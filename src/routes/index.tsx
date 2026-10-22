@@ -51,7 +51,7 @@ function Home() {
         <h2 className="display-md mb-10">Our collection</h2>
         <Slider>
           {ciders.map((p) => (
-            <div key={p.slug} className={slideClass}><ProductCard product={p} dark={p.theme === "forest"} /></div>
+            <div key={p.slug} className={slideClass}><ProductCard product={p} /></div>
           ))}
         </Slider>
       </section>

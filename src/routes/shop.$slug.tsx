@@ -140,8 +140,8 @@ function ProductDetails({ p }: { p: Product }) {
 
       <section className="mx-auto max-w-[1920px] px-5 py-16 md:px-10 md:py-24">
         <h2 className="display-md mb-10">You might also like</h2>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {related.map((r) => <ProductCard key={r.slug} product={r} dark={r.theme === "forest"} />)}
+        <div className="grid grid-cols-1 gap-5 min-[480px]:grid-cols-2 md:gap-6 lg:grid-cols-3">
+          {related.map((r) => <ProductCard key={r.slug} product={r} />)}
         </div>
       </section>
 

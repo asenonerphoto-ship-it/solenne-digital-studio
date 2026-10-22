@@ -13,6 +13,10 @@ export interface Product {
   price: number;
   unit: string;
   short: string;
+  /** Optional sticker on product cards, e.g. "NEW" */
+  badge?: string;
+  /** Three short card feature lines */
+  taglines: [string, string, string];
   description: string;
   image: string;
   hoverImage: string;
@@ -27,6 +31,8 @@ export interface Product {
 export const products: Product[] = [
   {
     slug: "crispy-apple",
+    badge: "TOP SELLER",
+    taglines: ["Fresh-pressed apple bite", "Sweet, sparkling, easy to love", "Made in South Tyrol"],
     image: img.applePool,
     hoverImage: img.toast,
     name: "Crispy Apple",
@@ -53,6 +59,8 @@ export const products: Product[] = [
   },
   {
     slug: "white-peach",
+    badge: "FAN FAV",
+    taglines: ["Juicy white peach twist", "Soft, fruity and fizzy", "Summer in a can"],
     image: img.peachLime,
     hoverImage: img.peachPeaches,
     name: "White Peach",
@@ -79,6 +87,8 @@ export const products: Product[] = [
   },
   {
     slug: "mixed-pack",
+    badge: "NEW",
+    taglines: ["Both flavors in one box", "Perfect for sharing", "12 cans of good vibes"],
     image: img.toast,
     hoverImage: img.tray,
     name: "Mixed Pack",
@@ -104,6 +114,7 @@ export const products: Product[] = [
   },
   {
     slug: "corduroy-hat",
+    taglines: ["Soft corduroy, curved brim", "One size fits most", "Embroidered Solenne logo"],
     image: img.hat,
     hoverImage: img.canHand,
     name: "Corduroy Hat",
@@ -125,6 +136,7 @@ export const products: Product[] = [
   },
   {
     slug: "fleece-jacket",
+    taglines: ["Cozy teddy fleece", "Navy and cream", "Made for après-ski"],
     image: img.fleeceWoman,
     hoverImage: img.fleeceFlat,
     name: "Fleece Jacket",
@@ -147,6 +159,7 @@ export const products: Product[] = [
   },
   {
     slug: "crewneck",
+    taglines: ["Heavyweight cotton", "Relaxed fit", "Wear it anywhere"],
     image: img.jacket,
     hoverImage: img.fleeceChest,
     name: "Crewneck",

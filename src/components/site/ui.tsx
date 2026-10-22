@@ -131,41 +131,54 @@ export function SectionHeading({ eyebrow, title, align = "left", className }: { 
   );
 }
 
-/* ---------- ProductCard ---------- */
-export function ProductCard({ product, dark: _dark }: { product: Product; dark?: boolean }) {
+/* ---------- ProductCard: bold flavor-colored panel, sticker, taglines, full-width Shop now ---------- */
+const panelClass: Record<string, string> = {
+  apple: "bg-apple text-cream",
+  peach: "bg-peach text-forest",
+  forest: "bg-cream text-forest",
+  navy: "bg-navy text-cream",
+};
+export function ProductCard({ product }: { product: Product }) {
   const [alternate, setAlternate] = useState(false);
   const touchStart = useRef<number | null>(null);
-  const swiped = useRef(false);
-  const tint = product.category === "merch" ? "bg-card-merch" : product.theme === "peach" ? "bg-card-peach" : "bg-card-apple";
+  const light = product.theme === "peach" || product.theme === "forest";
+  const alt = (src: string, fallback: string) => product.images.find((i) => i.src === src)?.alt ?? fallback;
   return (
-    <article className={cn("product-card group flex h-full min-w-0 flex-col text-forest", tint)}>
-      <Button
-        variant="outline"
-        className="product-card-image relative block aspect-[4/5] w-full overflow-hidden rounded-none border-0 p-6"
-        aria-label={`Swap ${product.name} image`}
-        aria-pressed={alternate}
-        onTouchStart={(e) => { touchStart.current = e.touches[0]?.clientX ?? null; swiped.current = false; }}
+    <article className={cn("product-card group relative flex h-full min-w-0 flex-col p-3", panelClass[product.theme])}>
+      <div
+        className="card-media relative aspect-square w-full overflow-hidden rounded-[20px]"
+        data-alternate={alternate}
+        onTouchStart={(e) => { touchStart.current = e.touches[0]?.clientX ?? null; }}
         onTouchEnd={(e) => {
           const end = e.changedTouches[0]?.clientX;
-          if (touchStart.current !== null && end !== undefined && Math.abs(end - touchStart.current) > 30) {
-            setAlternate((v) => !v); swiped.current = true;
-          }
+          if (touchStart.current !== null && end !== undefined && Math.abs(end - touchStart.current) > 30) setAlternate((v) => !v);
           touchStart.current = null;
         }}
-        onClick={() => { if (!swiped.current) setAlternate((v) => !v); swiped.current = false; }}
+        onClick={() => { if (window.matchMedia("(hover: none)").matches) setAlternate((v) => !v); }}
       >
-        <span className="relative block h-full w-full" data-alternate={alternate}>
-          <img src={product.image} alt={product.images.find((i) => i.src === product.image)?.alt ?? product.name} loading="lazy" className="card-primary absolute inset-0 h-full w-full rounded-2xl object-cover" />
-          <img src={product.hoverImage} alt={product.images.find((i) => i.src === product.hoverImage)?.alt ?? `${product.name} alternate view`} loading="lazy" className="card-alternate absolute inset-0 h-full w-full rounded-2xl object-cover" />
-        </span>
-      </Button>
-      <div className="card-dots flex justify-center gap-2" aria-label="Product images">
-        {[false, true].map((value, i) => <Button key={i} variant="outline" aria-label={`Show ${product.name} image ${i + 1}`} aria-pressed={alternate === value} onClick={() => setAlternate(value)} className="grid h-7 w-7 rounded-full border-0 p-0"><span className={cn("h-1.5 w-1.5 rounded-full bg-forest", alternate !== value && "opacity-25")} /></Button>)}
+        <img src={product.image} alt={alt(product.image, product.name)} loading="lazy" draggable={false} className="card-primary absolute inset-0 h-full w-full object-cover" />
+        <img src={product.hoverImage} alt={alt(product.hoverImage, `${product.name} lifestyle`)} loading="lazy" draggable={false} className="card-alternate absolute inset-0 h-full w-full object-cover" />
+        <div className="card-dots absolute inset-x-0 bottom-2 z-10 flex justify-center gap-1" aria-label="Product images">
+          {[false, true].map((value, i) => (
+            <button key={i} type="button" aria-label={`Show ${product.name} image ${i + 1}`} aria-pressed={alternate === value} onClick={(e) => { e.stopPropagation(); setAlternate(value); }} className="grid h-7 w-7 place-items-center">
+              <span className={cn("h-2 w-2 rounded-full bg-background shadow", alternate !== value && "opacity-50")} />
+            </button>
+          ))}
+        </div>
       </div>
-      <div className="flex flex-1 flex-col px-6 pb-6 pt-2">
-        <Link to="/shop/$slug" params={{ slug: product.slug }}><h3 className="text-2xl leading-[1.1]">{product.name}</h3></Link>
-        <p className="mt-2 text-sm font-light leading-relaxed">{product.short}</p>
-        <div className="mt-auto pt-5"><Link to="/shop/$slug" params={{ slug: product.slug }} className={btnClass("green", "card-shop shadow-none")}>Shop now</Link></div>
+      {product.badge && (
+        <span className="card-badge pointer-events-none absolute right-1 top-1 z-20 rotate-[8deg] rounded-full bg-cream px-3.5 py-1.5 font-display text-xs uppercase tracking-wide text-forest shadow-tilt ring-2 ring-forest">{product.badge}</span>
+      )}
+      <div className="flex flex-1 flex-col px-3 pb-3 pt-6 md:px-4">
+        <h3 className="text-2xl leading-[1.05] md:text-[1.875rem]">
+          <Link to="/shop/$slug" params={{ slug: product.slug }} className="card-link after:absolute after:inset-0 after:z-[1] after:rounded-[28px] focus-visible:outline-none">{product.name}</Link>
+        </h3>
+        <ul className="mt-3 space-y-0.5 text-[15px] font-light leading-snug">
+          {product.taglines.map((t) => <li key={t}>{t}</li>)}
+        </ul>
+        <div className="mt-auto pt-6">
+          <span className={cn(btnClass(light ? "green" : "cream", "card-shop pointer-events-none w-full shadow-none"), "group-hover:-translate-y-0.5 group-hover:before:[transform:translate(-50%,-50%)_scale(1)]")} aria-hidden>Shop now</span>
+        </div>
       </div>
     </article>
   );
@@ -219,7 +232,7 @@ export function Slider({ children }: { children: ReactNode }) {
     </div>
   );
 }
-export const slideClass = "w-[80%] shrink-0 snap-start sm:w-[46%] lg:w-[31%]";
+export const slideClass = "w-[85%] shrink-0 snap-start sm:w-[46%] lg:w-[31%]";
 
 /* ---------- FeatureCard ---------- */
 export function FeatureCard({ icon, title, text, className }: { icon?: ReactNode; title: string; text: string; className?: string }) {

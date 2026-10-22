@@ -83,7 +83,7 @@ function Story() {
       <section className="mx-auto max-w-[1920px] px-5 pb-16 md:px-10">
         <h2 className="display-md mb-10">Our collection</h2>
         <Slider>
-          {products.filter((p) => p.category === "cider").map((p) => <div key={p.slug} className={slideClass}><ProductCard product={p} dark={p.theme === "forest"} /></div>)}
+          {products.filter((p) => p.category === "cider").map((p) => <div key={p.slug} className={slideClass}><ProductCard product={p} /></div>)}
         </Slider>
       </section>
 
