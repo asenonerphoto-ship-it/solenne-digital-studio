@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { img } from "@/lib/images";
 import { products } from "@/data/products";
-import { Marquee, ProductCard, Reveal, Slider, slideClass, btnClass } from "@/components/site/ui";
+import { Marquee, ProductCard, Reveal, Slider, Words, slideClass, btnClass } from "@/components/site/ui";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,8 +23,8 @@ function Home() {
   const merch = products.filter((p) => p.category === "merch");
   return (
     <>
-      <section className="relative">
-        <img src={img.hero} alt="Crispy Apple can standing on a mirror in the grass with petals" className="aspect-[4/5] w-full object-cover md:aspect-[1920/990]" />
+      <section className="relative overflow-hidden" data-m-skip>
+        <img src={img.hero} alt="Crispy Apple can standing on a mirror in the grass with petals" className="ken-burns aspect-[4/5] w-full object-cover md:aspect-[1920/990]" />
         <h1 className="sr-only">Solenne Original Hard Cider</h1>
       </section>
       <Marquee />
@@ -34,10 +34,10 @@ function Home() {
         <div className="mx-auto grid max-w-[1920px] items-center gap-12 px-5 pb-32 pt-16 md:grid-cols-2 md:px-10 md:pb-48 md:pt-24">
           <Reveal className="relative">
             <img src={img.pour} alt="Crispy Apple cider being poured into a green glass" className="relative z-10 mx-auto w-[85%] max-w-xl" />
-            <div className="absolute -left-2 bottom-10 z-20 h-28 w-28 rounded-full bg-cream shadow-tilt md:h-44 md:w-44" aria-hidden />
+            <div className="float-y absolute -left-2 bottom-10 z-20 h-28 w-28 rounded-full bg-cream shadow-tilt md:h-44 md:w-44" aria-hidden />
           </Reveal>
           <Reveal className="flex flex-col items-end text-right" delay={150}>
-            <h2 className="display-xl">Say hello<br />to<br />Solenne</h2>
+            <Words className="display-xl" text="Say hello|to|Solenne" />
             <p className="mt-8 max-w-md text-lg uppercase md:text-xl">We started Solenne with the goal to create a cider that feels and tastes like something Italian made should.</p>
             <p className="mt-4 font-semibold uppercase md:text-xl">We think we did a pretty good job!</p>
             <Link to="/our-story" className={btnClass("cream", "mt-8")}>Explore our story</Link>
@@ -59,7 +59,7 @@ function Home() {
       <section className="grid bg-forest text-cream md:grid-cols-2">
         <div className="flex flex-col items-end justify-center px-6 py-16 text-right md:px-16 lg:px-24">
           <Reveal className="flex flex-col items-end">
-            <h2 className="display-xl">What<br />is<br />Solenne?</h2>
+            <Words className="display-xl" text="What|is|Solenne?" />
             <p className="mt-8 max-w-md text-lg uppercase">Apples from South Tyrol, a can inspired by Osaka, and a whole lot of Italian style.</p>
             <Link to="/how-its-made" className={btnClass("cream", "mt-8")}>How it's made</Link>
           </Reveal>
@@ -80,7 +80,7 @@ function Home() {
         <img src={img.tray} alt="Tray of White Peach cans with straws and peach slices at a party" className="h-[420px] w-full object-cover md:h-full md:min-h-[700px]" />
         <div className="flex flex-col items-end justify-center px-6 py-16 text-right md:px-16 lg:px-24">
           <Reveal className="flex flex-col items-end">
-            <h2 className="display-xl">Join<br />the<br />crew!</h2>
+            <Words className="display-xl" text="Join|the|crew!" />
             <p className="mt-8 max-w-md text-lg uppercase">Bring Solenne to bars, parties, mountains and festivals. Get free merch and good vibes.</p>
             <Link to="/crew" className={btnClass("cream", "mt-8")}>Explore the crew</Link>
           </Reveal>

@@ -1,19 +1,20 @@
-import { useEffect, useRef, useState, type ReactNode, type ButtonHTMLAttributes, type InputHTMLAttributes } from "react";
+import { Fragment, useEffect, useRef, useState, type ReactNode, type ButtonHTMLAttributes, type InputHTMLAttributes } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/data/products";
+import { observeOnce, prefersReducedMotion, usePauseOffscreen } from "@/lib/motion";
 
 
 /* ---------- Button ---------- */
 const btnBase =
-  "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.06em] transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.06em] btn-fx hover:-translate-y-0.5 disabled:opacity-50 disabled:pointer-events-none";
 const btnVariants = {
-  cream: "bg-cream text-forest shadow-tilt hover:brightness-105",
-  orange: "bg-peach text-forest hover:brightness-105",
-  green: "bg-forest text-cream hover:bg-apple",
-  outline: "border-2 border-current bg-transparent",
-  white: "bg-background text-forest hover:bg-paper",
+  cream: "btn-fill bg-cream text-forest shadow-tilt hover:brightness-105",
+  orange: "btn-fill bg-peach text-forest hover:brightness-105",
+  green: "btn-fill bg-forest text-cream hover:bg-apple",
+  outline: "border-2 border-current bg-transparent overflow-visible",
+  white: "btn-fill bg-background text-forest hover:bg-paper",
 } as const;
 export type BtnVariant = keyof typeof btnVariants;
 export const btnClass = (v: BtnVariant = "cream", extra?: string) => cn(btnBase, btnVariants[v], extra);
@@ -22,39 +23,71 @@ export function Button({ variant = "cream", className, ...p }: ButtonHTMLAttribu
   return <button className={btnClass(variant, className)} {...p} />;
 }
 
-/* ---------- Reveal (fade-up on scroll) ---------- */
-export function Reveal({ children, className, delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
+/* ---------- Reveal (scroll reveal, once) ---------- */
+export function Reveal({ children, className, delay = 0, kind = "up" }: { children: ReactNode; className?: string; delay?: number; kind?: "up" | "pop" }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (!e) return;
-        if (e.isIntersecting) {
-          setVisible(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.12 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+  useEffect(() => (ref.current ? observeOnce(ref.current) : undefined), []);
   return (
-    <div ref={ref} data-visible={visible} className={cn("reveal", className)} style={{ transitionDelay: `${delay}ms` }}>
+    <div ref={ref} data-m={kind} className={className} style={{ ["--m-delay" as string]: `${delay}ms` }}>
       {children}
     </div>
   );
 }
 
-/* ---------- Marquee ---------- */
+/* ---------- Words: word-by-word headline reveal. Use "|" for line breaks. ---------- */
+export function Words({ text, as: Tag = "h2", className }: { text: string; as?: "h1" | "h2"; className?: string }) {
+  const ref = useRef<HTMLHeadingElement>(null);
+  useEffect(() => (ref.current ? observeOnce(ref.current) : undefined), []);
+  let n = 0;
+  return (
+    <Tag ref={ref} data-m-skip className={cn("words", className)} aria-label={text.replace(/\|/g, " ")}>
+      {text.split("|").map((line, li) => (
+        <Fragment key={li}>
+          {li > 0 && <br />}
+          {line.trim().split(" ").map((w, wi) => (
+            <Fragment key={wi}>
+              {wi > 0 && " "}
+              <span className="w" aria-hidden><span style={{ ["--i" as string]: n++ }}>{w}</span></span>
+            </Fragment>
+          ))}
+        </Fragment>
+      ))}
+    </Tag>
+  );
+}
+
+/* ---------- Marquee: slows on hover, nudged by scroll velocity, paused offscreen ---------- */
 export function Marquee({ text = "ORIGINAL HARD CIDER · MADE IN ITALY · ", className }: { text?: string; className?: string }) {
   const row = Array.from({ length: 8 }, () => text).join("");
+  const wrap = useRef<HTMLDivElement>(null);
+  const track = useRef<HTMLDivElement>(null);
+  usePauseOffscreen(wrap);
+  useEffect(() => {
+    const el = track.current;
+    if (!el || prefersReducedMotion()) return;
+    const anim = el.getAnimations()[0];
+    if (!anim) return;
+    let hover = false, boost = 0, lastY = window.scrollY, raf = 0, rate = 1;
+    const tick = () => {
+      boost *= 0.92;
+      const target = (hover ? 0.35 : 1) + boost;
+      rate += (target - rate) * 0.08;
+      anim.playbackRate = rate;
+      raf = Math.abs(target - rate) > 0.01 || boost > 0.01 ? requestAnimationFrame(tick) : 0;
+    };
+    const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
+    const onScroll = () => { const y = window.scrollY; boost = Math.min(2, boost + Math.abs(y - lastY) / 300); lastY = y; kick(); };
+    const enter = () => { hover = true; kick(); };
+    const leave = () => { hover = false; kick(); };
+    const w = wrap.current;
+    w?.addEventListener("pointerenter", enter);
+    w?.addEventListener("pointerleave", leave);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { cancelAnimationFrame(raf); w?.removeEventListener("pointerenter", enter); w?.removeEventListener("pointerleave", leave); window.removeEventListener("scroll", onScroll); };
+  }, []);
   return (
-    <div className={cn("overflow-hidden bg-forest py-4 text-cream", className)} aria-label="Original hard cider, made in Italy">
-      <div className="flex w-max animate-marquee whitespace-nowrap font-display text-lg font-semibold tracking-[0.06em] md:text-2xl" aria-hidden>
+    <div ref={wrap} data-m-skip className={cn("overflow-hidden bg-forest py-4 text-cream", className)} aria-label="Original hard cider, made in Italy">
+      <div ref={track} className="flex w-max animate-marquee whitespace-nowrap font-display text-lg font-semibold tracking-[0.06em] md:text-2xl" aria-hidden>
         <span className="pr-2">{row}</span>
         <span className="pr-2">{row}</span>
       </div>
@@ -62,13 +95,18 @@ export function Marquee({ text = "ORIGINAL HARD CIDER · MADE IN ITALY · ", cla
   );
 }
 
-/* ---------- WaveDivider ---------- */
+/* ---------- WaveDivider: seamless horizontal drift + gentle wobble ---------- */
+const wavePath = "M0,40 C180,100 360,100 540,50 C720,0 900,0 1080,50 C1200,85 1320,90 1440,40 C1620,100 1800,100 1980,50 C2160,0 2340,0 2520,50 C2640,85 2760,90 2880,40 V0 H0 Z";
 export function WaveDivider({ top = "fill-background", className, flip }: { top?: string; className?: string; flip?: boolean }) {
+  const ref = useRef<HTMLDivElement>(null);
+  usePauseOffscreen(ref);
   return (
-    <div className={cn("relative -mb-px leading-none", className)} aria-hidden>
-      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className={cn("block h-12 w-full md:h-24", flip && "rotate-180")}>
-        <path className={top} d="M0,0 H1440 V40 C1260,110 1080,10 900,50 C700,95 520,120 300,80 C170,55 80,60 0,80 Z" />
-      </svg>
+    <div ref={ref} data-m-skip className={cn("relative -mb-px overflow-hidden leading-none", className)} aria-hidden>
+      <div className={cn("wave-wobble", flip && "rotate-180")}>
+        <svg viewBox="0 0 2880 120" preserveAspectRatio="none" className="wave-drift block h-12 w-[200%] md:h-24">
+          <path className={top} d={wavePath} />
+        </svg>
+      </div>
     </div>
   );
 }
@@ -133,10 +171,50 @@ export function ProductCard({ product, dark: _dark }: { product: Product; dark?:
   );
 }
 
-/* ---------- Slider ---------- */
+/* ---------- Slider: native snap + mouse drag with momentum + fading edges ---------- */
 export function Slider({ children }: { children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let startX = 0, startScroll = 0, lastX = 0, lastT = 0, v = 0, down = false, moved = false, raf = 0;
+    const onDown = (e: PointerEvent) => {
+      if (e.pointerType !== "mouse" || e.button !== 0) return;
+      cancelAnimationFrame(raf);
+      down = true; moved = false; startX = lastX = e.clientX; startScroll = el.scrollLeft; lastT = performance.now(); v = 0;
+    };
+    const onMove = (e: PointerEvent) => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      if (!moved && Math.abs(dx) > 6) { moved = true; el.dataset["dragging"] = "true"; }
+      if (!moved) return;
+      const now = performance.now();
+      v = (e.clientX - lastX) / Math.max(1, now - lastT);
+      lastX = e.clientX; lastT = now;
+      el.scrollLeft = startScroll - dx;
+    };
+    const onUp = () => {
+      if (!down) return;
+      down = false;
+      if (!moved) return;
+      let vel = v * 16;
+      const glide = () => {
+        el.scrollLeft -= vel; vel *= 0.92;
+        if (Math.abs(vel) > 0.5 && !prefersReducedMotion()) raf = requestAnimationFrame(glide);
+        else el.dataset["dragging"] = "false";
+      };
+      glide();
+    };
+    const blockClick = (e: MouseEvent) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } };
+    el.addEventListener("pointerdown", onDown);
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    el.addEventListener("click", blockClick, true);
+    el.addEventListener("dragstart", (e) => e.preventDefault());
+    return () => { cancelAnimationFrame(raf); el.removeEventListener("pointerdown", onDown); window.removeEventListener("pointermove", onMove); window.removeEventListener("pointerup", onUp); el.removeEventListener("click", blockClick, true); };
+  }, []);
   return (
-    <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-6 md:-mx-10 md:gap-8 md:px-10">
+    <div ref={ref} className="slider-fade no-scrollbar -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-6 md:-mx-10 md:gap-8 md:px-10">
       {children}
     </div>
   );
@@ -168,8 +246,8 @@ export function QuoteBlock({ quote, source, className }: { quote: string; source
 export function StepTimeline({ steps, className }: { steps: { title: string; text: string }[]; className?: string }) {
   return (
     <ol className={cn("relative grid gap-10 md:grid-cols-[repeat(var(--n),minmax(0,1fr))] md:gap-6", className)} style={{ ["--n" as string]: steps.length }}>
-      <svg className="pointer-events-none absolute left-0 right-0 top-7 hidden h-6 w-full md:block" viewBox="0 0 1000 24" preserveAspectRatio="none" aria-hidden>
-        <path d="M0 12 Q62 0 125 12 T250 12 T375 12 T500 12 T625 12 T750 12 T875 12 T1000 12" className="fill-none stroke-current opacity-40" strokeWidth="3" />
+      <svg data-m-skip ref={(el) => { if (el) observeOnce(el); }} className="line-draw pointer-events-none absolute left-0 right-0 top-7 hidden h-6 w-full md:block" viewBox="0 0 1000 24" preserveAspectRatio="none" aria-hidden>
+        <path d="M0 12 Q62 0 125 12 T250 12 T375 12 T500 12 T625 12 T750 12 T875 12 T1000 12" className="fill-none stroke-current opacity-40" strokeWidth="3" pathLength={1} />
       </svg>
       {steps.map((s, i) => (
         <li key={s.title} className="relative flex gap-5 md:flex-col md:gap-0">

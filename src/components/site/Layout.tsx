@@ -1,6 +1,7 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
-import { Instagram, Menu, ShoppingBag, X } from "lucide-react";
+import { Check, Instagram, Menu, ShoppingBag, X } from "lucide-react";
+import { prefersReducedMotion } from "@/lib/motion";
 import { navLinks } from "@/data/content";
 import { img } from "@/lib/images";
 import { useShopify } from "@/lib/shopify";
@@ -15,18 +16,38 @@ export function Logo({ className }: { className?: string }) {
 export function Header() {
   const { count, available, openCart } = useShopify();
   const [menu, setMenu] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [bounce, setBounce] = useState(0);
+  const prevCount = useRef(count);
   useEffect(() => {
     document.body.style.overflow = menu ? "hidden" : "";
   }, [menu]);
+  useEffect(() => {
+    if (count > prevCount.current) setBounce((b) => b + 1);
+    prevCount.current = count;
+  }, [count]);
+  useEffect(() => {
+    let last = window.scrollY, raf = 0;
+    const run = () => {
+      raf = 0;
+      const y = window.scrollY;
+      setScrolled(y > 12);
+      if (Math.abs(y - last) > 6) { setHidden(y > last && y > 160); last = y; }
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(run); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); };
+  }, []);
   return (
-    <header className="sticky top-0 z-40 bg-forest text-cream">
+    <header className="site-header sticky top-0 z-40 bg-forest text-cream" data-hidden={hidden && !menu} data-scrolled={scrolled}>
       <div className="relative mx-auto flex h-20 max-w-[1920px] items-center justify-between px-5 md:h-24 md:px-10">
         <button className="xl:hidden" onClick={() => setMenu(true)} aria-label="Open menu">
           <Menu className="h-7 w-7" />
         </button>
         <nav className="hidden gap-8 xl:flex" aria-label="Main">
           {navLinks.map((l) => (
-            <Link key={l.to} to={l.to} className="eyebrow transition-opacity hover:opacity-70" activeProps={{ className: "underline underline-offset-8 decoration-2" }}>
+            <Link key={l.to} to={l.to} className="nav-link eyebrow transition-opacity hover:opacity-80">
               {l.label}
             </Link>
           ))}
@@ -35,26 +56,26 @@ export function Header() {
           <Logo />
         </Link>
         <Button variant="outline" onClick={openCart} disabled={!available} className="relative h-10 w-10 border-0 p-0" title={available ? "Open cart" : "Coming soon"} aria-label={`Open cart, ${count} items`}>
-          <ShoppingBag className="h-7 w-7" />
+          <ShoppingBag key={bounce} className={cn("h-7 w-7", bounce > 0 && "cart-bounce")} />
           {count > 0 && (
             <span className="absolute -right-2 -top-2 grid h-5 min-w-5 place-items-center rounded-full bg-peach px-1 text-xs font-bold text-forest">{count}</span>
           )}
         </Button>
       </div>
       {menu && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-forest px-6 py-6 text-cream animate-in fade-in">
+        <div className="menu-wave fixed inset-0 z-50 flex flex-col bg-forest px-6 py-6 text-cream">
           <div className="flex items-center justify-between">
             <Logo />
             <button onClick={() => setMenu(false)} aria-label="Close menu"><X className="h-8 w-8" /></button>
           </div>
           <nav className="mt-16 flex flex-col gap-6" aria-label="Mobile">
-            {navLinks.map((l) => (
-              <Link key={l.to} to={l.to} onClick={() => setMenu(false)} className="font-display text-5xl font-bold uppercase">
+            {navLinks.map((l, i) => (
+              <Link key={l.to} to={l.to} onClick={() => setMenu(false)} className="menu-item font-display text-5xl font-bold uppercase" style={{ ["--i" as string]: i }}>
                 {l.label}
               </Link>
             ))}
           </nav>
-          <p className="mt-auto eyebrow opacity-70">Life is good!</p>
+          <p className="menu-item mt-auto eyebrow opacity-70" style={{ ["--i" as string]: navLinks.length }}>Life is good!</p>
         </div>
       )}
     </header>
@@ -64,20 +85,26 @@ export function Header() {
 export function AgeGate() {
   const [show, setShow] = useState(false);
   const [denied, setDenied] = useState(false);
+  const [leaving, setLeaving] = useState(false);
+  const accept = () => {
+    localStorage.setItem("solenne-age-ok", "1");
+    if (prefersReducedMotion()) return setShow(false);
+    setLeaving(true);
+  };
   useEffect(() => {
     if (localStorage.getItem("solenne-age-ok") !== "1") setShow(true);
   }, []);
   if (!show) return null;
   return (
-    <div className="fixed inset-0 z-[60] grid place-items-center bg-forest p-6 text-cream" role="dialog" aria-modal="true" aria-labelledby="age-title">
-      <div className="max-w-lg text-center">
+    <div className={cn("fixed inset-0 z-[60] grid place-items-center bg-forest p-6 text-cream", leaving && "gate-out")} onAnimationEnd={(e) => { if (leaving && e.target === e.currentTarget) setShow(false); }} role="dialog" aria-modal="true" aria-labelledby="age-title">
+      <div className="gate-in max-w-lg text-center">
         <Logo className="mx-auto h-16 md:h-20" />
         <h2 id="age-title" className="display-lg mt-10">Are you 18 or older?</h2>
         {denied ? (
           <p className="mt-8 text-lg">Sorry, come back when you're 18. Life will still be good.</p>
         ) : (
           <div className="mt-10 flex justify-center gap-4">
-            <button className={btnClass("cream")} onClick={() => { localStorage.setItem("solenne-age-ok", "1"); setShow(false); }}>Yes, I am</button>
+            <button className={btnClass("cream")} onClick={accept}>Yes, I am</button>
             <button className={btnClass("outline")} onClick={() => setDenied(true)}>No</button>
           </div>
         )}
@@ -126,7 +153,7 @@ export function Footer() {
           <h2 className="display-md">Join the crew</h2>
           <p className="mt-3 text-lg">Get 10% off your first order.</p>
           {state === "done" ? (
-            <p className="mt-6 rounded-2xl bg-cream px-5 py-4 font-semibold text-forest" role="status">You're in! Check your inbox for your code.</p>
+            <p className="mt-6 flex items-center gap-3 rounded-2xl bg-cream px-5 py-4 font-semibold text-forest" role="status"><span className="check-burst h-7 w-7 rounded-full bg-forest text-cream"><Check className="check-draw h-4 w-4" /></span>You're in! Check your inbox for your code.</p>
           ) : (
             <form onSubmit={onSubmit} noValidate className="mt-6 flex flex-col gap-3 sm:flex-row">
               <label htmlFor="nl-email" className="sr-only">Email address</label>

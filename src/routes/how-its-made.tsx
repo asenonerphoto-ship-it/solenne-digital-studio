@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { img } from "@/lib/images";
 import { faqs, madeSteps } from "@/data/content";
-import { Accordion, Reveal, btnClass } from "@/components/site/ui";
+import { Accordion, Reveal, Words, btnClass } from "@/components/site/ui";
+import { prefersReducedMotion, useScrollProgress } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/how-its-made")({
@@ -30,6 +31,7 @@ function Counter({ to, suffix, decimals = 0 }: { to: number; suffix: string; dec
       if (!e) return;
       if (!e.isIntersecting) return;
       io.disconnect();
+      if (prefersReducedMotion()) { setV(to); return; }
       const start = performance.now();
       const tick = (t: number) => {
         const k = Math.min(1, (t - start) / 1400);
@@ -45,12 +47,19 @@ function Counter({ to, suffix, decimals = 0 }: { to: number; suffix: string; dec
 }
 
 function Made() {
+  const track = useRef<HTMLDivElement>(null);
+  const line = useRef<SVGPathElement>(null);
+  const [reached, setReached] = useState(-1);
+  useScrollProgress(track, (p) => {
+    if (line.current) line.current.style.strokeDashoffset = String(1 - p);
+    setReached(Math.floor(p * madeSteps.length + 0.35) - 1);
+  }, 0.6);
   return (
     <>
       <section className="overflow-hidden bg-forest text-cream">
         <div className="mx-auto grid max-w-[1920px] items-center gap-10 px-5 py-16 md:grid-cols-2 md:px-10 md:py-24">
           <div>
-            <h1 className="display-xl">What is<br />Solenne?</h1>
+            <Words as="h1" className="display-xl" text="What is|Solenne?" />
             <p className="mt-8 max-w-lg text-lg leading-relaxed">An original hard cider with Italian attitude. Crisp, fruity and lightly sparkling — made for sharing, not sipping alone. Our philosophy is simple: real fruit, honest process, great style.</p>
           </div>
           <img src={img.appleGreen} alt="Hand holding a Crispy Apple can against a green sweater" className="mx-auto w-[80%] max-w-md rotate-3 rounded-[var(--radius-card)] shadow-tilt" />
@@ -59,9 +68,9 @@ function Made() {
 
       <section className="mx-auto max-w-6xl px-5 py-16 md:py-24">
         <h2 className="display-md text-center">From orchard to can</h2>
-        <div className="relative mt-16">
+        <div ref={track} className="relative mt-16">
           <svg className="absolute left-1/2 top-0 hidden h-full w-16 -translate-x-1/2 md:block" viewBox="0 0 40 1000" preserveAspectRatio="none" aria-hidden>
-            <path d="M20 0 Q40 62 20 125 T20 250 T20 375 T20 500 T20 625 T20 750 T20 875 T20 1000" className="fill-none stroke-apple" strokeWidth="4" />
+            <path d="M20 0 Q40 62 20 125 T20 250 T20 375 T20 500 T20 625 T20 750 T20 875 T20 1000" ref={line} pathLength={1} strokeDasharray="1" strokeDashoffset="1" className="fill-none stroke-apple" strokeWidth="4" />
           </svg>
           <ol className="space-y-16 md:space-y-24">
             {madeSteps.map((s, i) => (
@@ -70,7 +79,7 @@ function Made() {
                   <img src={s.src} alt={s.title} loading="lazy" className={cn("aspect-[4/3] w-full rounded-[var(--radius-card)] object-cover shadow-tilt", i % 2 ? "rotate-2" : "-rotate-2")} />
                 </Reveal>
                 <Reveal delay={100} className={cn(i % 2 && "md:order-1 md:text-right")}>
-                  <span className="grid h-14 w-14 place-items-center rounded-full bg-cream font-display text-2xl font-bold text-forest md:inline-grid">{i + 1}</span>
+                  <span data-in={reached >= i} className="badge-pop grid h-14 w-14 place-items-center rounded-full bg-cream font-display text-2xl font-bold text-forest md:inline-grid">{i + 1}</span>
                   <h3 className="mt-4 text-3xl md:text-4xl">{s.title}</h3>
                   <p className="mt-3 text-lg leading-relaxed">{s.text}</p>
                 </Reveal>
