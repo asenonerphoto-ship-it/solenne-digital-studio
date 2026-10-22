@@ -96,7 +96,7 @@ export function Marquee({ text = "ORIGINAL HARD CIDER · MADE IN ITALY · ", cla
 }
 
 /* ---------- WaveDivider: seamless horizontal drift + gentle wobble ---------- */
-const wavePeriod = "C180,100 360,100 540,50 C720,0 900,0 1080,50 C1200,85 1320,90 1440,40";
+const wavePath = "M0,40 C180,100 360,100 540,50 C720,0 900,0 1080,50 C1200,85 1320,90 1440,40 C1620,100 1800,100 1980,50 C2160,0 2340,0 2520,50 C2640,85 2760,90 2880,40 V0 H0 Z";
 export function WaveDivider({ top = "fill-background", className, flip }: { top?: string; className?: string; flip?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   usePauseOffscreen(ref);
@@ -104,7 +104,7 @@ export function WaveDivider({ top = "fill-background", className, flip }: { top?
     <div ref={ref} data-m-skip className={cn("relative -mb-px overflow-hidden leading-none", className)} aria-hidden>
       <div className={cn("wave-wobble", flip && "rotate-180")}>
         <svg viewBox="0 0 2880 120" preserveAspectRatio="none" className="wave-drift block h-12 w-[200%] md:h-24">
-          <path className={top} d={`M0,0 H2880 V40 C2760,-10 2640,-10 2520,40 L2880,40 V40 H0 V40 ${wavePeriod} ${wavePeriod.replace(/(\d+),/g, (m, x) => `${Number(x) + 1440},`)} L2880,40 V0 Z`} />
+          <path className={top} d={wavePath} />
         </svg>
       </div>
     </div>
