@@ -137,7 +137,7 @@ export function AgeGate() {
 }
 
 const footerCols = [
-  { title: "Shop", links: [{ to: "/shop", label: "All products" }, { to: "/shop", label: "Cider" }, { to: "/b2b", label: "Wholesale" }] },
+  { title: "Shop", links: [{ to: "/shop", label: "All products" }, { to: "/how-its-made", label: "Our Cider" }, { to: "/b2b", label: "Wholesale" }] },
   { title: "Learn", links: [{ to: "/our-story", label: "Our Story" }, { to: "/how-its-made", label: "How It's Made" }, { to: "/crew", label: "Crew" }] },
   { title: "Help", links: [{ to: "/faq", label: "FAQ" }, { to: "/contact", label: "Contact" }, { to: "/shipping", label: "Shipping" }] },
   { title: "More", links: [{ to: "/b2b", label: "B2B" }, { to: "/press", label: "Press" }] },
@@ -164,7 +164,7 @@ export function Footer() {
                 <p className="eyebrow mb-4">{c.title}</p>
                 <ul className="space-y-2.5">
                   {c.links.map((l) => (
-                    <li key={l.to}><Link to={l.to} className="opacity-80 hover:opacity-100">{l.label}</Link></li>
+                    <li key={l.label}><Link to={l.to} className="opacity-80 hover:opacity-100">{l.label}</Link></li>
                   ))}
                 </ul>
               </div>
