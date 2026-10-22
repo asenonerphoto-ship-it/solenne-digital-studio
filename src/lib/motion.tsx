@@ -14,7 +14,7 @@ function getIO() {
       (entries) => {
         for (const e of entries) {
           if (!e.isIntersecting) continue;
-          (e.target as HTMLElement).dataset.in = "true";
+          (e.target as HTMLElement).dataset["in"] = "true";
           sharedIO?.unobserve(e.target);
         }
       },
@@ -57,7 +57,7 @@ export function useAutoReveal(ref: RefObject<HTMLElement | null>, key: string) {
       const parent = el.parentElement ?? root;
       const i = counts.get(parent) ?? 0;
       counts.set(parent, i + 1);
-      el.dataset.m = kind;
+      el.dataset["m"] = kind;
       el.style.setProperty("--m-delay", `${Math.min(i, 6) * 80}ms`);
       marked.push(el);
     });
@@ -99,7 +99,7 @@ export function usePauseOffscreen(ref: RefObject<HTMLElement | null>) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => { el.dataset.paused = e?.isIntersecting ? "false" : "true"; });
+    const io = new IntersectionObserver(([e]) => { el.dataset["paused"] = e?.isIntersecting ? "false" : "true"; });
     io.observe(el);
     return () => io.disconnect();
   }, [ref]);

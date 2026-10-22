@@ -186,7 +186,7 @@ export function Slider({ children }: { children: ReactNode }) {
     const onMove = (e: PointerEvent) => {
       if (!down) return;
       const dx = e.clientX - startX;
-      if (!moved && Math.abs(dx) > 6) { moved = true; el.dataset.dragging = "true"; }
+      if (!moved && Math.abs(dx) > 6) { moved = true; el.dataset["dragging"] = "true"; }
       if (!moved) return;
       const now = performance.now();
       v = (e.clientX - lastX) / Math.max(1, now - lastT);
@@ -201,7 +201,7 @@ export function Slider({ children }: { children: ReactNode }) {
       const glide = () => {
         el.scrollLeft -= vel; vel *= 0.92;
         if (Math.abs(vel) > 0.5 && !prefersReducedMotion()) raf = requestAnimationFrame(glide);
-        else el.dataset.dragging = "false";
+        else el.dataset["dragging"] = "false";
       };
       glide();
     };
