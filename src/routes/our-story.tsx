@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useScrollProgress } from "@/lib/motion";
+import { prefersReducedMotion, useScrollProgress } from "@/lib/motion";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Mountain, Sparkles, Sun } from "lucide-react";
 import { img } from "@/lib/images";
@@ -25,7 +25,7 @@ export const Route = createFileRoute("/our-story")({
 
 function Story() {
   const script = useRef<HTMLParagraphElement>(null);
-  useScrollProgress(script, (p) => { if (script.current) script.current.style.transform = `translate3d(${(p - 0.5) * -12}%, ${p * 60}px, 0)`; }, 1);
+  useScrollProgress(script, (p) => { if (script.current && !prefersReducedMotion()) script.current.style.transform = `translate3d(${(p - 0.5) * -12}%, ${p * 60}px, 0)`; }, 1);
   return (
     <>
       <section className="relative overflow-hidden bg-forest pb-10 pt-16 text-cream">

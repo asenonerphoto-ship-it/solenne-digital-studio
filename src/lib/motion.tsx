@@ -44,7 +44,8 @@ export function useAutoReveal(ref: RefObject<HTMLElement | null>, key: string) {
     const marked: HTMLElement[] = [];
     const counts = new Map<Element, number>();
     root.querySelectorAll<HTMLElement>(CANDIDATES).forEach((el) => {
-      if (el.closest("[data-m]") || el.closest("[data-m-skip]") || el.classList.contains("sr-only")) return;
+      const rotated = el.tagName === "IMG" && (parseFloat(getComputedStyle(el).rotate) || 0) !== 0;
+      if ((!rotated && el.closest("[data-m]")) || el.closest("[data-m-skip]") || el.classList.contains("sr-only")) return;
       if (el.closest(".fixed")) return;
       let kind = "up";
       const tag = el.tagName;
