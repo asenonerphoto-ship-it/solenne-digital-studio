@@ -58,7 +58,7 @@ function ProductDetails({ p }: { p: Product }) {
           {/* Gallery */}
           <div className="grid grid-cols-3 gap-3">
             <button onClick={() => setLightbox(0)} className="col-span-3 overflow-hidden rounded-[var(--radius-card)]">
-              <img src={p.images[0].src} alt={p.images[0].alt} className="aspect-square w-full object-cover transition-transform duration-700 hover:scale-105" />
+              <img key={p.slug} src={p.images[0].src} alt={p.images[0].alt} className="fade-swap aspect-square w-full object-cover transition-transform duration-700 hover:scale-105" />
             </button>
             {p.images.slice(1).map((im, i) => (
               <button key={im.src + i} onClick={() => setLightbox(i + 1)} className="overflow-hidden rounded-2xl">
@@ -102,7 +102,7 @@ function ProductDetails({ p }: { p: Product }) {
                 </div>
                 <div className="mt-3 flex gap-2">
                   {p.sizes.map((s) => (
-                    <Button variant="outline" key={s} onClick={() => setSize(s)} aria-pressed={size === s} className={cn("h-12 w-14 p-0 border-current", size === s && "bg-cream text-forest border-cream")}>{s}</Button>
+                    <Button variant="outline" key={s} onClick={() => setSize(s)} aria-pressed={size === s} className={cn("select-pop h-12 w-14 p-0 border-current", size === s && "bg-cream text-forest border-cream")}>{s}</Button>
                   ))}
                 </div>
               </div>
@@ -113,10 +113,10 @@ function ProductDetails({ p }: { p: Product }) {
                 <legend className="eyebrow">Pack size</legend>
                 <div className="mt-3 grid grid-cols-2 gap-3">
                   {PACK_SIZES.map((pack) => (
-                    <Button key={pack} variant="outline" aria-pressed={packSize === pack} onClick={() => setPackSize(pack)} className={cn("relative flex h-24 flex-col gap-1 rounded-2xl border-current/30 px-3 py-4 normal-case tracking-normal", packSize === pack && "border-cream bg-cream text-forest")}>
+                    <Button key={pack} variant="outline" aria-pressed={packSize === pack} onClick={() => setPackSize(pack)} className={cn("select-pop relative flex h-24 flex-col gap-1 rounded-2xl border-current/30 px-3 py-4 normal-case tracking-normal", packSize === pack && "border-cream bg-cream text-forest")}>
                       <span className="text-lg font-semibold">{pack} cans</span>
                       {pack === 24 && <span className="text-xs font-light">Best value</span>}
-                      {packSize === pack && <Check className="absolute right-3 top-3 h-4 w-4 opacity-60" aria-hidden />}
+                      {packSize === pack && <Check className="check-draw absolute right-3 top-3 h-4 w-4 opacity-60" aria-hidden />}
                     </Button>
                   ))}
                 </div>
@@ -146,7 +146,7 @@ function ProductDetails({ p }: { p: Product }) {
       </section>
 
       {lightbox !== null && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-forest/95 p-4" role="dialog" aria-modal="true" onClick={() => setLightbox(null)}>
+        <div className="lightbox-in fixed inset-0 z-50 grid place-items-center bg-forest/95 p-4" role="dialog" aria-modal="true" onClick={() => setLightbox(null)}>
           <button className="absolute right-6 top-6 text-cream" aria-label="Close"><X className="h-8 w-8" /></button>
           <img src={p.images[lightbox]?.src} alt={p.images[lightbox]?.alt ?? ""} className="max-h-[85vh] max-w-full rounded-[var(--radius-card)]" />
         </div>

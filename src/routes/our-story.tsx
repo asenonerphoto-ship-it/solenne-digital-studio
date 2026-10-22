@@ -1,9 +1,11 @@
+import { useRef } from "react";
+import { useScrollProgress } from "@/lib/motion";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Mountain, Sparkles, Sun } from "lucide-react";
 import { img } from "@/lib/images";
 import { products } from "@/data/products";
 import { storyTimeline } from "@/data/content";
-import { FeatureCard, ProductCard, QuoteBlock, Reveal, Slider, StepTimeline, btnClass, slideClass } from "@/components/site/ui";
+import { FeatureCard, ProductCard, QuoteBlock, Reveal, Slider, StepTimeline, Words, btnClass, slideClass } from "@/components/site/ui";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/our-story")({
@@ -22,17 +24,19 @@ export const Route = createFileRoute("/our-story")({
 });
 
 function Story() {
+  const script = useRef<HTMLParagraphElement>(null);
+  useScrollProgress(script, (p) => { if (script.current) script.current.style.transform = `translate3d(${(p - 0.5) * -12}%, ${p * 60}px, 0)`; }, 1);
   return (
     <>
       <section className="relative overflow-hidden bg-forest pb-10 pt-16 text-cream">
-        <p className="script-faded pointer-events-none absolute inset-x-0 top-6 select-none text-center text-[28vw] leading-none text-forest-soft md:text-[22vw]" aria-hidden>Solenne</p>
+        <p ref={script} data-m-skip className="script-faded will-change-transform pointer-events-none absolute inset-x-0 top-6 select-none text-center text-[28vw] leading-none text-forest-soft md:text-[22vw]" aria-hidden>Solenne</p>
         <img src={img.towelCan} alt="Crispy Apple can in a waffle cone on a blue striped towel" className="relative mx-auto w-[75%] max-w-md rotate-3 md:max-w-lg" />
         <h1 className="sr-only">Our Story</h1>
       </section>
 
       <section className="mx-auto max-w-[1920px] px-5 py-16 md:px-10 md:py-24">
         <div className="text-center">
-          <h2 className="display-lg inline-block -rotate-2 bg-forest px-8 py-4 text-cream">Our founders</h2>
+          <Words className="display-lg inline-block -rotate-2 bg-forest px-8 py-4 text-cream" text="Our founders" />
         </div>
         <div className="mt-14 grid items-center gap-12 md:grid-cols-2">
           <Reveal className="space-y-5 text-lg leading-relaxed">

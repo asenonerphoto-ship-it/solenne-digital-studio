@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { products } from "@/data/products";
-import { ProductCard } from "@/components/site/ui";
+import { ProductCard, Words } from "@/components/site/ui";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/shop/")({
@@ -29,7 +29,7 @@ function Shop() {
   return (
     <>
       <section className="bg-forest px-5 py-16 text-cream md:px-10 md:py-24">
-        <h1 className="display-xl mx-auto max-w-[1920px]">Shop</h1>
+        <Words as="h1" className="display-xl mx-auto block max-w-[1920px]" text="Shop" />
       </section>
       <section className="mx-auto max-w-[1920px] px-5 py-12 md:px-10">
         <div className="flex flex-wrap gap-3">
