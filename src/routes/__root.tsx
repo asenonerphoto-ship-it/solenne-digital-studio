@@ -4,11 +4,13 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { prefersReducedMotion, useAutoReveal } from "@/lib/motion";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -114,12 +116,51 @@ function RootComponent() {
           Skip to content
         </a>
         <Header />
-        <main id="main">
-          <Outlet />
+        <main id="main" className="overflow-x-clip">
+          <PageTransition />
         </main>
         <Footer />
         <AgeGate />
       </ShopifyProvider>
     </QueryClientProvider>
+  );
+}
+
+/** Fade + 16px slide per route, a cream wave wipe on navigation, and auto scroll reveals. */
+function PageTransition() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const ref = useRef<HTMLDivElement>(null);
+  const first = useRef(true);
+  const [wipe, setWipe] = useState(0);
+  useAutoReveal(ref, pathname);
+  useEffect(() => {
+    if (first.current) { first.current = false; return; }
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    if (!prefersReducedMotion()) setWipe((n) => n + 1);
+  }, [pathname]);
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      const el = (e.target as Element | null)?.closest?.(".btn-fill") as HTMLElement | null;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+      el.style.setProperty("--my", `${e.clientY - r.top}px`);
+    };
+    document.addEventListener("pointerover", onMove, { passive: true });
+    return () => document.removeEventListener("pointerover", onMove);
+  }, []);
+  return (
+    <>
+      <div key={pathname} ref={ref} className="page-enter">
+        <Outlet />
+      </div>
+      {wipe > 0 && (
+        <div key={wipe} className="wave-wipe" aria-hidden onAnimationEnd={() => setWipe(0)}>
+          <svg viewBox="0 0 1440 1000" preserveAspectRatio="none">
+            <path fill="currentColor" d="M0,80 C240,0 480,0 720,60 C960,120 1200,120 1440,40 V920 C1200,1000 960,1000 720,940 C480,880 240,880 0,960 Z" />
+          </svg>
+        </div>
+      )}
+    </>
   );
 }
