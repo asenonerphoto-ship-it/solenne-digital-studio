@@ -26,8 +26,8 @@ export function LeadForm({ kind, fields, consent, submitLabel, success }: { kind
       if (f.required && !v) errs[f.name] = "This field is required.";
       else if (f.type === "email" && v && !isEmail(v)) errs[f.name] = "Please enter a valid email.";
     }
-    data.consent = fd.get("consent") === "on";
-    if (!data.consent) errs.consent = "Please accept to continue.";
+    data["consent"] = fd.get("consent") === "on";
+    if (!data["consent"]) errs["consent"] = "Please accept to continue.";
     setErrors(errs);
     if (Object.keys(errs).length) return;
     setState("sending");
@@ -45,7 +45,7 @@ export function LeadForm({ kind, fields, consent, submitLabel, success }: { kind
           <input type="checkbox" name="consent" className="mt-1 h-5 w-5 accent-peach" />
           <span>{consent}</span>
         </label>
-        {errors.consent && <p className="mt-1.5 text-sm font-semibold text-destructive" role="alert">{errors.consent}</p>}
+        {errors["consent"] && <p className="mt-1.5 text-sm font-semibold text-destructive" role="alert">{errors["consent"]}</p>}
       </div>
       <button className={btnClass("cream", "md:col-span-2 md:justify-self-start")} disabled={state === "sending"}>{state === "sending" ? "Sending…" : submitLabel}</button>
     </form>

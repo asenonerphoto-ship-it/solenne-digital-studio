@@ -24,6 +24,7 @@ function Counter({ to, suffix, decimals = 0 }: { to: number; suffix: string; dec
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(([e]) => {
+      if (!e) return;
       if (!e.isIntersecting) return;
       io.disconnect();
       const start = performance.now();

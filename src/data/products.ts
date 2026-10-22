@@ -14,7 +14,7 @@ export interface Product {
   unit: string;
   short: string;
   description: string;
-  images: { src: string; alt: string }[];
+  images: [{ src: string; alt: string }, ...{ src: string; alt: string }[]];
   sizes?: string[];
   material?: string;
   care?: string;
