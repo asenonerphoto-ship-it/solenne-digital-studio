@@ -11,4 +11,7 @@
 
 - Site content (products, steps, FAQs) lives in src/data/*; pages read from there so copy is easy to edit.
 - Forms submit through src/lib/forms.ts `submitForm` stub; swap it for a backend call when one is connected.
-- Shared site UI lives in src/components/site (ui.tsx primitives, Layout.tsx header/footer/cart/age gate).
+- Shared site UI lives in src/components/site (ui.tsx primitives, Layout.tsx header/footer/age gate).
+
+- External Shopify embeds use a browser-only SDK provider with one shared Shopify cart; product selections come from src/config/shopify.ts so placeholders never make store requests.
+- Reusable product cards read primary and alternate imagery from the product catalog; touch state and desktop hover remain local presentation only.

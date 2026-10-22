@@ -11,6 +11,8 @@ export const Route = createFileRoute("/shop/")({
       { name: "description", content: "Shop Solenne Crispy Apple, White Peach, Mixed Packs and merch." },
       { property: "og:title", content: "Shop Solenne" },
       { property: "og:description", content: "Hard cider and merch from South Tyrol." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Shop,

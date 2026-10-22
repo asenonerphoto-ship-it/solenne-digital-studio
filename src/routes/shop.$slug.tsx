@@ -1,11 +1,11 @@
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { Gift, Leaf, MapPin, Minus, Plus, X } from "lucide-react";
-import { getProduct, products, formatPrice, themeClasses, type Product } from "@/data/products";
+import { Check, Gift, Leaf, MapPin, X } from "lucide-react";
+import { getProduct, products, themeClasses, type Product } from "@/data/products";
 import { img } from "@/lib/images";
-import { useCart } from "@/lib/cart";
-import { submitForm } from "@/lib/forms";
-import { Accordion, FormField, ProductCard, QuoteBlock, Reveal, Stars, WaveDivider, btnClass } from "@/components/site/ui";
+import { ShopifyBuyButton } from "@/components/site/ShopifyBuyButton";
+import { DEFAULT_PACK_SIZE, PACK_SIZES, getShopifySelection, type PackSize } from "@/config/shopify";
+import { Accordion, Button, ProductCard, QuoteBlock, Reveal, WaveDivider, btnClass } from "@/components/site/ui";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/shop/$slug")({
@@ -23,6 +23,9 @@ export const Route = createFileRoute("/shop/$slug")({
         { name: "description", content: p.description },
         { property: "og:title", content: `${p.name} — Solenne` },
         { property: "og:description", content: p.short },
+        { property: "og:type", content: "product" },
+        { name: "twitter:card", content: "summary_large_image" },
+        ...(p.images[0].src.startsWith("https://") ? [{ property: "og:image", content: p.images[0].src }, { name: "twitter:image", content: p.images[0].src }] : []),
       ],
     };
   },
@@ -31,17 +34,19 @@ export const Route = createFileRoute("/shop/$slug")({
 
 function ProductPage() {
   const { slug } = Route.useLoaderData();
-  const p = getProduct(slug)!;
+  const product = getProduct(slug);
+  if (!product) throw notFound();
+  return <ProductDetails key={slug} p={product} />;
+}
+
+function ProductDetails({ p }: { p: Product }) {
   const t = themeClasses[p.theme];
   const isCider = p.category === "cider";
-  const { add } = useCart();
-  const [qty, setQty] = useState(1);
-  const [purchase, setPurchase] = useState<"once" | "sub">("once");
-  const [freq, setFreq] = useState("4 weeks");
+  const [packSize, setPackSize] = useState<PackSize>(DEFAULT_PACK_SIZE);
   const [size, setSize] = useState(p.sizes?.[0] ?? "");
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [sizeGuide, setSizeGuide] = useState(false);
-  const price = purchase === "sub" ? p.price * 0.9 : p.price;
+  const selection = getShopifySelection(p.slug, isCider ? packSize : size);
 
   const related = products.filter((x) => x.slug !== p.slug && x.category === p.category).slice(0, 3);
   const onLight = p.theme === "peach";
@@ -65,8 +70,7 @@ function ProductPage() {
           {/* Details */}
           <div className="lg:sticky lg:top-32 lg:self-start">
             <p className="eyebrow opacity-80">{isCider ? "Original Hard Cider · 330 ml · 5.1%" : "Solenne Merch"}</p>
-            <h1 className="display-lg mt-3 normal-case">{p.name}</h1>
-            <Stars className="mt-4" />
+            <h1 className="display-lg mt-3">{p.name}</h1>
             <p className="mt-5 text-lg md:text-xl">{p.description}</p>
 
             {isCider && (
@@ -78,7 +82,8 @@ function ProductPage() {
             {isCider && p.pack === "single" && (
               <div className="mt-4 flex gap-3">
                 {["crispy-apple", "white-peach"].map((s) => {
-                  const x = getProduct(s)!;
+                  const x = getProduct(s);
+                  if (!x) return null;
                   return (
                     <Link key={s} to="/shop/$slug" params={{ slug: s }} className={cn("overflow-hidden rounded-xl border-2 text-center text-xs font-semibold", s === p.slug ? "border-cream" : "border-transparent opacity-70")}>
                       <img src={x.images[0].src} alt="" className="h-16 w-20 object-cover" />
@@ -97,49 +102,28 @@ function ProductPage() {
                 </div>
                 <div className="mt-3 flex gap-2">
                   {p.sizes.map((s) => (
-                    <button key={s} onClick={() => setSize(s)} aria-pressed={size === s} className={cn("h-12 w-14 rounded-full border-2 border-current font-semibold", size === s && "bg-cream text-forest border-cream")}>{s}</button>
+                    <Button variant="outline" key={s} onClick={() => setSize(s)} aria-pressed={size === s} className={cn("h-12 w-14 p-0 border-current", size === s && "bg-cream text-forest border-cream")}>{s}</Button>
                   ))}
                 </div>
               </div>
             )}
 
-            <fieldset className="mt-8 space-y-3">
-              <legend className="sr-only">Purchase option</legend>
-              <label className="flex cursor-pointer items-center gap-4 rounded-2xl bg-background p-4 text-forest">
-                <input type="radio" name="purchase" checked={purchase === "once"} onChange={() => setPurchase("once")} className="h-5 w-5 accent-forest" />
-                <span className="flex-1 font-semibold">One-time purchase</span>
-                <span>{formatPrice(p.price)} <span className="text-xs opacity-70">/ {p.unit}</span></span>
-              </label>
-              {isCider && (
-                <label className="block cursor-pointer rounded-2xl bg-background p-4 text-forest">
-                  <span className="flex items-center gap-4">
-                    <input type="radio" name="purchase" checked={purchase === "sub"} onChange={() => setPurchase("sub")} className="h-5 w-5 accent-forest" />
-                    <span className="flex-1 font-semibold">Subscribe & Save 10%</span>
-                    <span>{formatPrice(p.price * 0.9)}</span>
-                  </span>
-                  {purchase === "sub" && (
-                    <span className="mt-3 flex flex-wrap gap-2 pl-9">
-                      {["2 weeks", "4 weeks", "8 weeks"].map((f) => (
-                        <button type="button" key={f} onClick={() => setFreq(f)} className={cn("rounded-full border border-forest px-3 py-1 text-xs", freq === f && "bg-forest text-cream")}>Every {f}</button>
-                      ))}
-                    </span>
-                  )}
-                </label>
-              )}
-            </fieldset>
-
-            <div className="mt-5 flex gap-3">
-              <div className="flex items-center gap-4 rounded-full bg-background px-4 text-forest">
-                <button onClick={() => setQty((q) => Math.max(1, q - 1))} aria-label="Decrease quantity"><Minus className="h-4 w-4" /></button>
-                <span className="w-5 text-center font-semibold" aria-live="polite">{qty}</span>
-                <button onClick={() => setQty((q) => q + 1)} aria-label="Increase quantity"><Plus className="h-4 w-4" /></button>
-              </div>
-              <button
-                className={btnClass(onLight ? "green" : "cream", "flex-1")}
-                onClick={() => add({ slug: p.slug, name: p.name, price, image: p.images[0].src, variant: [size !== "One size" ? size : "", purchase === "sub" ? `Every ${freq}` : ""].filter(Boolean).join(" · ") || undefined }, qty)}
-              >
-                Add to cart · {formatPrice(price * qty)}
-              </button>
+            {isCider && (
+              <fieldset className="mt-8">
+                <legend className="eyebrow">Pack size</legend>
+                <div className="mt-3 grid grid-cols-2 gap-3">
+                  {PACK_SIZES.map((pack) => (
+                    <Button key={pack} variant="outline" aria-pressed={packSize === pack} onClick={() => setPackSize(pack)} className={cn("relative flex h-24 flex-col gap-1 rounded-2xl border-current/30 px-3 py-4 normal-case tracking-normal", packSize === pack && "border-cream bg-cream text-forest")}>
+                      <span className="text-lg font-semibold">{pack} cans</span>
+                      {pack === 24 && <span className="text-xs font-light">Best value</span>}
+                      {packSize === pack && <Check className="absolute right-3 top-3 h-4 w-4 opacity-60" aria-hidden />}
+                    </Button>
+                  ))}
+                </div>
+              </fieldset>
+            )}
+            <div className="mt-5">
+              <ShopifyBuyButton productId={selection.productId} variantId={selection.variantId} tone={onLight ? "orange" : "cream"} />
             </div>
             <div className="mt-3 flex flex-wrap gap-3">
               <Link to="/contact" className={btnClass("white", "py-2.5 normal-case")}><MapPin className="h-4 w-4" /> Find me in store</Link>
@@ -202,9 +186,9 @@ function CiderSections({ p }: { p: Product }) {
             <p className="mt-6 text-lg leading-relaxed">{p.description} Lightly sparkling, never syrupy, made to be shared.</p>
           </Reveal>
           <Reveal className="space-y-6" delay={100}>
-            <Bar label="Sweet" value={p.taste!.sweet} />
-            <Bar label="Refreshing" value={p.taste!.refreshing} />
-            <Bar label="Sparkling" value={p.taste!.sparkling} />
+            <Bar label="Sweet" value={p.taste?.sweet ?? 0} />
+            <Bar label="Refreshing" value={p.taste?.refreshing ?? 0} />
+            <Bar label="Sparkling" value={p.taste?.sparkling ?? 0} />
           </Reveal>
         </div>
         <div className="mx-auto grid max-w-[1920px] grid-cols-2 gap-4 px-5 pb-16 md:grid-cols-4 md:px-10">
@@ -218,7 +202,7 @@ function CiderSections({ p }: { p: Product }) {
       <section className="mx-auto max-w-[1920px] px-5 py-16 md:px-10 md:py-24">
         <h2 className="display-md">Serve it like this</h2>
         <div className="mt-10 grid gap-8 md:grid-cols-3">
-          {p.serve!.map((s, i) => (
+          {p.serve?.map((s, i) => (
             <Reveal key={s.title} delay={i * 100}>
               <img src={s.src} alt={s.title} loading="lazy" className={cn("aspect-[4/5] w-full rounded-[var(--radius-card)] object-cover shadow-tilt", i === 1 ? "rotate-2" : "-rotate-2")} />
               <h3 className="mt-6 text-2xl">{s.title}</h3>
@@ -264,41 +248,7 @@ function CiderSections({ p }: { p: Product }) {
         </div>
       </section>
 
-      <Reviews />
     </>
-  );
-}
-
-function Reviews() {
-  const [sent, setSent] = useState(false);
-  const [err, setErr] = useState<Record<string, string>>({});
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const d = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
-    const errs: Record<string, string> = {};
-    if (!d["name"]?.trim()) errs["name"] = "Please add your name.";
-    if (!d["review"]?.trim() || d["review"].trim().length < 10) errs["review"] = "Tell us a little more (10+ characters).";
-    setErr(errs);
-    if (Object.keys(errs).length) return;
-    await submitForm("review", d);
-    setSent(true);
-  };
-  return (
-    <section className="bg-paper px-5 py-16 md:py-24">
-      <div className="mx-auto max-w-3xl">
-        <h2 className="display-md">Reviews</h2>
-        <p className="mt-4 text-lg">No reviews yet. Be the first to tell us what you think.</p>
-        {sent ? (
-          <p className="mt-8 rounded-2xl bg-forest p-6 text-cream" role="status">Thanks! Your review will appear after moderation.</p>
-        ) : (
-          <form onSubmit={onSubmit} noValidate className="mt-8 grid gap-5">
-            <FormField id="r-name" name="name" label="Name" error={err["name"]} />
-            <FormField id="r-review" name="review" label="Your review" as="textarea" error={err["review"]} />
-            <button className={btnClass("green", "justify-self-start")}>Submit review</button>
-          </form>
-        )}
-      </div>
-    </section>
   );
 }
 
