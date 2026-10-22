@@ -22,10 +22,10 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 bg-forest text-cream">
       <div className="relative mx-auto flex h-20 max-w-[1920px] items-center justify-between px-5 md:h-24 md:px-10">
-        <button className="lg:hidden" onClick={() => setMenu(true)} aria-label="Open menu">
+        <button className="xl:hidden" onClick={() => setMenu(true)} aria-label="Open menu">
           <Menu className="h-7 w-7" />
         </button>
-        <nav className="hidden gap-8 lg:flex" aria-label="Main">
+        <nav className="hidden gap-8 xl:flex" aria-label="Main">
           {navLinks.map((l) => (
             <Link key={l.to} to={l.to} className="eyebrow transition-opacity hover:opacity-70" activeProps={{ className: "underline underline-offset-8 decoration-2" }}>
               {l.label}
