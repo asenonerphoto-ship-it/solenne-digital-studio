@@ -226,3 +226,13 @@
   .animate-marquee { animation: none; }
   .reveal { opacity: 1; }
 }
+.shopify-buy-button .shopify-buy__product { width: 100%; max-width: none; margin: 0; }
+.shopify-buy-button .shopify-buy__btn-wrapper { margin-top: 0; }
+.shopify-buy-button .shopify-buy__btn {
+  width: 100%; border: 0; border-radius: 999px; padding: 14px 28px;
+  background: var(--cream); color: var(--forest); font-family: var(--font-sans);
+  font-size: 14px; font-weight: 600; text-transform: uppercase;
+}
+.shopify-buy-button-orange .shopify-buy__btn { background: var(--peach); }
+.shopify-buy-button .shopify-buy__btn:hover { background: var(--cream); color: var(--forest); }
+.shopify-buy-button-orange .shopify-buy__btn:hover { background: var(--peach); }
