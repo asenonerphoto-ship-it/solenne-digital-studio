@@ -1,24 +1,88 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { img } from "@/lib/images";
+import { products } from "@/data/products";
+import { Marquee, ProductCard, Reveal, Slider, slideClass, btnClass } from "@/components/site/ui";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Solenne — Original Hard Cider. Life is good!" },
+      { name: "description", content: "Italian hard cider from South Tyrol. Crispy Apple and White Peach in 330 ml cans, 5.1% ABV." },
+      { property: "og:title", content: "Solenne — Original Hard Cider" },
+      { property: "og:description", content: "Italian hard cider from South Tyrol. Life is good!" },
+    ],
+  }),
+  component: Home,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Home() {
+  const ciders = products.filter((p) => p.category === "cider");
+  const merch = products.filter((p) => p.category === "merch");
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <section className="relative">
+        <img src={img.hero} alt="Crispy Apple can standing on a mirror in the grass with petals" className="h-[70vh] w-full object-cover md:h-[calc(100vh-6rem)]" />
+        <h1 className="sr-only">Solenne Original Hard Cider</h1>
+      </section>
+      <Marquee />
+
+      {/* Say hello */}
+      <section className="relative overflow-hidden bg-forest text-cream" style={{ clipPath: "polygon(0 0,100% 0,100% 92%,0 100%)" }}>
+        <div className="mx-auto grid max-w-[1920px] items-center gap-12 px-5 pb-32 pt-16 md:grid-cols-2 md:px-10 md:pb-48 md:pt-24">
+          <Reveal className="relative">
+            <img src={img.pour} alt="Crispy Apple cider being poured into a green glass" className="relative z-10 mx-auto w-[85%] max-w-xl" />
+            <div className="absolute -left-2 bottom-10 z-20 h-28 w-28 rounded-full bg-cream shadow-tilt md:h-44 md:w-44" aria-hidden />
+          </Reveal>
+          <Reveal className="flex flex-col items-end text-right" delay={150}>
+            <h2 className="display-xl">Say hello<br />to<br />Solenne</h2>
+            <p className="mt-8 max-w-md text-lg uppercase md:text-xl">We started Solenne with the goal to create a cider that feels and tastes like something Italian made should.</p>
+            <p className="mt-4 font-semibold uppercase md:text-xl">We think we did a pretty good job!</p>
+            <Link to="/our-story" className={btnClass("cream", "mt-8")}>Explore our story</Link>
+          </Reveal>
+        </div>
+      </section>
+
+      <img src={img.toast} alt="Two hands toasting with Crispy Apple and White Peach cans under palms" className="-mt-16 h-[40vh] w-full object-cover md:h-[60vh]" style={{ clipPath: "polygon(0 15%,100% 0,100% 100%,0 85%)" }} />
+
+      <section className="mx-auto max-w-[1920px] px-5 py-16 md:px-10 md:py-24">
+        <h2 className="display-md mb-10">Our collection</h2>
+        <Slider>
+          {ciders.map((p) => (
+            <div key={p.slug} className={slideClass}><ProductCard product={p} dark={p.theme === "forest"} /></div>
+          ))}
+        </Slider>
+      </section>
+
+      <section className="grid bg-forest text-cream md:grid-cols-2">
+        <div className="flex flex-col items-end justify-center px-6 py-16 text-right md:px-16 lg:px-24">
+          <Reveal className="flex flex-col items-end">
+            <h2 className="display-xl">What<br />is<br />Solenne?</h2>
+            <p className="mt-8 max-w-md text-lg uppercase">Apples from South Tyrol, a can inspired by Osaka, and a whole lot of Italian style.</p>
+            <Link to="/how-its-made" className={btnClass("cream", "mt-8")}>How it's made</Link>
+          </Reveal>
+        </div>
+        <img src={img.canHand} alt="Hand with gold rings holding a Solenne can against a white tee" className="h-[420px] w-full object-cover md:h-full md:min-h-[700px]" />
+      </section>
+
+      <section className="mx-auto max-w-[1920px] px-5 py-16 md:px-10 md:py-24">
+        <h2 className="display-md mb-10">Our merch</h2>
+        <Slider>
+          {merch.map((p) => (
+            <div key={p.slug} className={slideClass}><ProductCard product={p} /></div>
+          ))}
+        </Slider>
+      </section>
+
+      <section className="grid bg-forest text-cream md:grid-cols-2">
+        <img src={img.tray} alt="Tray of White Peach cans with straws and peach slices at a party" className="h-[420px] w-full object-cover md:h-full md:min-h-[700px]" />
+        <div className="flex flex-col items-end justify-center px-6 py-16 text-right md:px-16 lg:px-24">
+          <Reveal className="flex flex-col items-end">
+            <h2 className="display-xl">Join<br />the<br />crew!</h2>
+            <p className="mt-8 max-w-md text-lg uppercase">Bring Solenne to bars, parties, mountains and festivals. Get free merch and good vibes.</p>
+            <Link to="/crew" className={btnClass("cream", "mt-8")}>Explore the crew</Link>
+          </Reveal>
+        </div>
+      </section>
+    </>
   );
 }
