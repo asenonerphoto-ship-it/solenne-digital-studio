@@ -31,6 +31,7 @@ export function Reveal({ children, className, delay = 0 }: { children: ReactNode
     if (!el) return;
     const io = new IntersectionObserver(
       ([e]) => {
+        if (!e) return;
         if (e.isIntersecting) {
           setVisible(true);
           io.disconnect();
@@ -211,7 +212,7 @@ export function Accordion({ items, className }: { items: { q: string; a: ReactNo
 }
 
 /* ---------- FormField ---------- */
-export function FormField({ label, error, id, as, options, className, ...p }: InputHTMLAttributes<HTMLInputElement> & { label: string; error?: string; id: string; as?: "textarea" | "select"; options?: string[] }) {
+export function FormField({ label, error, id, as, options, className, ...p }: InputHTMLAttributes<HTMLInputElement> & { label: string; error?: string | undefined; id: string; as?: "textarea" | "select" | undefined; options?: string[] | undefined }) {
   const fieldCls = "mt-2 w-full rounded-2xl border-2 border-current/30 bg-transparent px-4 py-3 text-base placeholder:opacity-50 focus:border-current focus:outline-none";
   return (
     <div className={className}>

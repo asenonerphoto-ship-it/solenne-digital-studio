@@ -21,7 +21,7 @@ function Home() {
   return (
     <>
       <section className="relative">
-        <img src={img.hero} alt="Crispy Apple can standing on a mirror in the grass with petals" className="h-[70vh] w-full object-cover md:h-[calc(100vh-6rem)]" />
+        <img src={img.hero} alt="Crispy Apple can standing on a mirror in the grass with petals" className="aspect-[4/5] w-full object-cover md:aspect-[1920/990]" />
         <h1 className="sr-only">Solenne Original Hard Cider</h1>
       </section>
       <Marquee />

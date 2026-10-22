@@ -22,10 +22,10 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 bg-forest text-cream">
       <div className="relative mx-auto flex h-20 max-w-[1920px] items-center justify-between px-5 md:h-24 md:px-10">
-        <button className="lg:hidden" onClick={() => setMenu(true)} aria-label="Open menu">
+        <button className="xl:hidden" onClick={() => setMenu(true)} aria-label="Open menu">
           <Menu className="h-7 w-7" />
         </button>
-        <nav className="hidden gap-8 lg:flex" aria-label="Main">
+        <nav className="hidden gap-8 xl:flex" aria-label="Main">
           {navLinks.map((l) => (
             <Link key={l.to} to={l.to} className="eyebrow transition-opacity hover:opacity-70" activeProps={{ className: "underline underline-offset-8 decoration-2" }}>
               {l.label}
@@ -137,7 +137,7 @@ export function AgeGate() {
 }
 
 const footerCols = [
-  { title: "Shop", links: [{ to: "/shop", label: "All products" }, { to: "/shop/crispy-apple", label: "Crispy Apple" }, { to: "/shop/white-peach", label: "White Peach" }, { to: "/shop/mixed-pack", label: "Mixed Pack" }] },
+  { title: "Shop", links: [{ to: "/shop", label: "All products" }, { to: "/how-its-made", label: "Our Cider" }, { to: "/b2b", label: "Wholesale" }] },
   { title: "Learn", links: [{ to: "/our-story", label: "Our Story" }, { to: "/how-its-made", label: "How It's Made" }, { to: "/crew", label: "Crew" }] },
   { title: "Help", links: [{ to: "/faq", label: "FAQ" }, { to: "/contact", label: "Contact" }, { to: "/shipping", label: "Shipping" }] },
   { title: "More", links: [{ to: "/b2b", label: "B2B" }, { to: "/press", label: "Press" }] },
@@ -164,7 +164,7 @@ export function Footer() {
                 <p className="eyebrow mb-4">{c.title}</p>
                 <ul className="space-y-2.5">
                   {c.links.map((l) => (
-                    <li key={l.to}><Link to={l.to} className="opacity-80 hover:opacity-100">{l.label}</Link></li>
+                    <li key={l.label}><Link to={l.to} className="opacity-80 hover:opacity-100">{l.label}</Link></li>
                   ))}
                 </ul>
               </div>

@@ -164,7 +164,7 @@ function ProductPage() {
       {lightbox !== null && (
         <div className="fixed inset-0 z-50 grid place-items-center bg-forest/95 p-4" role="dialog" aria-modal="true" onClick={() => setLightbox(null)}>
           <button className="absolute right-6 top-6 text-cream" aria-label="Close"><X className="h-8 w-8" /></button>
-          <img src={p.images[lightbox].src} alt={p.images[lightbox].alt} className="max-h-[85vh] max-w-full rounded-[var(--radius-card)]" />
+          <img src={p.images[lightbox]?.src} alt={p.images[lightbox]?.alt ?? ""} className="max-h-[85vh] max-w-full rounded-[var(--radius-card)]" />
         </div>
       )}
       {sizeGuide && (
@@ -276,8 +276,8 @@ function Reviews() {
     e.preventDefault();
     const d = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
     const errs: Record<string, string> = {};
-    if (!d.name?.trim()) errs.name = "Please add your name.";
-    if (!d.review?.trim() || d.review.trim().length < 10) errs.review = "Tell us a little more (10+ characters).";
+    if (!d["name"]?.trim()) errs["name"] = "Please add your name.";
+    if (!d["review"]?.trim() || d["review"].trim().length < 10) errs["review"] = "Tell us a little more (10+ characters).";
     setErr(errs);
     if (Object.keys(errs).length) return;
     await submitForm("review", d);
@@ -292,8 +292,8 @@ function Reviews() {
           <p className="mt-8 rounded-2xl bg-forest p-6 text-cream" role="status">Thanks! Your review will appear after moderation.</p>
         ) : (
           <form onSubmit={onSubmit} noValidate className="mt-8 grid gap-5">
-            <FormField id="r-name" name="name" label="Name" error={err.name} />
-            <FormField id="r-review" name="review" label="Your review" as="textarea" error={err.review} />
+            <FormField id="r-name" name="name" label="Name" error={err["name"]} />
+            <FormField id="r-review" name="review" label="Your review" as="textarea" error={err["review"]} />
             <button className={btnClass("green", "justify-self-start")}>Submit review</button>
           </form>
         )}

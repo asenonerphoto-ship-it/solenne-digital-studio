@@ -24,6 +24,7 @@ function Counter({ to, suffix, decimals = 0 }: { to: number; suffix: string; dec
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(([e]) => {
+      if (!e) return;
       if (!e.isIntersecting) return;
       io.disconnect();
       const start = performance.now();
@@ -49,7 +50,7 @@ function Made() {
             <h1 className="display-xl">What is<br />Solenne?</h1>
             <p className="mt-8 max-w-lg text-lg leading-relaxed">An original hard cider with Italian attitude. Crisp, fruity and lightly sparkling — made for sharing, not sipping alone. Our philosophy is simple: real fruit, honest process, great style.</p>
           </div>
-          <img src={img.apple Green === undefined ? img.appleGreen : img.appleGreen} alt="Hand holding a Crispy Apple can against a green sweater" className="mx-auto w-[80%] max-w-md rotate-3 rounded-[var(--radius-card)] shadow-tilt" />
+          <img src={img.appleGreen} alt="Hand holding a Crispy Apple can against a green sweater" className="mx-auto w-[80%] max-w-md rotate-3 rounded-[var(--radius-card)] shadow-tilt" />
         </div>
       </section>
 

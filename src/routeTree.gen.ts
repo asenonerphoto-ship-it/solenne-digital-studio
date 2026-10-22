@@ -10,12 +10,78 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as B2bRouteImport } from './routes/b2b'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CrewRouteImport } from './routes/crew'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as HowItsMadeRouteImport } from './routes/how-its-made'
+import { Route as ImprintRouteImport } from './routes/imprint'
+import { Route as OurStoryRouteImport } from './routes/our-story'
+import { Route as PressRouteImport } from './routes/press'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ShippingRouteImport } from './routes/shipping'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ShopIndexRouteImport } from './routes/shop.index'
 import { Route as ShopSlugRouteImport } from './routes/shop.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const B2bRoute = B2bRouteImport.update({
+  id: '/b2b',
+  path: '/b2b',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrewRoute = CrewRouteImport.update({
+  id: '/crew',
+  path: '/crew',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItsMadeRoute = HowItsMadeRouteImport.update({
+  id: '/how-its-made',
+  path: '/how-its-made',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImprintRoute = ImprintRouteImport.update({
+  id: '/imprint',
+  path: '/imprint',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OurStoryRoute = OurStoryRouteImport.update({
+  id: '/our-story',
+  path: '/our-story',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PressRoute = PressRouteImport.update({
+  id: '/press',
+  path: '/press',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShippingRoute = ShippingRouteImport.update({
+  id: '/shipping',
+  path: '/shipping',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopIndexRoute = ShopIndexRouteImport.update({
@@ -31,30 +97,117 @@ const ShopSlugRoute = ShopSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/b2b': typeof B2bRoute
+  '/contact': typeof ContactRoute
+  '/crew': typeof CrewRoute
+  '/faq': typeof FaqRoute
+  '/how-its-made': typeof HowItsMadeRoute
+  '/imprint': typeof ImprintRoute
+  '/our-story': typeof OurStoryRoute
+  '/press': typeof PressRoute
+  '/privacy': typeof PrivacyRoute
+  '/shipping': typeof ShippingRoute
+  '/terms': typeof TermsRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/shop/': typeof ShopIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/b2b': typeof B2bRoute
+  '/contact': typeof ContactRoute
+  '/crew': typeof CrewRoute
+  '/faq': typeof FaqRoute
+  '/how-its-made': typeof HowItsMadeRoute
+  '/imprint': typeof ImprintRoute
+  '/our-story': typeof OurStoryRoute
+  '/press': typeof PressRoute
+  '/privacy': typeof PrivacyRoute
+  '/shipping': typeof ShippingRoute
+  '/terms': typeof TermsRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/shop': typeof ShopIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/b2b': typeof B2bRoute
+  '/contact': typeof ContactRoute
+  '/crew': typeof CrewRoute
+  '/faq': typeof FaqRoute
+  '/how-its-made': typeof HowItsMadeRoute
+  '/imprint': typeof ImprintRoute
+  '/our-story': typeof OurStoryRoute
+  '/press': typeof PressRoute
+  '/privacy': typeof PrivacyRoute
+  '/shipping': typeof ShippingRoute
+  '/terms': typeof TermsRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/shop/': typeof ShopIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/shop/$slug' | '/shop/'
+  fullPaths:
+    | '/'
+    | '/b2b'
+    | '/contact'
+    | '/crew'
+    | '/faq'
+    | '/how-its-made'
+    | '/imprint'
+    | '/our-story'
+    | '/press'
+    | '/privacy'
+    | '/shipping'
+    | '/terms'
+    | '/shop/$slug'
+    | '/shop/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/shop/$slug' | '/shop'
-  id: '__root__' | '/' | '/shop/$slug' | '/shop/'
+  to:
+    | '/'
+    | '/b2b'
+    | '/contact'
+    | '/crew'
+    | '/faq'
+    | '/how-its-made'
+    | '/imprint'
+    | '/our-story'
+    | '/press'
+    | '/privacy'
+    | '/shipping'
+    | '/terms'
+    | '/shop/$slug'
+    | '/shop'
+  id:
+    | '__root__'
+    | '/'
+    | '/b2b'
+    | '/contact'
+    | '/crew'
+    | '/faq'
+    | '/how-its-made'
+    | '/imprint'
+    | '/our-story'
+    | '/press'
+    | '/privacy'
+    | '/shipping'
+    | '/terms'
+    | '/shop/$slug'
+    | '/shop/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  B2bRoute: typeof B2bRoute
+  ContactRoute: typeof ContactRoute
+  CrewRoute: typeof CrewRoute
+  FaqRoute: typeof FaqRoute
+  HowItsMadeRoute: typeof HowItsMadeRoute
+  ImprintRoute: typeof ImprintRoute
+  OurStoryRoute: typeof OurStoryRoute
+  PressRoute: typeof PressRoute
+  PrivacyRoute: typeof PrivacyRoute
+  ShippingRoute: typeof ShippingRoute
+  TermsRoute: typeof TermsRoute
   ShopSlugRoute: typeof ShopSlugRoute
   ShopIndexRoute: typeof ShopIndexRoute
 }
@@ -66,6 +219,83 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/b2b': {
+      id: '/b2b'
+      path: '/b2b'
+      fullPath: '/b2b'
+      preLoaderRoute: typeof B2bRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crew': {
+      id: '/crew'
+      path: '/crew'
+      fullPath: '/crew'
+      preLoaderRoute: typeof CrewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-its-made': {
+      id: '/how-its-made'
+      path: '/how-its-made'
+      fullPath: '/how-its-made'
+      preLoaderRoute: typeof HowItsMadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/imprint': {
+      id: '/imprint'
+      path: '/imprint'
+      fullPath: '/imprint'
+      preLoaderRoute: typeof ImprintRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/our-story': {
+      id: '/our-story'
+      path: '/our-story'
+      fullPath: '/our-story'
+      preLoaderRoute: typeof OurStoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/press': {
+      id: '/press'
+      path: '/press'
+      fullPath: '/press'
+      preLoaderRoute: typeof PressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shipping': {
+      id: '/shipping'
+      path: '/shipping'
+      fullPath: '/shipping'
+      preLoaderRoute: typeof ShippingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop/': {
@@ -87,6 +317,17 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  B2bRoute: B2bRoute,
+  ContactRoute: ContactRoute,
+  CrewRoute: CrewRoute,
+  FaqRoute: FaqRoute,
+  HowItsMadeRoute: HowItsMadeRoute,
+  ImprintRoute: ImprintRoute,
+  OurStoryRoute: OurStoryRoute,
+  PressRoute: PressRoute,
+  PrivacyRoute: PrivacyRoute,
+  ShippingRoute: ShippingRoute,
+  TermsRoute: TermsRoute,
   ShopSlugRoute: ShopSlugRoute,
   ShopIndexRoute: ShopIndexRoute,
 }
