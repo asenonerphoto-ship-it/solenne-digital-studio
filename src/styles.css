@@ -20,7 +20,7 @@
   --radius-4xl: calc(var(--radius) + 16px);
   --radius-card: 1.5rem;
 
-  --font-display: "Josefin Sans", "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo Black", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Josefin Sans", "Montserrat", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "DM Serif Display", Georgia, serif;
 
@@ -31,6 +31,9 @@
   --color-cream: var(--cream);
   --color-navy: var(--navy);
   --color-paper: var(--paper);
+  --color-card-apple: var(--card-apple);
+  --color-card-peach: var(--card-peach);
+  --color-card-merch: var(--card-merch);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -83,6 +86,10 @@
   --cream: oklch(0.864 0.097 73.5);
   --navy: oklch(0.241 0.045 263.2);
   --paper: oklch(0.982 0.015 77.1);
+  --card-apple: oklch(0.95 0.035 155);
+  --card-peach: oklch(0.96 0.04 60);
+  --card-merch: oklch(0.96 0.018 85);
+  --shadow-card: 0 16px 32px -18px color-mix(in oklab, var(--forest) 25%, transparent);
 
   --background: oklch(1 0 0);
   --foreground: var(--forest);
@@ -139,8 +146,9 @@
     font-family: var(--font-display);
     font-weight: 700;
     text-transform: uppercase;
-    line-height: 0.95;
-    letter-spacing: 0.01em;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    overflow-wrap: break-word;
   }
   :focus-visible {
     outline: 3px solid var(--peach);
@@ -149,15 +157,21 @@
 }
 
 @utility display-xl {
-  font-size: clamp(3.25rem, 9vw, 8.75rem);
-  line-height: 0.92;
+  font-size: 3rem;
+  line-height: 1.05;
+  @media (min-width: 768px) { font-size: 5rem; }
+  @media (min-width: 1280px) { font-size: 7.5rem; }
 }
 @utility display-lg {
-  font-size: clamp(2.5rem, 6vw, 5.5rem);
-  line-height: 0.95;
+  font-size: 2.25rem;
+  line-height: 1.05;
+  @media (min-width: 768px) { font-size: 3.5rem; }
+  @media (min-width: 1280px) { font-size: 5rem; }
 }
 @utility display-md {
-  font-size: clamp(2rem, 4.2vw, 4.375rem);
+  font-size: 2rem;
+  @media (min-width: 768px) { font-size: 3rem; }
+  @media (min-width: 1280px) { font-size: 4rem; }
   line-height: 1;
 }
 @utility eyebrow {
@@ -190,4 +204,25 @@
 @utility script-faded {
   font-family: "Pacifico", cursive;
   text-transform: none;
+}
+
+.product-card { border-radius: 28px; transition: transform 400ms ease, box-shadow 400ms ease; }
+.product-card-image:hover { transform: none; }
+.card-primary, .card-alternate { transition: opacity 400ms ease; }
+.card-alternate { opacity: 0; }
+[data-alternate="true"] .card-primary { opacity: 0; }
+[data-alternate="true"] .card-alternate { opacity: 1; }
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card); }
+  .product-card:hover .card-primary { opacity: 0; }
+  .product-card:hover .card-alternate { opacity: 1; }
+  .card-dots { display: none; }
+  .card-shop { opacity: 0; transform: translateY(8px); transition: opacity 400ms ease, transform 400ms ease; }
+  .product-card:hover .card-shop, .product-card:focus-within .card-shop { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .product-card, .card-primary, .card-alternate, .card-shop, .reveal { transition: none; transform: none; }
+  .animate-marquee { animation: none; }
+  .reveal { opacity: 1; }
 }

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState, type ReactNode, type ButtonHTMLAttributes, type InputHTMLAttributes } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronDown, Heart, Star } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/data/products";
-import { formatPrice, themeClasses } from "@/data/products";
+
 
 /* ---------- Button ---------- */
 const btnBase =
@@ -93,52 +93,42 @@ export function SectionHeading({ eyebrow, title, align = "left", className }: { 
   );
 }
 
-/* ---------- Stars ---------- */
-export function Stars({ className }: { className?: string }) {
-  return (
-    <div className={cn("flex items-center gap-2", className)}>
-      <div className="flex" aria-hidden>
-        {Array.from({ length: 5 }).map((_, i) => (
-          <Star key={i} className="h-4 w-4 opacity-40" />
-        ))}
-      </div>
-      <span className="text-sm">Reviews coming soon</span>
-    </div>
-  );
-}
-
 /* ---------- ProductCard ---------- */
-export function ProductCard({ product, dark }: { product: Product; dark?: boolean }) {
-  const [liked, setLiked] = useState(false);
-  const t = themeClasses[product.theme];
-  const outline = product.category === "merch" ? "border-cream" : t.outline;
+export function ProductCard({ product, dark: _dark }: { product: Product; dark?: boolean }) {
+  const [alternate, setAlternate] = useState(false);
+  const touchStart = useRef<number | null>(null);
+  const swiped = useRef(false);
+  const tint = product.category === "merch" ? "bg-card-merch" : product.theme === "peach" ? "bg-card-peach" : "bg-card-apple";
   return (
-    <article
-      className={cn(
-        "group relative flex h-full flex-col rounded-[var(--radius-card)] border-[3px] p-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift",
-        dark ? "border-forest bg-forest text-cream" : cn("bg-background", outline),
-      )}
-    >
-      <Link to="/shop/$slug" params={{ slug: product.slug }} className="block">
-        <div className="overflow-hidden rounded-[1.75rem]">
-          <img src={product.images[0].src} alt={product.images[0].alt} loading="lazy" className="aspect-square w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-        </div>
-        <h3 className={cn("mt-5 text-2xl md:text-3xl", !dark && (product.category === "merch" ? "text-forest" : t.accent))}>{product.name}</h3>
-        <p className="mt-2 text-sm md:text-base">{product.short}</p>
-      </Link>
-      <div className="mt-auto flex items-center justify-between pt-4">
-        <Stars className={dark ? "text-cream" : product.category === "merch" ? "text-peach" : t.accent} />
-        <span className="font-semibold">{formatPrice(product.price)}</span>
-      </div>
-      <button
-        type="button"
-        onClick={() => setLiked((v) => !v)}
-        aria-pressed={liked}
-        aria-label={liked ? `Remove ${product.name} from favorites` : `Add ${product.name} to favorites`}
-        className="absolute right-8 top-8 grid h-11 w-11 place-items-center rounded-full bg-background/80 text-forest backdrop-blur transition-transform hover:scale-110"
+    <article className={cn("product-card group flex h-full min-w-0 flex-col text-forest", tint)}>
+      <Button
+        variant="outline"
+        className="product-card-image relative block aspect-[4/5] w-full overflow-hidden rounded-none border-0 p-6"
+        aria-label={`Swap ${product.name} image`}
+        aria-pressed={alternate}
+        onTouchStart={(e) => { touchStart.current = e.touches[0]?.clientX ?? null; swiped.current = false; }}
+        onTouchEnd={(e) => {
+          const end = e.changedTouches[0]?.clientX;
+          if (touchStart.current !== null && end !== undefined && Math.abs(end - touchStart.current) > 30) {
+            setAlternate((v) => !v); swiped.current = true;
+          }
+          touchStart.current = null;
+        }}
+        onClick={() => { if (!swiped.current) setAlternate((v) => !v); swiped.current = false; }}
       >
-        <Heart className={cn("h-5 w-5", liked && "fill-peach text-peach")} />
-      </button>
+        <span className="relative block h-full w-full" data-alternate={alternate}>
+          <img src={product.image} alt={product.images.find((i) => i.src === product.image)?.alt ?? product.name} loading="lazy" className="card-primary absolute inset-0 h-full w-full rounded-2xl object-cover" />
+          <img src={product.hoverImage} alt={product.images.find((i) => i.src === product.hoverImage)?.alt ?? `${product.name} alternate view`} loading="lazy" className="card-alternate absolute inset-0 h-full w-full rounded-2xl object-cover" />
+        </span>
+      </Button>
+      <div className="card-dots flex justify-center gap-2" aria-label="Product images">
+        {[false, true].map((value, i) => <Button key={i} variant="outline" aria-label={`Show ${product.name} image ${i + 1}`} aria-pressed={alternate === value} onClick={() => setAlternate(value)} className="grid h-7 w-7 rounded-full border-0 p-0"><span className={cn("h-1.5 w-1.5 rounded-full bg-forest", alternate !== value && "opacity-25")} /></Button>)}
+      </div>
+      <div className="flex flex-1 flex-col px-6 pb-6 pt-2">
+        <Link to="/shop/$slug" params={{ slug: product.slug }}><h3 className="text-2xl leading-[1.1]">{product.name}</h3></Link>
+        <p className="mt-2 text-sm font-light leading-relaxed">{product.short}</p>
+        <div className="mt-auto pt-5"><Link to="/shop/$slug" params={{ slug: product.slug }} className={btnClass("green", "card-shop shadow-none")}>Shop now</Link></div>
+      </div>
     </article>
   );
 }

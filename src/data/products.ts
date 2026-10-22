@@ -14,6 +14,8 @@ export interface Product {
   unit: string;
   short: string;
   description: string;
+  image: string;
+  hoverImage: string;
   images: [{ src: string; alt: string }, ...{ src: string; alt: string }[]];
   sizes?: string[];
   material?: string;
@@ -25,6 +27,8 @@ export interface Product {
 export const products: Product[] = [
   {
     slug: "crispy-apple",
+    image: img.applePool,
+    hoverImage: img.toast,
     name: "Crispy Apple",
     category: "cider",
     pack: "single",
@@ -49,6 +53,8 @@ export const products: Product[] = [
   },
   {
     slug: "white-peach",
+    image: img.peachLime,
+    hoverImage: img.peachPeaches,
     name: "White Peach",
     category: "cider",
     pack: "single",
@@ -73,6 +79,8 @@ export const products: Product[] = [
   },
   {
     slug: "mixed-pack",
+    image: img.toast,
+    hoverImage: img.tray,
     name: "Mixed Pack",
     category: "cider",
     pack: "variety",
@@ -96,6 +104,8 @@ export const products: Product[] = [
   },
   {
     slug: "corduroy-hat",
+    image: img.hat,
+    hoverImage: img.canHand,
     name: "Corduroy Hat",
     category: "merch",
     theme: "navy",
@@ -115,6 +125,8 @@ export const products: Product[] = [
   },
   {
     slug: "fleece-jacket",
+    image: img.fleeceWoman,
+    hoverImage: img.fleeceFlat,
     name: "Fleece Jacket",
     category: "merch",
     theme: "navy",
@@ -135,6 +147,8 @@ export const products: Product[] = [
   },
   {
     slug: "crewneck",
+    image: img.jacket,
+    hoverImage: img.fleeceChest,
     name: "Crewneck",
     category: "merch",
     theme: "navy",
