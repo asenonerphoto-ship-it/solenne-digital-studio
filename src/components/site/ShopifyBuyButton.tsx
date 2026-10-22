@@ -28,7 +28,7 @@ export function ShopifyBuyButton({ productId, variantId, tone = "cream" }: { pro
       ui = instance;
       const theme = shopifyTheme();
       component = await instance.createComponent("product", {
-        id: productId, storefrontVariantId: variantId, node: container,
+        id: productId, storefrontVariantId: `gid://shopify/ProductVariant/${variantId}`, node: container,
         options: {
           product: {
             iframe: false,
@@ -41,7 +41,7 @@ export function ShopifyBuyButton({ productId, variantId, tone = "cream" }: { pro
       });
       if (cancelled) { dispose(); return; }
       // Do not silently sell the default variant if the configured ID is wrong.
-      if (!component || String(component.selectedVariant?.id) !== variantId) { dispose(); setStatus("unavailable"); return; }
+      if (!component || String(component.selectedVariant?.id) !== `gid://shopify/ProductVariant/${variantId}`) { dispose(); setStatus("unavailable"); return; }
       setStatus("ready");
     }).catch(() => { dispose(); if (!cancelled) setStatus("unavailable"); });
     return () => { cancelled = true; dispose(); };
