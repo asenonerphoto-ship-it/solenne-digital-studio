@@ -10,12 +10,36 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as B2bRouteImport } from './routes/b2b'
+import { Route as CrewRouteImport } from './routes/crew'
+import { Route as HowItsMadeRouteImport } from './routes/how-its-made'
+import { Route as OurStoryRouteImport } from './routes/our-story'
 import { Route as ShopIndexRouteImport } from './routes/shop.index'
 import { Route as ShopSlugRouteImport } from './routes/shop.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const B2bRoute = B2bRouteImport.update({
+  id: '/b2b',
+  path: '/b2b',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrewRoute = CrewRouteImport.update({
+  id: '/crew',
+  path: '/crew',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItsMadeRoute = HowItsMadeRouteImport.update({
+  id: '/how-its-made',
+  path: '/how-its-made',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OurStoryRoute = OurStoryRouteImport.update({
+  id: '/our-story',
+  path: '/our-story',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopIndexRoute = ShopIndexRouteImport.update({
@@ -31,30 +55,68 @@ const ShopSlugRoute = ShopSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/b2b': typeof B2bRoute
+  '/crew': typeof CrewRoute
+  '/how-its-made': typeof HowItsMadeRoute
+  '/our-story': typeof OurStoryRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/shop/': typeof ShopIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/b2b': typeof B2bRoute
+  '/crew': typeof CrewRoute
+  '/how-its-made': typeof HowItsMadeRoute
+  '/our-story': typeof OurStoryRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/shop': typeof ShopIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/b2b': typeof B2bRoute
+  '/crew': typeof CrewRoute
+  '/how-its-made': typeof HowItsMadeRoute
+  '/our-story': typeof OurStoryRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/shop/': typeof ShopIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/shop/$slug' | '/shop/'
+  fullPaths:
+    | '/'
+    | '/b2b'
+    | '/crew'
+    | '/how-its-made'
+    | '/our-story'
+    | '/shop/$slug'
+    | '/shop/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/shop/$slug' | '/shop'
-  id: '__root__' | '/' | '/shop/$slug' | '/shop/'
+  to:
+    | '/'
+    | '/b2b'
+    | '/crew'
+    | '/how-its-made'
+    | '/our-story'
+    | '/shop/$slug'
+    | '/shop'
+  id:
+    | '__root__'
+    | '/'
+    | '/b2b'
+    | '/crew'
+    | '/how-its-made'
+    | '/our-story'
+    | '/shop/$slug'
+    | '/shop/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  B2bRoute: typeof B2bRoute
+  CrewRoute: typeof CrewRoute
+  HowItsMadeRoute: typeof HowItsMadeRoute
+  OurStoryRoute: typeof OurStoryRoute
   ShopSlugRoute: typeof ShopSlugRoute
   ShopIndexRoute: typeof ShopIndexRoute
 }
@@ -66,6 +128,34 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/b2b': {
+      id: '/b2b'
+      path: '/b2b'
+      fullPath: '/b2b'
+      preLoaderRoute: typeof B2bRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crew': {
+      id: '/crew'
+      path: '/crew'
+      fullPath: '/crew'
+      preLoaderRoute: typeof CrewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-its-made': {
+      id: '/how-its-made'
+      path: '/how-its-made'
+      fullPath: '/how-its-made'
+      preLoaderRoute: typeof HowItsMadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/our-story': {
+      id: '/our-story'
+      path: '/our-story'
+      fullPath: '/our-story'
+      preLoaderRoute: typeof OurStoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop/': {
@@ -87,6 +177,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  B2bRoute: B2bRoute,
+  CrewRoute: CrewRoute,
+  HowItsMadeRoute: HowItsMadeRoute,
+  OurStoryRoute: OurStoryRoute,
   ShopSlugRoute: ShopSlugRoute,
   ShopIndexRoute: ShopIndexRoute,
 }
