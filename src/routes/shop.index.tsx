@@ -43,8 +43,8 @@ function Shop() {
             </div>
           )}
         </div>
-        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {list.map((p) => <ProductCard key={p.slug} product={p} dark={p.theme === "forest"} />)}
+        <div className="mt-10 grid grid-cols-1 gap-5 min-[480px]:grid-cols-2 md:gap-6 lg:grid-cols-3">
+          {list.map((p) => <ProductCard key={p.slug} product={p} />)}
         </div>
       </section>
     </>
