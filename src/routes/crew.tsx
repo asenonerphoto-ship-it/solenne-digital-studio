@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CalendarHeart, Percent, Rocket, Shirt } from "lucide-react";
 import { img } from "@/lib/images";
 import { crewSteps } from "@/data/content";
-import { FeatureCard, Reveal, StepTimeline, btnClass } from "@/components/site/ui";
+import { FeatureCard, Reveal, StepTimeline, Words, btnClass } from "@/components/site/ui";
 import { LeadForm } from "@/components/site/LeadForm";
 import { cn } from "@/lib/utils";
 
@@ -27,7 +27,7 @@ function Crew() {
       <section className="grid bg-forest text-cream md:grid-cols-2">
         <img src={img.tray} alt="Friends serving a tray of Solenne cans at a party" className="h-[420px] w-full object-cover md:h-full md:min-h-[700px]" />
         <div className="flex flex-col items-end justify-center px-6 py-16 text-right md:px-16 lg:px-24">
-          <h1 className="display-xl">Join<br />the<br />crew!</h1>
+          <Words as="h1" className="display-xl" text="Join|the|crew!" />
           <p className="mt-8 max-w-md text-lg">The Crew is our community of friends who bring Solenne to bars, parties, mountains and festivals.</p>
           <a href="#apply" className={btnClass("cream", "mt-8")}>Apply now</a>
         </div>

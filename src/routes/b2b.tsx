@@ -3,7 +3,7 @@ import { Download, Megaphone, Snowflake, Sparkles, TrendingUp } from "lucide-rea
 import { img } from "@/lib/images";
 import { b2bSteps } from "@/data/content";
 import { getProduct } from "@/data/products";
-import { FeatureCard, Reveal, StepTimeline, btnClass } from "@/components/site/ui";
+import { FeatureCard, Reveal, StepTimeline, Words, btnClass } from "@/components/site/ui";
 import { LeadForm } from "@/components/site/LeadForm";
 
 export const Route = createFileRoute("/b2b")({
@@ -35,7 +35,7 @@ function B2B() {
       <section className="relative overflow-hidden bg-forest text-cream">
         <img src={img.tray} alt="Moody bar scene with Solenne cans on a tray" className="absolute inset-0 h-full w-full object-cover opacity-40" />
         <div className="relative mx-auto max-w-[1920px] px-5 py-28 md:px-10 md:py-40">
-          <h1 className="display-xl max-w-5xl">Solenne for your bar, restaurant & shop</h1>
+          <Words as="h1" className="display-xl max-w-5xl" text="Solenne for your bar, restaurant & shop" />
           <a href="#inquiry" className={btnClass("cream", "mt-10")}>Request wholesale info</a>
         </div>
       </section>
