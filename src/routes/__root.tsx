@@ -135,7 +135,6 @@ function PageTransition() {
   useAutoReveal(ref, pathname);
   useEffect(() => {
     if (first.current) { first.current = false; return; }
-    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
     if (!prefersReducedMotion()) setWipe((n) => n + 1);
   }, [pathname]);
   useEffect(() => {
