@@ -1,12 +1,11 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
-import { Instagram, Menu, Minus, Plus, ShoppingBag, X } from "lucide-react";
+import { Instagram, Menu, ShoppingBag, X } from "lucide-react";
 import { navLinks } from "@/data/content";
 import { img } from "@/lib/images";
-import { useCart } from "@/lib/cart";
-import { formatPrice } from "@/data/products";
+import { useShopify } from "@/lib/shopify";
 import { isEmail, submitForm } from "@/lib/forms";
-import { btnClass } from "./ui";
+import { Button, btnClass } from "./ui";
 import { cn } from "@/lib/utils";
 
 export function Logo({ className }: { className?: string }) {
@@ -14,7 +13,7 @@ export function Logo({ className }: { className?: string }) {
 }
 
 export function Header() {
-  const { count, setOpen } = useCart();
+  const { count, available, openCart } = useShopify();
   const [menu, setMenu] = useState(false);
   useEffect(() => {
     document.body.style.overflow = menu ? "hidden" : "";
@@ -35,12 +34,12 @@ export function Header() {
         <Link to="/" className="absolute left-1/2 -translate-x-1/2" aria-label="Solenne home">
           <Logo />
         </Link>
-        <button onClick={() => setOpen(true)} className="relative" aria-label={`Open cart, ${count} items`}>
+        <Button variant="outline" onClick={openCart} disabled={!available} className="relative h-10 w-10 border-0 p-0" title={available ? "Open cart" : "Coming soon"} aria-label={`Open cart, ${count} items`}>
           <ShoppingBag className="h-7 w-7" />
           {count > 0 && (
             <span className="absolute -right-2 -top-2 grid h-5 min-w-5 place-items-center rounded-full bg-peach px-1 text-xs font-bold text-forest">{count}</span>
           )}
-        </button>
+        </Button>
       </div>
       {menu && (
         <div className="fixed inset-0 z-50 flex flex-col bg-forest px-6 py-6 text-cream animate-in fade-in">
@@ -59,54 +58,6 @@ export function Header() {
         </div>
       )}
     </header>
-  );
-}
-
-export function CartDrawer() {
-  const { items, open, setOpen, update, remove, total } = useCart();
-  return (
-    <div className={cn("fixed inset-0 z-50 transition-opacity", open ? "opacity-100" : "pointer-events-none opacity-0")} aria-hidden={!open}>
-      <div className="absolute inset-0 bg-forest/60" onClick={() => setOpen(false)} />
-      <aside
-        role="dialog"
-        aria-label="Shopping cart"
-        className={cn("absolute right-0 top-0 flex h-full w-full max-w-md flex-col bg-paper text-forest shadow-2xl transition-transform duration-500", open ? "translate-x-0" : "translate-x-full")}
-      >
-        <div className="flex items-center justify-between bg-forest px-6 py-5 text-cream">
-          <h2 className="text-2xl">Your cart</h2>
-          <button onClick={() => setOpen(false)} aria-label="Close cart"><X className="h-6 w-6" /></button>
-        </div>
-        <div className="flex-1 space-y-4 overflow-y-auto p-6">
-          {items.length === 0 && <p className="py-10 text-center">Your cart is empty. Time to fix that.</p>}
-          {items.map((i) => (
-            <div key={i.key} className="flex gap-4 rounded-2xl bg-background p-3">
-              <img src={i.image} alt="" className="h-20 w-20 rounded-xl object-cover" />
-              <div className="flex-1">
-                <p className="font-display font-bold uppercase">{i.name}</p>
-                {i.variant && <p className="text-sm">{i.variant}</p>}
-                <div className="mt-2 flex items-center gap-3">
-                  <button onClick={() => update(i.key, i.qty - 1)} aria-label="Decrease"><Minus className="h-4 w-4" /></button>
-                  <span>{i.qty}</span>
-                  <button onClick={() => update(i.key, i.qty + 1)} aria-label="Increase"><Plus className="h-4 w-4" /></button>
-                  <button onClick={() => remove(i.key)} className="ml-auto text-sm underline">Remove</button>
-                </div>
-              </div>
-              <p className="font-semibold">{formatPrice(i.price * i.qty)}</p>
-            </div>
-          ))}
-        </div>
-        <div className="border-t p-6">
-          <div className="flex justify-between font-display text-xl font-bold uppercase">
-            <span>Total</span>
-            <span>{formatPrice(total)}</span>
-          </div>
-          <button className={btnClass("green", "mt-4 w-full")} disabled={!items.length} onClick={() => alert("Checkout coming soon!")}>
-            Checkout
-          </button>
-          <p className="mt-3 text-center text-xs">Prices are placeholders. Checkout is not live yet.</p>
-        </div>
-      </aside>
-    </div>
   );
 }
 
@@ -161,7 +112,7 @@ export function Footer() {
           <div className="mt-10 grid grid-cols-2 gap-8 sm:grid-cols-4">
             {footerCols.map((c) => (
               <div key={c.title}>
-                <p className="eyebrow mb-4">{c.title}</p>
+                <h3 className="mb-4 text-sm leading-tight">{c.title}</h3>
                 <ul className="space-y-2.5">
                   {c.links.map((l) => (
                     <li key={l.label}><Link to={l.to} className="opacity-80 hover:opacity-100">{l.label}</Link></li>

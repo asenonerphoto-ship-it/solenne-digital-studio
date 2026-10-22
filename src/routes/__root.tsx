@@ -12,8 +12,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { CartProvider } from "@/lib/cart";
-import { AgeGate, CartDrawer, Footer, Header } from "@/components/site/Layout";
+import { ShopifyProvider } from "@/lib/shopify";
+import { AgeGate, Footer, Header } from "@/components/site/Layout";
 
 function NotFoundComponent() {
   return (
@@ -80,7 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Josefin+Sans:wght@300;400;600;700&family=Pacifico&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Serif+Display&family=Josefin+Sans:wght@300;400;600;700&family=Pacifico&display=swap",
       },
     ],
   }),
@@ -109,7 +109,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CartProvider>
+      <ShopifyProvider>
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-cream focus:px-4 focus:py-2 focus:text-forest">
           Skip to content
         </a>
@@ -118,9 +118,8 @@ function RootComponent() {
           <Outlet />
         </main>
         <Footer />
-        <CartDrawer />
         <AgeGate />
-      </CartProvider>
+      </ShopifyProvider>
     </QueryClientProvider>
   );
 }
