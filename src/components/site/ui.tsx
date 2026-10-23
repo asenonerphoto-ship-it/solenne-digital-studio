@@ -2,7 +2,7 @@ import { Fragment, useEffect, useRef, useState, type ReactNode, type ButtonHTMLA
 import { Link } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { Product } from "@/data/products";
+import type { Product, Theme } from "@/data/products";
 import { observeOnce, prefersReducedMotion, usePauseOffscreen } from "@/lib/motion";
 
 
@@ -131,22 +131,36 @@ export function SectionHeading({ eyebrow, title, align = "left", className }: { 
   );
 }
 
-/* ---------- ProductCard: bold flavor-colored panel, sticker, taglines, full-width Shop now ---------- */
-const panelClass: Record<string, string> = {
-  apple: "bg-apple text-cream",
-  peach: "bg-peach text-forest",
-  forest: "bg-cream text-forest",
-  navy: "bg-navy text-cream",
+/* ---------- CardSticker: cream flag with scalloped bottom edge (wave motif) ---------- */
+export function CardSticker({ text, className }: { text: string; className?: string }) {
+  return (
+    <span className={cn("pointer-events-none absolute right-2.5 top-0 z-20 flex w-[76px] rotate-[3deg] flex-col items-center text-center", className)} aria-hidden>
+      <span className="w-full rounded-t-[10px] bg-cream px-1.5 pb-1 pt-2 font-display text-[11px] font-bold uppercase leading-[1.2] tracking-wide text-forest">
+        {text.split(" ").map((w, i) => <span key={i} className="block">{w}</span>)}
+      </span>
+      <svg viewBox="0 0 80 12" preserveAspectRatio="none" className="-mt-px block h-3 w-full" aria-hidden>
+        <path d="M0 0 H80 V4 Q70 12 60 4 T40 4 T20 4 T0 4 Z" className="fill-cream" />
+      </svg>
+    </span>
+  );
+}
+
+/* ---------- ProductCard: outlined card, square photo, sticker; hover swaps text for actions ---------- */
+const cardTheme: Record<Theme, { text: string; btn: string }> = {
+  apple: { text: "text-apple", btn: "bg-apple text-cream" },
+  peach: { text: "text-peach", btn: "bg-peach text-cream" },
+  forest: { text: "text-forest", btn: "bg-forest text-cream" },
+  navy: { text: "text-navy", btn: "bg-navy text-cream" },
 };
 export function ProductCard({ product }: { product: Product }) {
   const [alternate, setAlternate] = useState(false);
   const touchStart = useRef<number | null>(null);
-  const light = product.theme === "peach" || product.theme === "forest";
+  const t = cardTheme[product.theme];
   const alt = (src: string, fallback: string) => product.images.find((i) => i.src === src)?.alt ?? fallback;
   return (
-    <article className={cn("product-card group relative flex h-full min-w-0 flex-col p-3", panelClass[product.theme])}>
+    <article className={cn("product-card group relative flex h-full min-w-0 flex-col rounded-[24px] border-2 border-current bg-background p-5", t.text)}>
       <div
-        className="card-media relative aspect-square w-full overflow-hidden rounded-[20px]"
+        className="card-media relative aspect-square w-full overflow-hidden rounded-2xl"
         data-alternate={alternate}
         onTouchStart={(e) => { touchStart.current = e.touches[0]?.clientX ?? null; }}
         onTouchEnd={(e) => {
@@ -158,6 +172,7 @@ export function ProductCard({ product }: { product: Product }) {
       >
         <img src={product.image} alt={alt(product.image, product.name)} loading="lazy" draggable={false} className="card-primary absolute inset-0 h-full w-full object-cover" />
         <img src={product.hoverImage} alt={alt(product.hoverImage, `${product.name} lifestyle`)} loading="lazy" draggable={false} className="card-alternate absolute inset-0 h-full w-full object-cover" />
+        {product.badge && <CardSticker text={product.badge} />}
         <div className="card-dots absolute inset-x-0 bottom-2 z-10 flex justify-center gap-1" aria-label="Product images">
           {[false, true].map((value, i) => (
             <button key={i} type="button" aria-label={`Show ${product.name} image ${i + 1}`} aria-pressed={alternate === value} onClick={(e) => { e.stopPropagation(); setAlternate(value); }} className="grid h-7 w-7 place-items-center">
@@ -166,18 +181,20 @@ export function ProductCard({ product }: { product: Product }) {
           ))}
         </div>
       </div>
-      {product.badge && (
-        <span className="card-badge pointer-events-none absolute right-1 top-1 z-20 rotate-[8deg] rounded-full bg-cream px-3.5 py-1.5 font-display text-xs uppercase tracking-wide text-forest shadow-tilt ring-2 ring-forest">{product.badge}</span>
-      )}
-      <div className="flex flex-1 flex-col px-3 pb-3 pt-6 md:px-4">
-        <h3 className="text-2xl leading-[1.05] md:text-[1.875rem]">
-          <Link to="/shop/$slug" params={{ slug: product.slug }} className="card-link after:absolute after:inset-0 after:z-[1] after:rounded-[28px] focus-visible:outline-none">{product.name}</Link>
-        </h3>
-        <ul className="mt-3 space-y-0.5 text-[15px] font-light leading-snug">
-          {product.taglines.map((t) => <li key={t}>{t}</li>)}
-        </ul>
-        <div className="mt-auto pt-6">
-          <span className={cn(btnClass(light ? "green" : "cream", "card-shop pointer-events-none w-full shadow-none"), "group-hover:-translate-y-0.5 group-hover:before:[transform:translate(-50%,-50%)_scale(1)]")} aria-hidden>Shop now</span>
+      <div className="card-body relative pt-4">
+        <div className="card-default">
+          <h3 className="text-2xl uppercase leading-[1.05] md:text-[1.75rem]">
+            <Link to="/shop/$slug" params={{ slug: product.slug }} className="card-link after:absolute after:inset-0 after:z-[1] after:rounded-[22px] focus-visible:outline-none">{product.name}</Link>
+          </h3>
+          <ul className="mt-2.5 space-y-0.5 text-sm font-light leading-[1.3]">
+            {product.taglines.map((line) => <li key={line}>{line}</li>)}
+          </ul>
+        </div>
+        <div className="card-hover absolute inset-0 flex flex-col items-center justify-center gap-2.5 pt-4" aria-hidden>
+          <span className={cn("inline-flex h-[54px] w-full items-center justify-center rounded-full font-display text-sm uppercase tracking-[0.06em]", t.btn)}>Shop now</span>
+          <span className="card-sub text-xs font-semibold uppercase tracking-wide underline underline-offset-4">
+            {product.category === "merch" ? "Choose your size" : "Choose 12 or 24 cans"}
+          </span>
         </div>
       </div>
     </article>
