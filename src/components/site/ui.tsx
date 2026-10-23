@@ -2,7 +2,7 @@ import { Fragment, useEffect, useRef, useState, type ReactNode, type ButtonHTMLA
 import { Link } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { Product } from "@/data/products";
+import type { Product, Theme } from "@/data/products";
 import { observeOnce, prefersReducedMotion, usePauseOffscreen } from "@/lib/motion";
 
 
@@ -146,7 +146,7 @@ export function CardSticker({ text, className }: { text: string; className?: str
 }
 
 /* ---------- ProductCard: outlined card, square photo, sticker; hover swaps text for actions ---------- */
-const cardTheme: Record<string, { text: string; btn: string }> = {
+const cardTheme: Record<Theme, { text: string; btn: string }> = {
   apple: { text: "text-apple", btn: "bg-apple text-cream" },
   peach: { text: "text-peach", btn: "bg-peach text-cream" },
   forest: { text: "text-forest", btn: "bg-forest text-cream" },
