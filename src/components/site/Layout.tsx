@@ -63,12 +63,12 @@ export function Header() {
         </Button>
       </div>
       {menu && (
-        <div className="menu-wave fixed inset-0 z-50 flex flex-col bg-forest px-6 py-6 text-cream">
+        <div className="menu-wave fixed inset-0 z-50 flex h-dvh flex-col bg-forest px-6 py-6 text-cream">
           <div className="flex items-center justify-between">
             <Logo />
             <button onClick={() => setMenu(false)} aria-label="Close menu"><X className="h-8 w-8" /></button>
           </div>
-          <nav className="mt-16 flex flex-col gap-6" aria-label="Mobile">
+          <nav className="mt-16 flex flex-col gap-6 bg-forest" aria-label="Mobile">
             {navLinks.map((l, i) => (
               <Link key={l.to} to={l.to} onClick={() => setMenu(false)} className="menu-item font-display text-5xl font-bold uppercase" style={{ ["--i" as string]: i }}>
                 {l.label}
