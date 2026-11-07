@@ -182,9 +182,6 @@
 @utility shadow-lift {
   box-shadow: var(--shadow-lift);
 }
-@utility shadow-photo {
-  box-shadow: 6px 6px 0 var(--navy);
-}
 @utility no-scrollbar {
   scrollbar-width: none;
   &::-webkit-scrollbar {
