@@ -35,7 +35,7 @@ export function ShopifyBuyButton({ productId, variantId, tone = "cream" }: { pro
             contents: { img: false, imgWithCarousel: false, title: false, variantTitle: false, price: false, description: false, options: false, quantity: false, button: true, buttonWithQuantity: false },
             text: { button: "ADD TO CART" },
             buttonDestination: "cart",
-            styles: { product: { width: "100%", "max-width": "none", margin: "0" }, button: { "border-radius": "999px", "background-color": tone === "orange" ? theme.peach : theme.cream, color: theme.forest, "font-family": theme.bodyFont } },
+            styles: { product: { width: "100%", "max-width": "none", margin: "0" }, button: { "border-radius": "999px", "background-color": tone === "orange" ? theme.peach : theme.cream, color: theme.navy, "font-family": theme.bodyFont } },
           },
         },
       });

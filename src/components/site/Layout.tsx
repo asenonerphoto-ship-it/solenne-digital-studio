@@ -58,7 +58,7 @@ export function Header() {
         <Button variant="outline" onClick={openCart} disabled={!available} className="relative h-10 w-10 border-0 p-0" title={available ? "Open cart" : "Coming soon"} aria-label={`Open cart, ${count} items`}>
           <ShoppingBag key={bounce} className={cn("h-7 w-7", bounce > 0 && "cart-bounce")} />
           {count > 0 && (
-            <span className="absolute -right-2 -top-2 grid h-5 min-w-5 place-items-center rounded-full bg-peach px-1 text-xs font-bold text-forest">{count}</span>
+            <span className="absolute -right-2 -top-2 grid h-5 min-w-5 place-items-center rounded-full bg-peach px-1 text-xs font-bold text-navy">{count}</span>
           )}
         </Button>
       </div>
@@ -153,7 +153,7 @@ export function Footer() {
           <h2 className="display-md">Join the crew</h2>
           <p className="mt-3 text-lg">Get 10% off your first order.</p>
           {state === "done" ? (
-            <p className="mt-6 flex items-center gap-3 rounded-2xl bg-cream px-5 py-4 font-semibold text-forest" role="status"><span className="check-burst h-7 w-7 rounded-full bg-forest text-cream"><Check className="check-draw h-4 w-4" /></span>You're in! Check your inbox for your code.</p>
+            <p className="mt-6 flex items-center gap-3 rounded-2xl bg-cream px-5 py-4 font-semibold text-navy" role="status"><span className="check-burst h-7 w-7 rounded-full bg-forest text-cream"><Check className="check-draw h-4 w-4" /></span>You're in! Check your inbox for your code.</p>
           ) : (
             <form onSubmit={onSubmit} noValidate className="mt-6 flex flex-col gap-3 sm:flex-row">
               <label htmlFor="nl-email" className="sr-only">Email address</label>
@@ -161,10 +161,10 @@ export function Footer() {
               <button className={btnClass("cream")} disabled={state === "sending"}>{state === "sending" ? "…" : "Subscribe"}</button>
             </form>
           )}
-          {state === "error" && <p className="mt-2 text-sm text-peach" role="alert">Please enter a valid email.</p>}
+          {state === "error" && <p className="mt-2 text-sm text-cream" role="alert">Please enter a valid email.</p>}
           <div className="mt-8 flex gap-4">
-            <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Solenne on Instagram" className="grid h-11 w-11 place-items-center rounded-full border-2 border-cream/50 hover:bg-cream hover:text-forest"><Instagram className="h-5 w-5" /></a>
-            <a href="https://tiktok.com" target="_blank" rel="noreferrer" aria-label="Solenne on TikTok" className="grid h-11 w-11 place-items-center rounded-full border-2 border-cream/50 hover:bg-cream hover:text-forest">
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Solenne on Instagram" className="grid h-11 w-11 place-items-center rounded-full border-2 border-cream/50 hover:bg-cream hover:text-navy"><Instagram className="h-5 w-5" /></a>
+            <a href="https://tiktok.com" target="_blank" rel="noreferrer" aria-label="Solenne on TikTok" className="grid h-11 w-11 place-items-center rounded-full border-2 border-cream/50 hover:bg-cream hover:text-navy">
               <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9a7.4 7.4 0 0 0 4.3 1.4V7.3a4.3 4.3 0 0 1-3.2-1.5Z" /></svg>
             </a>
           </div>

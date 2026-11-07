@@ -19,7 +19,7 @@ export const Route = createFileRoute("/shop/")({
 });
 
 function Pill({ active, ...p }: React.ButtonHTMLAttributes<HTMLButtonElement> & { active: boolean }) {
-  return <button {...p} aria-pressed={active} className={cn("rounded-full border-2 border-forest px-6 py-2.5 text-sm font-semibold uppercase transition-colors", active ? "bg-forest text-cream" : "hover:bg-paper")} />;
+  return <button {...p} aria-pressed={active} className={cn("rounded-full border-2 border-navy px-6 py-2.5 text-sm font-semibold uppercase transition-colors", active ? "bg-forest text-cream" : "hover:bg-paper")} />;
 }
 
 function Shop() {

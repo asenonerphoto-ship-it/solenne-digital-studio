@@ -10,11 +10,11 @@ import { observeOnce, prefersReducedMotion, usePauseOffscreen } from "@/lib/moti
 const btnBase =
   "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.06em] btn-fx hover:-translate-y-0.5 disabled:opacity-50 disabled:pointer-events-none";
 const btnVariants = {
-  cream: "btn-fill bg-cream text-forest shadow-tilt hover:brightness-105",
-  orange: "btn-fill bg-peach text-forest hover:brightness-105",
-  green: "btn-fill bg-forest text-cream hover:bg-apple",
+  cream: "btn-fill bg-cream text-navy shadow-tilt hover:brightness-105",
+  orange: "btn-fill bg-peach text-navy hover:brightness-105",
+  navy: "btn-fill bg-navy text-cream hover:bg-forest",
   outline: "border-2 border-current bg-transparent overflow-visible",
-  white: "btn-fill bg-background text-forest hover:bg-paper",
+  white: "btn-fill bg-background text-navy hover:bg-paper",
 } as const;
 export type BtnVariant = keyof typeof btnVariants;
 export const btnClass = (v: BtnVariant = "cream", extra?: string) => cn(btnBase, btnVariants[v], extra);
@@ -135,22 +135,22 @@ export function SectionHeading({ eyebrow, title, align = "left", className }: { 
 export function CardSticker({ text, className }: { text: string; className?: string }) {
   return (
     <span className={cn("pointer-events-none absolute right-2.5 top-0 z-20 flex w-[76px] rotate-[3deg] flex-col items-center text-center", className)} aria-hidden>
-      <span className="w-full rounded-t-[10px] bg-cream px-1.5 pb-1 pt-2 font-display text-[11px] font-bold uppercase leading-[1.2] tracking-wide text-forest">
+      <span className="w-full rounded-t-[10px] bg-forest px-1.5 pb-1 pt-2 font-display text-[11px] font-bold uppercase leading-[1.2] tracking-wide text-cream">
         {text.split(" ").map((w, i) => <span key={i} className="block">{w}</span>)}
       </span>
       <svg viewBox="0 0 80 12" preserveAspectRatio="none" className="-mt-px block h-3 w-full" aria-hidden>
-        <path d="M0 0 H80 V4 Q70 12 60 4 T40 4 T20 4 T0 4 Z" className="fill-cream" />
+        <path d="M0 0 H80 V4 Q70 12 60 4 T40 4 T20 4 T0 4 Z" className="fill-forest" />
       </svg>
     </span>
   );
 }
 
 /* ---------- ProductCard: outlined card, square photo, sticker; hover swaps text for actions ---------- */
-const cardTheme: Record<Theme, { text: string; btn: string }> = {
-  apple: { text: "text-apple", btn: "bg-apple text-cream" },
-  peach: { text: "text-peach", btn: "bg-peach text-cream" },
-  forest: { text: "text-forest", btn: "bg-forest text-cream" },
-  navy: { text: "text-navy", btn: "bg-navy text-cream" },
+const cardTheme: Record<Theme, { outline: string; text: string; btn: string }> = {
+  apple: { outline: "border-apple", text: "text-navy", btn: "bg-navy text-cream" },
+  peach: { outline: "border-peach", text: "text-navy", btn: "bg-navy text-cream" },
+  forest: { outline: "border-forest", text: "text-navy", btn: "bg-navy text-cream" },
+  navy: { outline: "border-navy", text: "text-navy", btn: "bg-navy text-cream" },
 };
 export function ProductCard({ product }: { product: Product }) {
   const [alternate, setAlternate] = useState(false);
@@ -158,7 +158,7 @@ export function ProductCard({ product }: { product: Product }) {
   const t = cardTheme[product.theme];
   const alt = (src: string, fallback: string) => product.images.find((i) => i.src === src)?.alt ?? fallback;
   return (
-    <article className={cn("product-card group relative flex h-full min-w-0 flex-col rounded-[24px] border-2 border-current bg-background p-5", t.text)}>
+    <article className={cn("product-card group relative flex h-full min-w-0 flex-col rounded-[24px] border-2 bg-background p-5", t.outline, t.text)}>
       <div
         className="card-media relative aspect-square w-full overflow-hidden rounded-2xl"
         data-alternate={alternate}
@@ -255,7 +255,7 @@ export const slideClass = "w-[85%] shrink-0 snap-start sm:w-[46%] lg:w-[31%]";
 export function FeatureCard({ icon, title, text, className }: { icon?: ReactNode; title: string; text: string; className?: string }) {
   return (
     <div className={cn("rounded-[var(--radius-card)] border-2 border-cream p-7 transition-transform duration-300 hover:-translate-y-1", className)}>
-      {icon && <div className="mb-5 grid h-14 w-14 place-items-center rounded-full bg-cream text-forest">{icon}</div>}
+      {icon && <div className="mb-5 grid h-14 w-14 place-items-center rounded-full bg-cream text-navy">{icon}</div>}
       <h3 className="text-2xl">{title}</h3>
       <p className="mt-3 leading-relaxed">{text}</p>
     </div>
@@ -281,7 +281,7 @@ export function StepTimeline({ steps, className }: { steps: { title: string; tex
       </svg>
       {steps.map((s, i) => (
         <li key={s.title} className="relative flex gap-5 md:flex-col md:gap-0">
-          <span className="relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-full bg-cream font-display text-xl font-bold text-forest">{i + 1}</span>
+          <span className="relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-full bg-navy font-display text-xl font-bold text-cream">{i + 1}</span>
           <div className="md:mt-6">
             <h3 className="text-xl md:text-2xl">{s.title}</h3>
             <p className="mt-2 text-sm leading-relaxed md:text-base">{s.text}</p>
@@ -318,7 +318,7 @@ export function FormField({ label, error, id, as, options, className, ...p }: In
       {as === "textarea" ? (
         <textarea id={id} name={p.name} rows={4} className={fieldCls} placeholder={p.placeholder} aria-invalid={!!error} />
       ) : as === "select" ? (
-        <select id={id} name={p.name} className={cn(fieldCls, "[&>option]:text-forest")} aria-invalid={!!error} defaultValue="">
+        <select id={id} name={p.name} className={cn(fieldCls, "[&>option]:text-navy")} aria-invalid={!!error} defaultValue="">
           <option value="" disabled>Choose…</option>
           {options?.map((o) => <option key={o} value={o}>{o}</option>)}
         </select>

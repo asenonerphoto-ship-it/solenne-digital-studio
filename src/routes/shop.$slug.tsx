@@ -75,8 +75,8 @@ function ProductDetails({ p }: { p: Product }) {
 
             {isCider && (
               <div className="mt-8 grid grid-cols-2 gap-2 rounded-full bg-forest/30 p-1">
-                <Link to="/shop/$slug" params={{ slug: "crispy-apple" }} className={cn("rounded-full py-2.5 text-center text-sm font-semibold", p.pack === "single" ? "bg-cream text-forest" : "")}>Single Flavors</Link>
-                <Link to="/shop/$slug" params={{ slug: "mixed-pack" }} className={cn("rounded-full py-2.5 text-center text-sm font-semibold", p.pack === "variety" ? "bg-cream text-forest" : "")}>Variety Packs</Link>
+                <Link to="/shop/$slug" params={{ slug: "crispy-apple" }} className={cn("rounded-full py-2.5 text-center text-sm font-semibold", p.pack === "single" ? "bg-cream text-navy" : "")}>Single Flavors</Link>
+                <Link to="/shop/$slug" params={{ slug: "mixed-pack" }} className={cn("rounded-full py-2.5 text-center text-sm font-semibold", p.pack === "variety" ? "bg-cream text-navy" : "")}>Variety Packs</Link>
               </div>
             )}
             {isCider && p.pack === "single" && (
@@ -87,7 +87,7 @@ function ProductDetails({ p }: { p: Product }) {
                   return (
                     <Link key={s} to="/shop/$slug" params={{ slug: s }} className={cn("overflow-hidden rounded-xl border-2 text-center text-xs font-semibold", s === p.slug ? "border-cream" : "border-transparent opacity-70")}>
                       <img src={x.images[0].src} alt="" className="h-16 w-20 object-cover" />
-                      <span className="block bg-background py-1 text-forest">{x.name}</span>
+                      <span className="block bg-background py-1 text-navy">{x.name}</span>
                     </Link>
                   );
                 })}
@@ -102,7 +102,7 @@ function ProductDetails({ p }: { p: Product }) {
                 </div>
                 <div className="mt-3 flex gap-2">
                   {p.sizes.map((s) => (
-                    <Button variant="outline" key={s} onClick={() => setSize(s)} aria-pressed={size === s} className={cn("select-pop h-12 w-14 p-0 border-current", size === s && "bg-cream text-forest border-cream")}>{s}</Button>
+                    <Button variant="outline" key={s} onClick={() => setSize(s)} aria-pressed={size === s} className={cn("select-pop h-12 w-14 p-0 border-current", size === s && "bg-cream text-navy border-cream")}>{s}</Button>
                   ))}
                 </div>
               </div>
@@ -113,7 +113,7 @@ function ProductDetails({ p }: { p: Product }) {
                 <legend className="eyebrow">Pack size</legend>
                 <div className="mt-3 grid grid-cols-2 gap-3">
                   {PACK_SIZES.map((pack) => (
-                    <Button key={pack} variant="outline" aria-pressed={packSize === pack} onClick={() => setPackSize(pack)} className={cn("select-pop relative flex h-24 flex-col gap-1 rounded-2xl border-current/30 px-3 py-4 normal-case tracking-normal", packSize === pack && "border-cream bg-cream text-forest")}>
+                    <Button key={pack} variant="outline" aria-pressed={packSize === pack} onClick={() => setPackSize(pack)} className={cn("select-pop relative flex h-24 flex-col gap-1 rounded-2xl border-current/30 px-3 py-4 normal-case tracking-normal", packSize === pack && "border-cream bg-cream text-navy")}>
                       <span className="text-lg font-semibold">{pack} cans</span>
                       {pack === 24 && <span className="text-xs font-light">Best value</span>}
                       {packSize === pack && <Check className="check-draw absolute right-3 top-3 h-4 w-4 opacity-60" aria-hidden />}
@@ -153,7 +153,7 @@ function ProductDetails({ p }: { p: Product }) {
       )}
       {sizeGuide && (
         <div className="fixed inset-0 z-50 grid place-items-center bg-forest/80 p-4" role="dialog" aria-modal="true" aria-label="Size guide">
-          <div className="w-full max-w-md rounded-[var(--radius-card)] bg-background p-8 text-forest">
+          <div className="w-full max-w-md rounded-[var(--radius-card)] bg-background p-8 text-navy">
             <div className="flex items-center justify-between"><h2 className="text-3xl">Size guide</h2><button onClick={() => setSizeGuide(false)} aria-label="Close"><X /></button></div>
             <table className="mt-6 w-full text-left">
               <thead><tr className="border-b"><th className="py-2">Size</th><th>Chest (cm)</th><th>Length (cm)</th></tr></thead>

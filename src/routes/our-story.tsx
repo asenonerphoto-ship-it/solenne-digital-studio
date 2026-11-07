@@ -62,7 +62,7 @@ function Story() {
       <section className="bg-paper px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-[1920px]">
           <h2 className="display-md mb-14">How we got here</h2>
-          <StepTimeline steps={storyTimeline} className="text-forest" />
+          <StepTimeline steps={storyTimeline} className="text-navy" />
         </div>
       </section>
 
@@ -87,9 +87,9 @@ function Story() {
         </Slider>
       </section>
 
-      <section className="bg-peach px-5 py-20 text-center text-forest">
+      <section className="bg-peach px-5 py-20 text-center text-navy">
         <h2 className="display-lg">Join the crew</h2>
-        <Link to="/crew" className={btnClass("green", "mt-8")}>Become part of it</Link>
+        <Link to="/crew" className={btnClass("navy", "mt-8")}>Become part of it</Link>
       </section>
     </>
   );

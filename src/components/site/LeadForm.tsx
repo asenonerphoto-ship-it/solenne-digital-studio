@@ -35,7 +35,7 @@ export function LeadForm({ kind, fields, consent, submitLabel, success }: { kind
     await submitForm(kind, data);
     setState("done");
   };
-  if (state === "done") return <div className="rounded-[var(--radius-card)] bg-cream p-8 text-forest" role="status"><span className="check-burst mb-4 h-12 w-12 rounded-full bg-forest text-cream"><Check className="check-draw h-6 w-6" /></span>{success}</div>;
+  if (state === "done") return <div className="rounded-[var(--radius-card)] bg-cream p-8 text-navy" role="status"><span className="check-burst mb-4 h-12 w-12 rounded-full bg-forest text-cream"><Check className="check-draw h-6 w-6" /></span>{success}</div>;
   return (
     <form onSubmit={onSubmit} noValidate className="grid gap-5 md:grid-cols-2">
       {fields.map((f) => (

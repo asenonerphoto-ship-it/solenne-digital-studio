@@ -23,7 +23,7 @@ import press from "@/assets/press.webp.asset.json";
 import towelCan from "@/assets/towel-can.webp.asset.json";
 import founders from "@/assets/founders.webp.asset.json";
 import pool from "@/assets/pool.webp.asset.json";
-import logo from "@/assets/logo.png.asset.json";
+import logo from "@/assets/logo-white.png.asset.json";
 
 export const img = {
   hero: hero.url,

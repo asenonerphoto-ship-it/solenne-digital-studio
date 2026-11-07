@@ -5,9 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Solenne design system. All colors in oklch.
- * forest = main dark, apple = Crispy Apple green, peach = White Peach orange,
- * cream = text on dark / buttons, navy = logo / Fleece Jacket.
+ * Solenne design system.
+ * forest = main brand yellow (was the dark green), apple = Crispy Apple yellow,
+ * peach = White Peach orange, cream = white (text on yellow / light fills),
+ * navy = text and buttons on white, paper = page background.
  */
 
 @theme inline {
@@ -76,27 +77,27 @@
 
 :root {
   --radius: 0.75rem;
-  --forest: oklch(0.245 0.037 159.1);
-  --forest-soft: oklch(0.318 0.05 157.2);
-  --apple: oklch(0.372 0.081 162.5);
-  --peach: oklch(0.722 0.171 53.9);
-  --cream: oklch(0.864 0.097 73.5);
-  --navy: oklch(0.241 0.045 263.2);
-  --paper: oklch(0.982 0.015 77.1);
-  --shadow-card: 0 16px 32px -18px color-mix(in oklab, var(--forest) 25%, transparent);
+  --forest: #ffbf00;
+  --forest-soft: #e3a900;
+  --apple: #ffbf00;
+  --peach: #f58220;
+  --cream: #ffffff;
+  --navy: #141f35;
+  --paper: #fffdf7;
+  --shadow-card: 0 16px 32px -18px color-mix(in oklab, var(--navy) 25%, transparent);
 
   --background: oklch(1 0 0);
-  --foreground: var(--forest);
+  --foreground: var(--navy);
   --card: oklch(1 0 0);
-  --card-foreground: var(--forest);
+  --card-foreground: var(--navy);
   --popover: oklch(1 0 0);
-  --popover-foreground: var(--forest);
-  --primary: var(--forest);
+  --popover-foreground: var(--navy);
+  --primary: var(--navy);
   --primary-foreground: var(--cream);
   --secondary: var(--cream);
-  --secondary-foreground: var(--forest);
+  --secondary-foreground: var(--navy);
   --muted: var(--paper);
-  --muted-foreground: oklch(0.45 0.03 159);
+  --muted-foreground: oklch(0.45 0.02 263);
   --accent: var(--peach);
   --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.577 0.245 27.325);
@@ -119,7 +120,7 @@
   --sidebar-ring: var(--peach);
 
   --shadow-tilt: -8px 16px 28px -6px oklch(0 0 0 / 0.35);
-  --shadow-lift: 0 18px 40px -18px oklch(0.245 0.037 159.1 / 0.45);
+  --shadow-lift: 0 18px 40px -18px color-mix(in oklab, var(--navy) 45%, transparent);
 }
 
 @layer base {
@@ -145,7 +146,8 @@
     overflow-wrap: break-word;
   }
   :focus-visible {
-    outline: 3px solid var(--peach);
+    outline: 3px solid var(--navy);
+    box-shadow: 0 0 0 6px color-mix(in oklab, var(--cream) 90%, transparent);
     outline-offset: 3px;
   }
 }
@@ -195,7 +197,7 @@
 .card-alternate { opacity: 0; }
 [data-alternate="true"] .card-primary { opacity: 0; }
 [data-alternate="true"] .card-alternate { opacity: 1; }
-.product-card:has(.card-link:focus-visible) { outline: 3px solid var(--peach); outline-offset: 3px; }
+.product-card:has(.card-link:focus-visible) { outline: 3px solid var(--navy); box-shadow: 0 0 0 6px color-mix(in oklab, var(--cream) 90%, transparent); outline-offset: 3px; }
 .card-body { min-height: 128px; }
 .card-default { transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out); }
 .card-hover { opacity: 0; transform: translateY(6px); transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out); pointer-events: none; }
@@ -222,7 +224,7 @@
 .shopify-buy-button .shopify-buy__btn-wrapper { margin-top: 0; }
 .shopify-buy-button .shopify-buy__btn {
   width: 100%; border: 0; border-radius: 999px; padding: 14px 28px;
-  background: var(--cream); color: var(--forest); font-family: var(--font-sans);
+  background: var(--cream); color: var(--navy); font-family: var(--font-sans);
   font-size: 14px; font-weight: 600; text-transform: uppercase;
 }
 .shopify-buy-button-orange .shopify-buy__btn { background: var(--peach); }
