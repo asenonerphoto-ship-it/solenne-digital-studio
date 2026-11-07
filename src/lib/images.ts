@@ -1,5 +1,6 @@
 // Brand photography (uploaded by Solenne, served from the CDN).
 import hero from "@/assets/hero.webp.asset.json";
+import homeSnowChair from "@/assets/home-snow-chair.png.asset.json";
 import appleApples from "@/assets/apple-apples.webp.asset.json";
 import applePool from "@/assets/apple-pool.webp.asset.json";
 import crispyAppleCard from "@/assets/crispy-apple-card.png.asset.json";
@@ -29,6 +30,7 @@ import logo from "@/assets/logo-navy.png";
 
 export const img = {
   hero: hero.url,
+  homeSnowChair: homeSnowChair.url,
   appleApples: appleApples.url,
   applePool: applePool.url,
   crispyAppleCard: crispyAppleCard.url,

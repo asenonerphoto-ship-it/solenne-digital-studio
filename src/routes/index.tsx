@@ -33,7 +33,7 @@ function Home() {
       <section className="relative overflow-hidden bg-forest text-cream" style={{ clipPath: "polygon(0 0,100% 0,100% 92%,0 100%)" }}>
         <div className="mx-auto grid max-w-[1920px] items-center gap-12 px-5 pb-32 pt-16 md:grid-cols-2 md:px-10 md:pb-48 md:pt-24">
           <Reveal className="relative">
-            <img src={img.pour} alt="Crispy Apple cider being poured into a green glass" className="relative z-10 mx-auto w-[85%] max-w-xl" />
+            <img src={img.pour} alt="Crispy Apple cider being poured into a green glass" className="shadow-photo relative z-10 mx-auto w-[85%] max-w-xl" />
             <div className="float-y absolute -left-2 bottom-10 z-20 h-28 w-28 rounded-full bg-cream shadow-tilt md:h-44 md:w-44" aria-hidden />
           </Reveal>
           <Reveal className="flex flex-col items-end text-right" delay={150}>
@@ -45,7 +45,7 @@ function Home() {
         </div>
       </section>
 
-      <img src={img.toast} alt="Two hands toasting with Crispy Apple and White Peach cans under palms" className="-mt-16 h-[40vh] w-full object-cover md:h-[60vh]" style={{ clipPath: "polygon(0 15%,100% 0,100% 100%,0 85%)" }} />
+      <img src={img.homeSnowChair} alt="Woman relaxing in a striped chair in the snow with a Solenne can" className="-mt-16 h-[40vh] w-full object-cover md:h-[60vh]" style={{ clipPath: "polygon(0 15%,100% 0,100% 100%,0 85%)" }} />
 
       <section className="mx-auto max-w-[1920px] px-5 py-16 md:px-10 md:py-24">
         <h2 className="display-md mb-10">Our collection</h2>
