@@ -2,6 +2,8 @@
 import hero from "@/assets/hero.webp.asset.json";
 import appleApples from "@/assets/apple-apples.webp.asset.json";
 import applePool from "@/assets/apple-pool.webp.asset.json";
+import crispyAppleCard from "@/assets/crispy-apple-card.png.asset.json";
+import whitePeachCard from "@/assets/white-peach-card.png.asset.json";
 import appleGarden from "@/assets/apple-garden.webp.asset.json";
 import appleGreen from "@/assets/apple-green.webp.asset.json";
 import peachLime from "@/assets/peach-lime.webp.asset.json";
@@ -23,12 +25,14 @@ import press from "@/assets/press.webp.asset.json";
 import towelCan from "@/assets/towel-can.webp.asset.json";
 import founders from "@/assets/founders.webp.asset.json";
 import pool from "@/assets/pool.webp.asset.json";
-import logo from "@/assets/logo-white.png.asset.json";
+import logo from "@/assets/logo-navy.png";
 
 export const img = {
   hero: hero.url,
   appleApples: appleApples.url,
   applePool: applePool.url,
+  crispyAppleCard: crispyAppleCard.url,
+  whitePeachCard: whitePeachCard.url,
   appleGarden: appleGarden.url,
   appleGreen: appleGreen.url,
   peachLime: peachLime.url,
@@ -50,5 +54,5 @@ export const img = {
   towelCan: towelCan.url,
   founders: founders.url,
   pool: pool.url,
-  logo: logo.url,
+  logo,
 };

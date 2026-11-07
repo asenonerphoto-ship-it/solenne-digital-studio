@@ -2,7 +2,7 @@ import { Fragment, useEffect, useRef, useState, type ReactNode, type ButtonHTMLA
 import { Link } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { Product, Theme } from "@/data/products";
+import type { Product } from "@/data/products";
 import { observeOnce, prefersReducedMotion, usePauseOffscreen } from "@/lib/motion";
 
 
@@ -145,20 +145,13 @@ export function CardSticker({ text, className }: { text: string; className?: str
   );
 }
 
-/* ---------- ProductCard: outlined card, square photo, sticker; hover swaps text for actions ---------- */
-const cardTheme: Record<Theme, { outline: string; text: string; btn: string }> = {
-  apple: { outline: "border-apple", text: "text-navy", btn: "bg-navy text-cream" },
-  peach: { outline: "border-peach", text: "text-navy", btn: "bg-navy text-cream" },
-  forest: { outline: "border-forest", text: "text-navy", btn: "bg-navy text-cream" },
-  navy: { outline: "border-navy", text: "text-navy", btn: "bg-navy text-cream" },
-};
+/* ---------- ProductCard: borderless card, square photo, sticker; hover swaps text for actions ---------- */
 export function ProductCard({ product }: { product: Product }) {
   const [alternate, setAlternate] = useState(false);
   const touchStart = useRef<number | null>(null);
-  const t = cardTheme[product.theme];
   const alt = (src: string, fallback: string) => product.images.find((i) => i.src === src)?.alt ?? fallback;
   return (
-    <article className={cn("product-card group relative flex h-full min-w-0 flex-col rounded-[24px] border-2 bg-background p-5", t.outline, t.text)}>
+    <article className="product-card group relative flex h-full min-w-0 flex-col rounded-[24px] bg-background p-5 text-navy">
       <div
         className="card-media relative aspect-square w-full overflow-hidden rounded-2xl"
         data-alternate={alternate}
@@ -191,7 +184,7 @@ export function ProductCard({ product }: { product: Product }) {
           </ul>
         </div>
         <div className="card-hover absolute inset-0 flex flex-col items-center justify-center gap-2.5 pt-4" aria-hidden>
-          <span className={cn("inline-flex h-[54px] w-full items-center justify-center rounded-full font-display text-sm uppercase tracking-[0.06em]", t.btn)}>Shop now</span>
+          <span className="inline-flex h-[54px] w-full items-center justify-center rounded-full bg-navy font-display text-sm uppercase tracking-[0.06em] text-cream">Shop now</span>
           <span className="card-sub text-xs font-semibold uppercase tracking-wide underline underline-offset-4">
             {product.category === "merch" ? "Choose your size" : "Choose 12 or 24 cans"}
           </span>

@@ -10,7 +10,7 @@ import { Button, btnClass } from "./ui";
 import { cn } from "@/lib/utils";
 
 export function Logo({ className }: { className?: string }) {
-  return <img src={img.logo} alt="Solenne" className={cn("h-10 w-auto md:h-12", className)} />;
+  return <img src={img.logo} alt="Solenne" className={cn("shadow-logo h-10 w-auto md:h-12", className)} />;
 }
 
 export function Header() {
