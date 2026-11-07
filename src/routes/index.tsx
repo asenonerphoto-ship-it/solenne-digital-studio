@@ -45,7 +45,7 @@ function Home() {
         </div>
       </section>
 
-      <img src={img.toast} alt="Two hands toasting with Crispy Apple and White Peach cans under palms" className="-mt-16 h-[40vh] w-full object-cover md:h-[60vh]" style={{ clipPath: "polygon(0 15%,100% 0,100% 100%,0 85%)" }} />
+      <img src={img.homeSnowChair} alt="Woman relaxing in a striped chair in the snow with a Solenne can" className="-mt-16 h-[40vh] w-full object-cover md:h-[60vh]" style={{ clipPath: "polygon(0 15%,100% 0,100% 100%,0 85%)" }} />
 
       <section className="mx-auto max-w-[1920px] px-5 py-16 md:px-10 md:py-24">
         <h2 className="display-md mb-10">Our collection</h2>
