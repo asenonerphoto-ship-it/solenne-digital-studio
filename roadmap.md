@@ -8,3 +8,4 @@
 - [x] Change the Solenne logo to navy #141F35.
 - [x] Add a hard navy-blue shadow to the logo image.
 - [x] Move the hard navy shadow to product-card photos and reduce the header logo size.
+- [ ] Move the hard navy shadow from product-card photos to the selected homepage picture.
