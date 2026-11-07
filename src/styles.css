@@ -146,7 +146,8 @@
     overflow-wrap: break-word;
   }
   :focus-visible {
-    outline: 3px solid var(--peach);
+    outline: 3px solid var(--navy);
+    box-shadow: 0 0 0 6px color-mix(in oklab, var(--cream) 90%, transparent);
     outline-offset: 3px;
   }
 }
@@ -196,7 +197,7 @@
 .card-alternate { opacity: 0; }
 [data-alternate="true"] .card-primary { opacity: 0; }
 [data-alternate="true"] .card-alternate { opacity: 1; }
-.product-card:has(.card-link:focus-visible) { outline: 3px solid var(--peach); outline-offset: 3px; }
+.product-card:has(.card-link:focus-visible) { outline: 3px solid var(--navy); box-shadow: 0 0 0 6px color-mix(in oklab, var(--cream) 90%, transparent); outline-offset: 3px; }
 .card-body { min-height: 128px; }
 .card-default { transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out); }
 .card-hover { opacity: 0; transform: translateY(6px); transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out); pointer-events: none; }
