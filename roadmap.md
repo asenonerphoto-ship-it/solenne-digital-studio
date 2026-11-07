@@ -7,3 +7,4 @@
 - [x] Verify new default cider card photos and borderless cards.
 - [x] Change the Solenne logo to navy #141F35.
 - [x] Add a hard navy-blue shadow to the logo image.
+- [ ] Move the hard navy shadow to product-card photos and reduce the header logo size.
