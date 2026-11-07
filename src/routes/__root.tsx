@@ -24,7 +24,7 @@ function NotFoundComponent() {
         <h1 className="display-xl">404</h1>
         <p className="mt-4 text-lg">This page went to the mountains and never came back.</p>
         <div className="mt-8">
-          <Link to="/" className="inline-flex rounded-full bg-cream px-7 py-3.5 text-sm font-semibold uppercase text-forest">
+          <Link to="/" className="inline-flex rounded-full bg-cream px-7 py-3.5 text-sm font-semibold uppercase text-navy">
             Go home
           </Link>
         </div>
@@ -112,7 +112,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <ShopifyProvider>
-        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-cream focus:px-4 focus:py-2 focus:text-forest">
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-cream focus:px-4 focus:py-2 focus:text-navy">
           Skip to content
         </a>
         <Header />

@@ -61,7 +61,7 @@ function B2B() {
               <div key={s} className={`flex gap-6 rounded-[var(--radius-card)] border-[3px] p-5 ${s === "crispy-apple" ? "border-apple" : "border-peach"}`}>
                 <img src={p.images[0].src} alt={p.images[0].alt} className="h-36 w-36 shrink-0 rounded-2xl object-cover md:h-44 md:w-44" />
                 <div>
-                  <h3 className={`text-3xl ${s === "crispy-apple" ? "text-apple" : "text-peach"}`}>{p.name}</h3>
+                  <h3 className={`text-3xl ${s === "crispy-apple" ? "text-navy" : "text-peach"}`}>{p.name}</h3>
                   <p className="mt-3">Case: 24 × 330 ml cans</p>
                   <p>Minimum order: 5 cases</p>
                   <p className="mt-2 text-xs opacity-70">PLACEHOLDER — to be confirmed.</p>

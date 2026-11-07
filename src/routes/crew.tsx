@@ -39,7 +39,7 @@ function Crew() {
           <h2 className="display-lg mt-3">Sellers</h2>
           <p className="mt-6 text-lg">Sell Solenne to your friends, bars and shops — and earn 20% commission on every order.</p>
         </Reveal>
-        <Reveal delay={100} className="h-full rounded-[var(--radius-card)] bg-peach p-10 text-forest md:p-14">
+        <Reveal delay={100} className="h-full rounded-[var(--radius-card)] bg-peach p-10 text-navy md:p-14">
           <p className="eyebrow">Track 02</p>
           <h2 className="display-lg mt-3">Faces</h2>
           <p className="mt-6 text-lg">Be part of our look. No posting obligations, just good vibes.</p>

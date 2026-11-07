@@ -29,7 +29,7 @@ function Story() {
   return (
     <>
       <section className="relative overflow-hidden bg-forest pb-10 pt-16 text-cream">
-        <p ref={script} data-m-skip className="script-faded will-change-transform pointer-events-none absolute inset-x-0 top-6 select-none text-center text-[28vw] leading-none text-forest-soft md:text-[22vw]" aria-hidden>Solenne</p>
+        <p ref={script} data-m-skip className="script-faded will-change-transform pointer-events-none absolute inset-x-0 top-6 select-none text-center text-[28vw] leading-none text-navy-soft md:text-[22vw]" aria-hidden>Solenne</p>
         <img src={img.towelCan} alt="Crispy Apple can in a waffle cone on a blue striped towel" className="relative mx-auto w-[75%] max-w-md rotate-3 md:max-w-lg" />
         <h1 className="sr-only">Our Story</h1>
       </section>
@@ -62,7 +62,7 @@ function Story() {
       <section className="bg-paper px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-[1920px]">
           <h2 className="display-md mb-14">How we got here</h2>
-          <StepTimeline steps={storyTimeline} className="text-forest" />
+          <StepTimeline steps={storyTimeline} className="text-navy" />
         </div>
       </section>
 
@@ -87,7 +87,7 @@ function Story() {
         </Slider>
       </section>
 
-      <section className="bg-peach px-5 py-20 text-center text-forest">
+      <section className="bg-peach px-5 py-20 text-center text-navy">
         <h2 className="display-lg">Join the crew</h2>
         <Link to="/crew" className={btnClass("green", "mt-8")}>Become part of it</Link>
       </section>
