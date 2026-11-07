@@ -79,7 +79,7 @@ function Made() {
                   <img src={s.src} alt={s.title} loading="lazy" className={cn("aspect-[4/3] w-full rounded-[var(--radius-card)] object-cover shadow-tilt", i % 2 ? "rotate-2" : "-rotate-2")} />
                 </Reveal>
                 <Reveal delay={100} className={cn(i % 2 && "md:order-1 md:text-right")}>
-                  <span data-in={reached >= i} className="badge-pop grid h-14 w-14 place-items-center rounded-full bg-cream font-display text-2xl font-bold text-navy md:inline-grid">{i + 1}</span>
+                  <span data-in={reached >= i} className="badge-pop grid h-14 w-14 place-items-center rounded-full bg-navy font-display text-2xl font-bold text-cream md:inline-grid">{i + 1}</span>
                   <h3 className="mt-4 text-3xl md:text-4xl">{s.title}</h3>
                   <p className="mt-3 text-lg leading-relaxed">{s.text}</p>
                 </Reveal>
@@ -109,7 +109,7 @@ function Made() {
       <section className="mx-auto max-w-4xl px-5 py-16 md:py-24">
         <h2 className="display-md mb-10">FAQ</h2>
         <Accordion items={faqs} />
-        <div className="mt-12 text-center"><Link to="/shop" className={btnClass("green")}>Shop now</Link></div>
+        <div className="mt-12 text-center"><Link to="/shop" className={btnClass("navy")}>Shop now</Link></div>
       </section>
     </>
   );

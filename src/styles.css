@@ -120,7 +120,7 @@
   --sidebar-ring: var(--peach);
 
   --shadow-tilt: -8px 16px 28px -6px oklch(0 0 0 / 0.35);
-  --shadow-lift: 0 18px 40px -18px oklch(0.245 0.037 159.1 / 0.45);
+  --shadow-lift: 0 18px 40px -18px color-mix(in oklab, var(--navy) 45%, transparent);
 }
 
 @layer base {
@@ -223,7 +223,7 @@
 .shopify-buy-button .shopify-buy__btn-wrapper { margin-top: 0; }
 .shopify-buy-button .shopify-buy__btn {
   width: 100%; border: 0; border-radius: 999px; padding: 14px 28px;
-  background: var(--cream); color: var(--forest); font-family: var(--font-sans);
+  background: var(--cream); color: var(--navy); font-family: var(--font-sans);
   font-size: 14px; font-weight: 600; text-transform: uppercase;
 }
 .shopify-buy-button-orange .shopify-buy__btn { background: var(--peach); }

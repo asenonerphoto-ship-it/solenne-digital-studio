@@ -86,7 +86,7 @@ function B2B() {
           <h2 className="display-md mb-14">The process</h2>
           <StepTimeline steps={b2bSteps} />
           <div className="mt-16 flex flex-wrap gap-4">
-            <a href="/downloads/solenne-price-list-placeholder.pdf" download className={btnClass("green")}><Download className="h-4 w-4" /> Price list (PDF)</a>
+            <a href="/downloads/solenne-price-list-placeholder.pdf" download className={btnClass("navy")}><Download className="h-4 w-4" /> Price list (PDF)</a>
             <a href="/downloads/solenne-press-kit-placeholder.pdf" download className={btnClass("outline")}><Download className="h-4 w-4" /> Press kit (PDF)</a>
           </div>
         </div>

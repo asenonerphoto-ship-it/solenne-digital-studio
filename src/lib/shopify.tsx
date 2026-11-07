@@ -39,7 +39,7 @@ export function shopifyTheme() {
   const css = getComputedStyle(document.documentElement);
   const token = (name: string) => css.getPropertyValue(name).trim();
   return {
-    forest: token("--forest"), cream: token("--cream"), peach: token("--peach"), paper: token("--paper"),
+    forest: token("--forest"), navy: token("--navy"), cream: token("--cream"), peach: token("--peach"), paper: token("--paper"),
     bodyFont: css.getPropertyValue("--font-sans").trim(), displayFont: css.getPropertyValue("--font-display").trim(),
   };
 }
@@ -64,9 +64,9 @@ export function ShopifyProvider({ children }: { children: ReactNode }) {
           cart: {
             text: { title: "Your cart", button: "Checkout" },
             styles: {
-              cart: { "background-color": theme.paper, "font-family": theme.bodyFont, color: theme.forest },
-              title: { "font-family": theme.displayFont, color: theme.forest },
-              button: { "border-radius": "999px", "background-color": theme.forest, color: theme.cream, ":hover": { "background-color": theme.forest }, ":focus": { "background-color": theme.forest } },
+              cart: { "background-color": theme.paper, "font-family": theme.bodyFont, color: theme.navy },
+              title: { "font-family": theme.displayFont, color: theme.navy },
+              button: { "border-radius": "999px", "background-color": theme.navy, color: theme.cream, ":hover": { "background-color": theme.navy }, ":focus": { "background-color": theme.navy } },
             },
           },
         },
