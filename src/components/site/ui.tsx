@@ -153,7 +153,7 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <article className="product-card group relative flex h-full min-w-0 flex-col rounded-[24px] bg-background p-5 text-navy">
       <div
-        className="card-media shadow-photo relative aspect-square w-full overflow-hidden rounded-2xl"
+        className="card-media relative aspect-square w-full overflow-hidden rounded-2xl"
         data-alternate={alternate}
         onTouchStart={(e) => { touchStart.current = e.touches[0]?.clientX ?? null; }}
         onTouchEnd={(e) => {
