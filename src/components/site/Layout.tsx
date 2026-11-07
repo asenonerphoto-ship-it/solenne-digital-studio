@@ -161,7 +161,7 @@ export function Footer() {
               <button className={btnClass("cream")} disabled={state === "sending"}>{state === "sending" ? "…" : "Subscribe"}</button>
             </form>
           )}
-          {state === "error" && <p className="mt-2 text-sm text-peach" role="alert">Please enter a valid email.</p>}
+          {state === "error" && <p className="mt-2 text-sm text-cream" role="alert">Please enter a valid email.</p>}
           <div className="mt-8 flex gap-4">
             <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Solenne on Instagram" className="grid h-11 w-11 place-items-center rounded-full border-2 border-cream/50 hover:bg-cream hover:text-navy"><Instagram className="h-5 w-5" /></a>
             <a href="https://tiktok.com" target="_blank" rel="noreferrer" aria-label="Solenne on TikTok" className="grid h-11 w-11 place-items-center rounded-full border-2 border-cream/50 hover:bg-cream hover:text-navy">
