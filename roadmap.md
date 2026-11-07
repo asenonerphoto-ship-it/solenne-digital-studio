@@ -6,3 +6,4 @@
 - [x] Recolor site to yellow #FFBF00 with white text on yellow and navy #141F35 text/buttons on white (logo and favicon included).
 - [ ] Verify new default cider card photos and borderless cards.
 - [ ] Change the Solenne logo to navy #141F35.
+- [ ] Add a hard navy-blue shadow to the logo image.
