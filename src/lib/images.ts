@@ -2,6 +2,8 @@
 import hero from "@/assets/hero.webp.asset.json";
 import appleApples from "@/assets/apple-apples.webp.asset.json";
 import applePool from "@/assets/apple-pool.webp.asset.json";
+import crispyAppleCard from "@/assets/crispy-apple-card.png.asset.json";
+import whitePeachCard from "@/assets/white-peach-card.png.asset.json";
 import appleGarden from "@/assets/apple-garden.webp.asset.json";
 import appleGreen from "@/assets/apple-green.webp.asset.json";
 import peachLime from "@/assets/peach-lime.webp.asset.json";
@@ -29,6 +31,8 @@ export const img = {
   hero: hero.url,
   appleApples: appleApples.url,
   applePool: applePool.url,
+  crispyAppleCard: crispyAppleCard.url,
+  whitePeachCard: whitePeachCard.url,
   appleGarden: appleGarden.url,
   appleGreen: appleGreen.url,
   peachLime: peachLime.url,
