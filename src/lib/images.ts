@@ -25,7 +25,7 @@ import press from "@/assets/press.webp.asset.json";
 import towelCan from "@/assets/towel-can.webp.asset.json";
 import founders from "@/assets/founders.webp.asset.json";
 import pool from "@/assets/pool.webp.asset.json";
-import logo from "@/assets/logo-white.png.asset.json";
+import logo from "@/assets/logo-navy.png";
 
 export const img = {
   hero: hero.url,
@@ -54,5 +54,5 @@ export const img = {
   towelCan: towelCan.url,
   founders: founders.url,
   pool: pool.url,
-  logo: logo.url,
+  logo,
 };
