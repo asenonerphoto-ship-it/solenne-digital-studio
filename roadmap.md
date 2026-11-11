@@ -1,7 +1,7 @@
 # Solenne retro restyle
-- [ ] Remove the yellow wash on the B2B main photo.
-- [ ] Improve the Our Story photo grid while retaining its content and sections.
-- [ ] Use more of the uploaded ZIP photos across the site and verify at 375, 768, 1280 and 1920px.
+- [x] Remove the yellow wash on the B2B main photo.
+- [x] Improve the Our Story photo grid while retaining its content and sections.
+- [x] Use more of the uploaded ZIP photos across the site and verify at 375, 768, 1280 and 1920px.
 - [x] Replace global palette, navigation, footer and age-gate presentation.
 - [x] Create reusable doodles, photo treatments and centralized named photo slots.
 - [x] Restyle Home, Shop, products, Story, Crew, How It's Made, B2B and information pages.
