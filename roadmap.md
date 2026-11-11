@@ -1,4 +1,7 @@
 # Solenne retro restyle
+- [ ] Remove all photo tint and grain site-wide, including translucent photo treatments.
+- [ ] Rebuild Our Story as hero, three alternating story blocks and final full-bleed photo.
+- [ ] Verify photo colors and story layout at 375, 768, 1280 and 1920px.
 - [x] Replace global palette, navigation, footer and age-gate presentation.
 - [x] Create reusable doodles, photo treatments and centralized named photo slots.
 - [x] Restyle Home, Shop, products, Story, Crew, How It's Made, B2B and information pages.
