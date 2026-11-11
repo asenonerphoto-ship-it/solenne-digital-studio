@@ -395,6 +395,10 @@ section { position: relative; overflow-x: clip; }
 .retro-page .rounded-\[var\(--radius-card\)\] { border-radius: 8px; }
 .doodle { animation-duration: 7s; }
 .doodle:nth-child(2n) { animation-delay: -3s; }
+@media (hover:none) {
+ .card-photo-link { display: none; }
+ .product-card .card-body { min-height: 0; }
+}
 @media (min-width:768px) { .collection-band { padding: 52px 40px 32px; } }
 @media (max-width:767px) {
  .photo-hero { height: 560px; }
@@ -407,6 +411,8 @@ section { position: relative; overflow-x: clip; }
  .product-card .card-sub { display: none; }
  .card-media { z-index: 2; }
  .card-dots { display: flex; }
+ .card-photo-link { display: none; }
+ .retro-page .words.display-xl { font-size: 36px; }
  .product-card:hover .card-primary { opacity: 1; transform: none; }
  .product-card:hover .card-alternate { opacity: 0; transform: none; }
  .product-card [data-alternate="true"] .card-primary { opacity: 0; }

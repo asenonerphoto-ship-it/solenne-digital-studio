@@ -53,6 +53,7 @@ function Story() {
           </Reveal>
         </div>
         <img src={img["travel-can-tattoo"]} alt="A Solenne can held in a hand with gold rings" className="film-photo h-[420px] w-full object-cover md:order-first md:h-full md:min-h-[640px]" />
+        <Doodles items={doodlePlacements.storyTravel} />
       </section>
 
       <section className="grid items-center bg-cream text-navy md:grid-cols-2">
