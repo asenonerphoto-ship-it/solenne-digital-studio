@@ -26,17 +26,17 @@ export const Route = createFileRoute("/b2b")({
 
 const useCases = [
   { title: "Bars & Clubs", src: img["peach-tray-cans"] },
-  { title: "Restaurants", src: img.peachTable },
-  { title: "Hotels & Après-Ski", src: img.fleeceCouple },
-  { title: "Retail", src: img.appleApples },
-  { title: "Events & Festivals", src: img.toast },
+  { title: "Restaurants", src: img["table-peanuts"] },
+  { title: "Hotels & Après-Ski", src: img["fleece-ski"] },
+  { title: "Retail", src: img["shop-fridge-jacket"] },
+  { title: "Events & Festivals", src: img["cheers-palms"] },
 ];
 
 function B2B() {
   return (
     <div className="retro-page">
       <section className="relative overflow-hidden slant-bottom bg-yellow text-navy">
-        <img src={img["peach-tray-cans"]} alt="Moody bar scene with Solenne cans on a tray" className="absolute inset-0 h-full w-full object-cover opacity-40" />
+        <img src={img["peach-tray-cans"]} alt="Solenne cans on a tray" className="b2b-main-photo absolute inset-0 h-full w-full object-cover" />
         <div className="relative mx-auto max-w-[1920px] px-5 py-28 md:px-10 md:py-40">
           <Words as="h1" className="display-xl max-w-5xl" text="Solenne for your bar, restaurant & shop" />
           <a href="#inquiry" className={btnClass("yellow", "mt-10")}>Request wholesale info</a>

@@ -103,7 +103,7 @@ function Made() {
       </section>
 
       <section className="grid slant-bottom bg-yellow text-navy md:grid-cols-2">
-        <img src={img.pool} alt="Solenne can on a striped towel by a pool" className="h-[360px] w-full object-cover md:h-full" />
+        <img src={img["apple-pour-garden"]} alt="Solenne cider poured into a glass in the garden" className="h-[360px] w-full object-cover md:h-full" />
         <div className="px-6 py-16 md:px-16 lg:px-24">
           <h2 className="display-md">Sustainability</h2>
           <p className="mt-6 text-lg leading-relaxed">Aluminium cans are infinitely recyclable and chill fast, so less energy goes into keeping them cold. Our apples are sourced regionally in South Tyrol to keep the journey from tree to can short.</p>
