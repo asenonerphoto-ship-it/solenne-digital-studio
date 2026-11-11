@@ -56,7 +56,7 @@ function Made() {
   }, 0.6);
   return (
     <>
-      <section className="overflow-hidden bg-forest text-cream">
+      <section className="overflow-hidden bg-yellow text-cream">
         <div className="mx-auto grid max-w-[1920px] items-center gap-10 px-5 py-16 md:grid-cols-2 md:px-10 md:py-24">
           <div>
             <Words as="h1" className="display-xl" text="What is|Solenne?" />
@@ -70,7 +70,7 @@ function Made() {
         <h2 className="display-md text-center">From orchard to can</h2>
         <div ref={track} className="relative mt-16">
           <svg className="absolute left-1/2 top-0 hidden h-full w-16 -translate-x-1/2 md:block" viewBox="0 0 40 1000" preserveAspectRatio="none" aria-hidden>
-            <path d="M20 0 Q40 62 20 125 T20 250 T20 375 T20 500 T20 625 T20 750 T20 875 T20 1000" ref={line} pathLength={1} strokeDasharray="1" strokeDashoffset="1" className="fill-none stroke-apple" strokeWidth="4" />
+            <path d="M20 0 Q40 62 20 125 T20 250 T20 375 T20 500 T20 625 T20 750 T20 875 T20 1000" ref={line} pathLength={1} strokeDasharray="1" strokeDashoffset="1" className="fill-none stroke-yellow" strokeWidth="4" />
           </svg>
           <ol className="space-y-16 md:space-y-24">
             {madeSteps.map((s, i) => (
@@ -89,7 +89,7 @@ function Made() {
         </div>
       </section>
 
-      <section className="bg-peach px-5 py-16 text-navy md:py-24">
+      <section className="bg-yellow px-5 py-16 text-navy md:py-24">
         <div className="mx-auto grid max-w-6xl gap-10 text-center md:grid-cols-3">
           <div><p className="display-lg"><Counter to={5.1} decimals={1} suffix="%" /></p><p className="eyebrow mt-2">ABV</p></div>
           <div><p className="display-lg"><Counter to={330} suffix=" ml" /></p><p className="eyebrow mt-2">Classic can</p></div>
@@ -98,7 +98,7 @@ function Made() {
         <p className="mt-8 text-center text-xs">* To be confirmed.</p>
       </section>
 
-      <section className="grid bg-forest text-cream md:grid-cols-2">
+      <section className="grid bg-yellow text-cream md:grid-cols-2">
         <img src={img.pool} alt="Solenne can on a striped towel by a pool" className="h-[360px] w-full object-cover md:h-full" />
         <div className="px-6 py-16 md:px-16 lg:px-24">
           <h2 className="display-md">Sustainability</h2>

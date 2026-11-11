@@ -24,7 +24,7 @@ export const Route = createFileRoute("/crew")({
 function Crew() {
   return (
     <>
-      <section className="grid bg-forest text-cream md:grid-cols-2">
+      <section className="grid bg-yellow text-cream md:grid-cols-2">
         <img src={img.tray} alt="Friends serving a tray of Solenne cans at a party" className="h-[420px] w-full object-cover md:h-full md:min-h-[700px]" />
         <div className="flex flex-col items-end justify-center px-6 py-16 text-right md:px-16 lg:px-24">
           <Words as="h1" className="display-xl" text="Join|the|crew!" />
@@ -34,19 +34,19 @@ function Crew() {
       </section>
 
       <section className="mx-auto grid max-w-[1920px] gap-8 px-5 py-16 md:grid-cols-2 md:px-10 md:py-24">
-        <Reveal className="h-full rounded-[var(--radius-card)] bg-apple p-10 text-cream md:p-14">
+        <Reveal className="h-full rounded-[var(--radius-card)] bg-yellow p-10 text-cream md:p-14">
           <p className="eyebrow">Track 01</p>
           <h2 className="display-lg mt-3">Sellers</h2>
           <p className="mt-6 text-lg">Sell Solenne to your friends, bars and shops — and earn 20% commission on every order.</p>
         </Reveal>
-        <Reveal delay={100} className="h-full rounded-[var(--radius-card)] bg-peach p-10 text-navy md:p-14">
+        <Reveal delay={100} className="h-full rounded-[var(--radius-card)] bg-yellow p-10 text-navy md:p-14">
           <p className="eyebrow">Track 02</p>
           <h2 className="display-lg mt-3">Faces</h2>
           <p className="mt-6 text-lg">Be part of our look. No posting obligations, just good vibes.</p>
         </Reveal>
       </section>
 
-      <section className="bg-forest px-5 py-16 text-cream md:px-10 md:py-24">
+      <section className="bg-yellow px-5 py-16 text-cream md:px-10 md:py-24">
         <div className="mx-auto max-w-[1920px]">
           <h2 className="display-md mb-10">Crew benefits</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -66,7 +66,7 @@ function Crew() {
         ))}
       </section>
 
-      <section id="apply" className="scroll-mt-28 bg-forest px-5 py-16 text-cream md:py-24">
+      <section id="apply" className="scroll-mt-28 bg-yellow px-5 py-16 text-cream md:py-24">
         <div className="mx-auto max-w-3xl">
           <h2 className="display-md mb-10">Apply to the crew</h2>
           <LeadForm

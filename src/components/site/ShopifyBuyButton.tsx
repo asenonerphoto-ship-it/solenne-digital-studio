@@ -3,7 +3,7 @@ import { isShopifyConfigured, isShopifySelectionConfigured } from "@/config/shop
 import { useShopify, shopifyTheme, type ShopifyComponent, type ShopifyUI } from "@/lib/shopify";
 import { Button } from "./ui";
 
-export function ShopifyBuyButton({ productId, variantId, tone = "cream" }: { productId: string; variantId: string; tone?: "cream" | "orange" }) {
+export function ShopifyBuyButton({ productId, variantId, tone = "yellow" }: { productId: string; variantId: string; tone?: "yellow" }) {
   const node = useRef<HTMLDivElement>(null);
   const { getUI } = useShopify();
   const [status, setStatus] = useState<"loading" | "ready" | "unavailable">("loading");
@@ -35,7 +35,7 @@ export function ShopifyBuyButton({ productId, variantId, tone = "cream" }: { pro
             contents: { img: false, imgWithCarousel: false, title: false, variantTitle: false, price: false, description: false, options: false, quantity: false, button: true, buttonWithQuantity: false },
             text: { button: "ADD TO CART" },
             buttonDestination: "cart",
-            styles: { product: { width: "100%", "max-width": "none", margin: "0" }, button: { "border-radius": "999px", "background-color": tone === "orange" ? theme.peach : theme.cream, color: theme.navy, "font-family": theme.bodyFont } },
+            styles: { product: { width: "100%", "max-width": "none", margin: "0" }, button: { "border-radius": "999px", "background-color": theme.yellow, color: theme.navy, "font-family": theme.displayFont } },
           },
         },
       });
@@ -49,7 +49,7 @@ export function ShopifyBuyButton({ productId, variantId, tone = "cream" }: { pro
   return (
     <div className={`shopify-buy-button shopify-buy-button-${tone}`}>
       <div ref={node} hidden={status !== "ready" || !configured} />
-      {(status !== "ready" || !configured) && <Button variant={tone === "orange" ? "orange" : "cream"} className="w-full shadow-none" disabled>{configured && status === "loading" ? "Loading…" : "Coming soon"}</Button>}
+      {(status !== "ready" || !configured) && <Button variant="yellow" className="w-full shadow-none" disabled>{configured && status === "loading" ? "Loading…" : "Coming soon"}</Button>}
     </div>
   );
 }

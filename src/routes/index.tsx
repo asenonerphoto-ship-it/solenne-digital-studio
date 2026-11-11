@@ -30,7 +30,7 @@ function Home() {
       <Marquee />
 
       {/* Say hello */}
-      <section className="relative overflow-hidden bg-forest text-cream" style={{ clipPath: "polygon(0 0,100% 0,100% 92%,0 100%)" }}>
+      <section className="relative overflow-hidden bg-yellow text-cream" style={{ clipPath: "polygon(0 0,100% 0,100% 92%,0 100%)" }}>
         <div className="mx-auto grid max-w-[1920px] items-center gap-12 px-5 pb-32 pt-16 md:grid-cols-2 md:px-10 md:pb-48 md:pt-24">
           <Reveal className="relative">
             <img src={img.pour} alt="Crispy Apple cider being poured into a green glass" className="relative z-10 mx-auto w-[85%] max-w-xl" />
@@ -56,7 +56,7 @@ function Home() {
         </Slider>
       </section>
 
-      <section className="grid bg-forest text-cream md:grid-cols-2">
+      <section className="grid bg-yellow text-cream md:grid-cols-2">
         <div className="flex flex-col items-end justify-center px-6 py-16 text-right md:px-16 lg:px-24">
           <Reveal className="flex flex-col items-end">
             <Words className="display-xl" text="What|is|Solenne?" />
@@ -76,7 +76,7 @@ function Home() {
         </Slider>
       </section>
 
-      <section className="grid bg-forest text-cream md:grid-cols-2">
+      <section className="grid bg-yellow text-cream md:grid-cols-2">
         <img src={img.tray} alt="Tray of White Peach cans with straws and peach slices at a party" className="h-[420px] w-full object-cover md:h-full md:min-h-[700px]" />
         <div className="flex flex-col items-end justify-center px-6 py-16 text-right md:px-16 lg:px-24">
           <Reveal className="flex flex-col items-end">

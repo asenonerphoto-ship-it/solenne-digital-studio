@@ -32,7 +32,7 @@ const useCases = [
 function B2B() {
   return (
     <>
-      <section className="relative overflow-hidden bg-forest text-cream">
+      <section className="relative overflow-hidden bg-yellow text-cream">
         <img src={img.tray} alt="Moody bar scene with Solenne cans on a tray" className="absolute inset-0 h-full w-full object-cover opacity-40" />
         <div className="relative mx-auto max-w-[1920px] px-5 py-28 md:px-10 md:py-40">
           <Words as="h1" className="display-xl max-w-5xl" text="Solenne for your bar, restaurant & shop" />
@@ -40,7 +40,7 @@ function B2B() {
         </div>
       </section>
 
-      <section className="bg-forest px-5 py-16 text-cream md:px-10 md:py-24">
+      <section className="bg-yellow px-5 py-16 text-cream md:px-10 md:py-24">
         <div className="mx-auto max-w-[1920px]">
           <h2 className="display-md mb-10">Why Solenne?</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -58,10 +58,10 @@ function B2B() {
           {["crispy-apple", "white-peach"].map((s) => {
             const p = getProduct(s)!;
             return (
-              <div key={s} className={`flex gap-6 rounded-[var(--radius-card)] border-[3px] p-5 ${s === "crispy-apple" ? "border-apple" : "border-peach"}`}>
+              <div key={s} className={`flex gap-6 rounded-[var(--radius-card)] border-[3px] p-5 ${s === "crispy-apple" ? "border-yellow" : "border-yellow"}`}>
                 <img src={p.images[0].src} alt={p.images[0].alt} className="h-36 w-36 shrink-0 rounded-2xl object-cover md:h-44 md:w-44" />
                 <div>
-                  <h3 className={`text-3xl ${s === "crispy-apple" ? "text-navy" : "text-peach"}`}>{p.name}</h3>
+                  <h3 className={`text-3xl ${s === "crispy-apple" ? "text-navy" : "text-yellow"}`}>{p.name}</h3>
                   <p className="mt-3">Case: 24 × 330 ml cans</p>
                   <p>Minimum order: 5 cases</p>
                   <p className="mt-2 text-xs opacity-70">PLACEHOLDER — to be confirmed.</p>
@@ -76,7 +76,7 @@ function B2B() {
         {useCases.map((u, i) => (
           <Reveal key={u.title} delay={i * 60} className="relative overflow-hidden rounded-[var(--radius-card)]">
             <img src={u.src} alt={u.title} loading="lazy" className="aspect-[3/4] w-full object-cover" />
-            <p className="absolute inset-x-0 bottom-0 bg-forest/80 p-4 font-display text-lg font-bold uppercase text-cream">{u.title}</p>
+            <p className="absolute inset-x-0 bottom-0 bg-yellow/80 p-4 font-display text-lg font-bold uppercase text-cream">{u.title}</p>
           </Reveal>
         ))}
       </section>
@@ -92,7 +92,7 @@ function B2B() {
         </div>
       </section>
 
-      <section id="inquiry" className="scroll-mt-28 bg-forest px-5 py-16 text-cream md:py-24">
+      <section id="inquiry" className="scroll-mt-28 bg-yellow px-5 py-16 text-cream md:py-24">
         <div className="mx-auto max-w-3xl">
           <h2 className="display-md mb-10">Let's talk</h2>
           <LeadForm

@@ -74,7 +74,7 @@ function ProductDetails({ p }: { p: Product }) {
             <p className="mt-5 text-lg md:text-xl">{p.description}</p>
 
             {isCider && (
-              <div className="mt-8 grid grid-cols-2 gap-2 rounded-full bg-forest/30 p-1">
+              <div className="mt-8 grid grid-cols-2 gap-2 rounded-full bg-yellow/30 p-1">
                 <Link to="/shop/$slug" params={{ slug: "crispy-apple" }} className={cn("rounded-full py-2.5 text-center text-sm font-semibold", p.pack === "single" ? "bg-cream text-navy" : "")}>Single Flavors</Link>
                 <Link to="/shop/$slug" params={{ slug: "mixed-pack" }} className={cn("rounded-full py-2.5 text-center text-sm font-semibold", p.pack === "variety" ? "bg-cream text-navy" : "")}>Variety Packs</Link>
               </div>
@@ -135,7 +135,7 @@ function ProductDetails({ p }: { p: Product }) {
         </div>
       </section>
 
-      <WaveDivider top={p.theme === "apple" ? "fill-apple" : p.theme === "peach" ? "fill-peach" : p.theme === "navy" ? "fill-navy" : "fill-forest"} className="bg-forest" />
+      <WaveDivider top={p.theme === "apple" ? "fill-yellow" : p.theme === "peach" ? "fill-yellow" : p.theme === "navy" ? "fill-navy" : "fill-yellow"} className="bg-yellow" />
       {isCider ? <CiderSections p={p} /> : <MerchSections p={p} />}
 
       <section className="mx-auto max-w-[1920px] px-5 py-16 md:px-10 md:py-24">
@@ -146,13 +146,13 @@ function ProductDetails({ p }: { p: Product }) {
       </section>
 
       {lightbox !== null && (
-        <div className="lightbox-in fixed inset-0 z-50 grid place-items-center bg-forest/95 p-4" role="dialog" aria-modal="true" onClick={() => setLightbox(null)}>
+        <div className="lightbox-in fixed inset-0 z-50 grid place-items-center bg-yellow/95 p-4" role="dialog" aria-modal="true" onClick={() => setLightbox(null)}>
           <button className="absolute right-6 top-6 text-cream" aria-label="Close"><X className="h-8 w-8" /></button>
           <img src={p.images[lightbox]?.src} alt={p.images[lightbox]?.alt ?? ""} className="max-h-[85vh] max-w-full rounded-[var(--radius-card)]" />
         </div>
       )}
       {sizeGuide && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-forest/80 p-4" role="dialog" aria-modal="true" aria-label="Size guide">
+        <div className="fixed inset-0 z-50 grid place-items-center bg-yellow/80 p-4" role="dialog" aria-modal="true" aria-label="Size guide">
           <div className="w-full max-w-md rounded-[var(--radius-card)] bg-background p-8 text-navy">
             <div className="flex items-center justify-between"><h2 className="text-3xl">Size guide</h2><button onClick={() => setSizeGuide(false)} aria-label="Close"><X /></button></div>
             <table className="mt-6 w-full text-left">
@@ -179,7 +179,7 @@ function Bar({ label, value }: { label: string; value: number }) {
 function CiderSections({ p }: { p: Product }) {
   return (
     <>
-      <section className="bg-forest text-cream">
+      <section className="bg-yellow text-cream">
         <div className="mx-auto grid max-w-[1920px] gap-12 px-5 py-16 md:grid-cols-2 md:px-10 md:py-24">
           <Reveal>
             <h2 className="display-md">About this cider</h2>
@@ -254,7 +254,7 @@ function CiderSections({ p }: { p: Product }) {
 
 function MerchSections({ p }: { p: Product }) {
   return (
-    <section className="bg-forest text-cream">
+    <section className="bg-yellow text-cream">
       <div className="mx-auto grid max-w-[1920px] gap-12 px-5 py-16 md:grid-cols-2 md:px-10 md:py-24">
         <Accordion
           items={[

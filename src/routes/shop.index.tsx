@@ -19,7 +19,7 @@ export const Route = createFileRoute("/shop/")({
 });
 
 function Pill({ active, ...p }: React.ButtonHTMLAttributes<HTMLButtonElement> & { active: boolean }) {
-  return <button {...p} aria-pressed={active} className={cn("rounded-full border-2 border-navy px-6 py-2.5 text-sm font-semibold uppercase transition-colors", active ? "bg-forest text-cream" : "hover:bg-paper")} />;
+  return <button {...p} aria-pressed={active} className={cn("rounded-full border-2 border-navy px-6 py-2.5 text-sm font-semibold uppercase transition-colors", active ? "bg-yellow text-cream" : "hover:bg-paper")} />;
 }
 
 function Shop() {
@@ -28,7 +28,7 @@ function Shop() {
   const list = products.filter((p) => p.category === tab && (tab === "merch" || pack === "all" || p.pack === pack));
   return (
     <>
-      <section className="bg-forest px-5 py-16 text-cream md:px-10 md:py-24">
+      <section className="bg-yellow px-5 py-16 text-cream md:px-10 md:py-24">
         <Words as="h1" className="display-xl mx-auto block max-w-[1920px]" text="Shop" />
       </section>
       <section className="mx-auto max-w-[1920px] px-5 py-12 md:px-10">

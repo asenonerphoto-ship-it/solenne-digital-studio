@@ -28,15 +28,15 @@ function Story() {
   useScrollProgress(script, (p) => { if (script.current && !prefersReducedMotion()) script.current.style.transform = `translate3d(${(p - 0.5) * -12}%, ${p * 60}px, 0)`; }, 1);
   return (
     <>
-      <section className="relative overflow-hidden bg-forest pb-10 pt-16 text-cream">
-        <p ref={script} data-m-skip className="script-faded will-change-transform pointer-events-none absolute inset-x-0 top-6 select-none text-center text-[28vw] leading-none text-forest-soft md:text-[22vw]" aria-hidden>Solenne</p>
+      <section className="relative overflow-hidden bg-yellow pb-10 pt-16 text-cream">
+        <p ref={script} data-m-skip className="script-faded will-change-transform pointer-events-none absolute inset-x-0 top-6 select-none text-center text-[28vw] leading-none text-yellow md:text-[22vw]" aria-hidden>Solenne</p>
         <img src={img.towelCan} alt="Crispy Apple can in a waffle cone on a blue striped towel" className="relative mx-auto w-[75%] max-w-md rotate-3 md:max-w-lg" />
         <h1 className="sr-only">Our Story</h1>
       </section>
 
       <section className="mx-auto max-w-[1920px] px-5 py-16 md:px-10 md:py-24">
         <div className="text-center">
-          <Words className="display-lg inline-block -rotate-2 bg-forest px-8 py-4 text-cream" text="Our founders" />
+          <Words className="display-lg inline-block -rotate-2 bg-yellow px-8 py-4 text-cream" text="Our founders" />
         </div>
         <div className="mt-14 grid items-center gap-12 md:grid-cols-2">
           <Reveal className="space-y-5 text-lg leading-relaxed">
@@ -49,7 +49,7 @@ function Story() {
         </div>
       </section>
 
-      <section className="grid bg-forest text-cream md:grid-cols-2">
+      <section className="grid bg-yellow text-cream md:grid-cols-2">
         <div className="flex flex-col justify-center px-6 py-16 md:px-16 lg:px-24">
           <Reveal>
             <h2 className="display-lg">Why cider?</h2>
@@ -66,7 +66,7 @@ function Story() {
         </div>
       </section>
 
-      <section className="bg-forest px-5 py-16 text-cream md:px-10 md:py-24">
+      <section className="bg-yellow px-5 py-16 text-cream md:px-10 md:py-24">
         <div className="mx-auto grid max-w-[1920px] gap-6 md:grid-cols-3">
           <FeatureCard icon={<Mountain />} title="Made in Italy" text="Apples from South Tyrol, made close to home." />
           <FeatureCard icon={<Sparkles />} title="Quality you can taste" text="Real fruit, slow fermentation, no shortcuts." />
@@ -87,7 +87,7 @@ function Story() {
         </Slider>
       </section>
 
-      <section className="bg-peach px-5 py-20 text-center text-navy">
+      <section className="bg-yellow px-5 py-20 text-center text-navy">
         <h2 className="display-lg">Join the crew</h2>
         <Link to="/crew" className={btnClass("navy", "mt-8")}>Become part of it</Link>
       </section>

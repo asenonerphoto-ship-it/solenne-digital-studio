@@ -184,10 +184,10 @@ export const products: Product[] = [
 export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
 
 export const themeClasses: Record<Theme, { page: string; outline: string; accent: string; text: string }> = {
-  apple: { page: "bg-apple text-cream", outline: "border-apple", accent: "text-navy", text: "text-cream" },
-  peach: { page: "bg-peach text-navy", outline: "border-peach", accent: "text-peach", text: "text-navy" },
+  apple: { page: "bg-yellow text-cream", outline: "border-yellow", accent: "text-navy", text: "text-cream" },
+  peach: { page: "bg-yellow text-navy", outline: "border-yellow", accent: "text-yellow", text: "text-navy" },
   navy: { page: "bg-navy text-cream", outline: "border-cream", accent: "text-navy", text: "text-cream" },
-  forest: { page: "bg-forest text-cream", outline: "border-navy", accent: "text-navy", text: "text-cream" },
+  forest: { page: "bg-yellow text-cream", outline: "border-navy", accent: "text-navy", text: "text-cream" },
 };
 
 export const formatPrice = (n: number) =>

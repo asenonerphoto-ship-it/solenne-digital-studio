@@ -19,7 +19,7 @@ import { AgeGate, Footer, Header } from "@/components/site/Layout";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-[70vh] items-center justify-center bg-forest px-4 text-cream">
+    <div className="flex min-h-[70vh] items-center justify-center bg-yellow px-4 text-cream">
       <div className="max-w-md text-center">
         <h1 className="display-xl">404</h1>
         <p className="mt-4 text-lg">This page went to the mountains and never came back.</p>

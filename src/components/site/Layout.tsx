@@ -40,12 +40,12 @@ export function Header() {
     return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); };
   }, []);
   return (
-    <header className="site-header sticky top-0 z-40 bg-forest text-cream" data-hidden={hidden && !menu} data-scrolled={scrolled}>
+    <header className="site-header sticky top-0 z-40 bg-yellow text-white" data-hidden={hidden && !menu} data-scrolled={scrolled}>
       <div className="relative mx-auto flex h-20 max-w-[1920px] items-center justify-between px-5 md:h-24 md:px-10">
-        <button className="xl:hidden" onClick={() => setMenu(true)} aria-label="Open menu">
+        <Button variant="outline" className="border-0 p-0 xl:hidden" onClick={() => setMenu(true)} aria-label="Open menu">
           <Menu className="h-7 w-7" />
-        </button>
-        <nav className="hidden gap-8 xl:flex" aria-label="Main">
+        </Button>
+        <nav className="hidden gap-5 xl:flex" aria-label="Main">
           {navLinks.map((l) => (
             <Link key={l.to} to={l.to} className="nav-link eyebrow transition-opacity hover:opacity-80">
               {l.label}
@@ -58,19 +58,19 @@ export function Header() {
         <Button variant="outline" onClick={openCart} disabled={!available} className="relative h-10 w-10 border-0 p-0" title={available ? "Open cart" : "Coming soon"} aria-label={`Open cart, ${count} items`}>
           <ShoppingBag key={bounce} className={cn("h-7 w-7", bounce > 0 && "cart-bounce")} />
           {count > 0 && (
-            <span className="absolute -right-2 -top-2 grid h-5 min-w-5 place-items-center rounded-full bg-peach px-1 text-xs font-bold text-navy">{count}</span>
+            <span className="absolute -right-2 -top-2 grid h-5 min-w-5 place-items-center rounded-full bg-yellow px-1 text-xs font-bold text-navy">{count}</span>
           )}
         </Button>
       </div>
       {menu && (
-        <div className="menu-wave fixed inset-0 z-50 flex h-dvh flex-col bg-forest px-6 py-6 text-cream">
+        <div className="menu-wave fixed inset-0 z-50 flex h-dvh flex-col bg-yellow px-6 py-6 text-white">
           <div className="flex items-center justify-between">
             <Logo />
-            <button onClick={() => setMenu(false)} aria-label="Close menu"><X className="h-8 w-8" /></button>
+            <Button variant="outline" className="border-0 p-0" onClick={() => setMenu(false)} aria-label="Close menu"><X className="h-8 w-8" /></Button>
           </div>
-          <nav className="mt-16 flex flex-col gap-6 bg-forest" aria-label="Mobile">
+          <nav className="mt-16 flex flex-col gap-6 bg-yellow" aria-label="Mobile">
             {navLinks.map((l, i) => (
-              <Link key={l.to} to={l.to} onClick={() => setMenu(false)} className="menu-item font-display text-5xl font-bold uppercase" style={{ ["--i" as string]: i }}>
+              <Link key={l.to} to={l.to} onClick={() => setMenu(false)} className="menu-item font-display text-3xl font-bold uppercase md:text-5xl" style={{ ["--i" as string]: i }}>
                 {l.label}
               </Link>
             ))}
@@ -96,7 +96,7 @@ export function AgeGate() {
   }, []);
   if (!show) return null;
   return (
-    <div className={cn("fixed inset-0 z-[60] grid place-items-center bg-forest p-6 text-cream", leaving && "gate-out")} onAnimationEnd={(e) => { if (leaving && e.target === e.currentTarget) setShow(false); }} role="dialog" aria-modal="true" aria-labelledby="age-title">
+    <div className={cn("age-gate fixed inset-0 z-[60] grid place-items-center bg-navy p-6 text-yellow", leaving && "gate-out")} onAnimationEnd={(e) => { if (leaving && e.target === e.currentTarget) setShow(false); }} role="dialog" aria-modal="true" aria-labelledby="age-title">
       <div className="gate-in max-w-lg text-center">
         <Logo className="mx-auto h-16 md:h-20" />
         <h2 id="age-title" className="display-lg mt-10">Are you 18 or older?</h2>
@@ -104,8 +104,8 @@ export function AgeGate() {
           <p className="mt-8 text-lg">Sorry, come back when you're 18. Life will still be good.</p>
         ) : (
           <div className="mt-10 flex justify-center gap-4">
-            <button className={btnClass("cream")} onClick={accept}>Yes, I am</button>
-            <button className={btnClass("outline")} onClick={() => setDenied(true)}>No</button>
+            <Button variant="yellow" onClick={accept}>Yes, I am</Button>
+            <Button variant="outline" onClick={() => setDenied(true)}>No</Button>
           </div>
         )}
         <p className="mt-10 text-sm opacity-70">Please enjoy responsibly.</p>
@@ -132,10 +132,10 @@ export function Footer() {
     setState("done");
   };
   return (
-    <footer className="bg-forest text-cream">
+    <footer className="site-footer bg-navy text-white">
       <div className="mx-auto grid max-w-[1920px] gap-12 px-5 py-16 md:px-10 lg:grid-cols-[1fr_1.2fr] lg:py-24">
         <div>
-          <Logo className="h-14 md:h-16" />
+          <Logo className="h-14 md:h-16 brightness-0 invert" />
           <div className="mt-10 grid grid-cols-2 gap-8 sm:grid-cols-4">
             {footerCols.map((c) => (
               <div key={c.title}>
@@ -153,15 +153,15 @@ export function Footer() {
           <h2 className="display-md">Join the crew</h2>
           <p className="mt-3 text-lg">Get 10% off your first order.</p>
           {state === "done" ? (
-            <p className="mt-6 flex items-center gap-3 rounded-2xl bg-cream px-5 py-4 font-semibold text-navy" role="status"><span className="check-burst h-7 w-7 rounded-full bg-forest text-cream"><Check className="check-draw h-4 w-4" /></span>You're in! Check your inbox for your code.</p>
+            <p className="mt-6 flex items-center gap-3 rounded-2xl bg-cream px-5 py-4 font-semibold text-navy" role="status"><span className="check-burst h-7 w-7 rounded-full bg-yellow text-white"><Check className="check-draw h-4 w-4" /></span>You're in! Check your inbox for your code.</p>
           ) : (
             <form onSubmit={onSubmit} noValidate className="mt-6 flex flex-col gap-3 sm:flex-row">
               <label htmlFor="nl-email" className="sr-only">Email address</label>
-              <input id="nl-email" name="email" type="email" placeholder="Your email address" className="flex-1 rounded-full border-2 border-cream/50 bg-transparent px-5 py-3 placeholder:text-cream/50 focus:border-cream focus:outline-none" />
-              <button className={btnClass("cream")} disabled={state === "sending"}>{state === "sending" ? "…" : "Subscribe"}</button>
+              <input id="nl-email" name="email" type="email" placeholder="Your email address" className="flex-1 rounded-full border-2 border-cream/50 bg-transparent px-5 py-3 placeholder:text-white/50 focus:border-cream focus:outline-none" />
+              <Button variant="yellow" disabled={state === "sending"}>{state === "sending" ? "…" : "Subscribe"}</Button>
             </form>
           )}
-          {state === "error" && <p className="mt-2 text-sm text-cream" role="alert">Please enter a valid email.</p>}
+          {state === "error" && <p className="mt-2 text-sm text-white" role="alert">Please enter a valid email.</p>}
           <div className="mt-8 flex gap-4">
             <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Solenne on Instagram" className="grid h-11 w-11 place-items-center rounded-full border-2 border-cream/50 hover:bg-cream hover:text-navy"><Instagram className="h-5 w-5" /></a>
             <a href="https://tiktok.com" target="_blank" rel="noreferrer" aria-label="Solenne on TikTok" className="grid h-11 w-11 place-items-center rounded-full border-2 border-cream/50 hover:bg-cream hover:text-navy">

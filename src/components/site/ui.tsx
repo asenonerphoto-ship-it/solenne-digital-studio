@@ -8,11 +8,11 @@ import { observeOnce, prefersReducedMotion, usePauseOffscreen } from "@/lib/moti
 
 /* ---------- Button ---------- */
 const btnBase =
-  "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.06em] btn-fx hover:-translate-y-0.5 disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 rounded-lg px-7 py-3.5 text-sm font-display uppercase tracking-normal btn-fx hover:-translate-y-0.5 disabled:opacity-50 disabled:pointer-events-none";
 const btnVariants = {
-  cream: "btn-fill bg-cream text-navy shadow-tilt hover:brightness-105",
-  orange: "btn-fill bg-peach text-navy hover:brightness-105",
-  navy: "btn-fill bg-navy text-cream hover:bg-forest",
+  cream: "btn-fill bg-yellow text-navy hover:brightness-105",
+  yellow: "btn-fill bg-yellow text-navy hover:brightness-105",
+  navy: "btn-fill bg-navy text-yellow hover:brightness-110",
   outline: "border-2 border-current bg-transparent overflow-visible",
   white: "btn-fill bg-background text-navy hover:bg-paper",
 } as const;
@@ -57,7 +57,7 @@ export function Words({ text, as: Tag = "h2", className }: { text: string; as?: 
 }
 
 /* ---------- Marquee: slows on hover, nudged by scroll velocity, paused offscreen ---------- */
-export function Marquee({ text = "ORIGINAL HARD CIDER · MADE IN ITALY · ", className }: { text?: string; className?: string }) {
+export function Marquee({ text = "ORIGINAL HARD CIDER - MADE IN ITALY - ", className }: { text?: string; className?: string }) {
   const row = Array.from({ length: 8 }, () => text).join("");
   const wrap = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
@@ -86,38 +86,12 @@ export function Marquee({ text = "ORIGINAL HARD CIDER · MADE IN ITALY · ", cla
     return () => { cancelAnimationFrame(raf); w?.removeEventListener("pointerenter", enter); w?.removeEventListener("pointerleave", leave); window.removeEventListener("scroll", onScroll); };
   }, []);
   return (
-    <div ref={wrap} data-m-skip className={cn("overflow-hidden bg-forest py-4 text-cream", className)} aria-label="Original hard cider, made in Italy">
+    <div ref={wrap} data-m-skip className={cn("overflow-hidden bg-navy py-4 text-yellow", className)} aria-label="Original hard cider, made in Italy">
       <div ref={track} className="flex w-max animate-marquee whitespace-nowrap font-display text-lg font-semibold tracking-[0.06em] md:text-2xl" aria-hidden>
         <span className="pr-2">{row}</span>
         <span className="pr-2">{row}</span>
       </div>
     </div>
-  );
-}
-
-/* ---------- WaveDivider: seamless horizontal drift + gentle wobble ---------- */
-const wavePath = "M0,40 C180,100 360,100 540,50 C720,0 900,0 1080,50 C1200,85 1320,90 1440,40 C1620,100 1800,100 1980,50 C2160,0 2340,0 2520,50 C2640,85 2760,90 2880,40 V0 H0 Z";
-export function WaveDivider({ top = "fill-background", className, flip }: { top?: string; className?: string; flip?: boolean }) {
-  const ref = useRef<HTMLDivElement>(null);
-  usePauseOffscreen(ref);
-  return (
-    <div ref={ref} data-m-skip className={cn("relative -mb-px overflow-hidden leading-none", className)} aria-hidden>
-      <div className={cn("wave-wobble", flip && "rotate-180")}>
-        <svg viewBox="0 0 2880 120" preserveAspectRatio="none" className="wave-drift block h-12 w-[200%] md:h-24">
-          <path className={top} d={wavePath} />
-        </svg>
-      </div>
-    </div>
-  );
-}
-
-export function WaveStripes({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 400 60" className={cn("h-10 w-40", className)} aria-hidden>
-      <path d="M0 15 Q50 0 100 15 T200 15 T300 15 T400 15" className="fill-none stroke-apple" strokeWidth="8" />
-      <path d="M0 32 Q50 17 100 32 T200 32 T300 32 T400 32" className="fill-none stroke-cream" strokeWidth="8" />
-      <path d="M0 49 Q50 34 100 49 T200 49 T300 49 T400 49" className="fill-none stroke-navy" strokeWidth="8" />
-    </svg>
   );
 }
 
@@ -135,11 +109,11 @@ export function SectionHeading({ eyebrow, title, align = "left", className }: { 
 export function CardSticker({ text, className }: { text: string; className?: string }) {
   return (
     <span className={cn("pointer-events-none absolute right-2.5 top-0 z-20 flex w-[76px] rotate-[3deg] flex-col items-center text-center", className)} aria-hidden>
-      <span className="w-full rounded-t-[10px] bg-forest px-1.5 pb-1 pt-2 font-display text-[11px] font-bold uppercase leading-[1.2] tracking-wide text-cream">
+      <span className="w-full rounded-t-[10px] bg-yellow px-1.5 pb-1 pt-2 font-display text-[11px] font-bold uppercase leading-[1.2] tracking-normal text-navy">
         {text.split(" ").map((w, i) => <span key={i} className="block">{w}</span>)}
       </span>
       <svg viewBox="0 0 80 12" preserveAspectRatio="none" className="-mt-px block h-3 w-full" aria-hidden>
-        <path d="M0 0 H80 V4 Q70 12 60 4 T40 4 T20 4 T0 4 Z" className="fill-forest" />
+        <path d="M0 0 H80 V4 Q70 12 60 4 T40 4 T20 4 T0 4 Z" className="fill-yellow" />
       </svg>
     </span>
   );
@@ -151,7 +125,7 @@ export function ProductCard({ product }: { product: Product }) {
   const touchStart = useRef<number | null>(null);
   const alt = (src: string, fallback: string) => product.images.find((i) => i.src === src)?.alt ?? fallback;
   return (
-    <article className="product-card group relative flex h-full min-w-0 flex-col rounded-[24px] bg-background p-5 text-navy">
+    <article data-category={product.category} className="product-card group relative flex h-full min-w-0 flex-col">
       <div
         className="card-media relative aspect-square w-full overflow-hidden rounded-2xl"
         data-alternate={alternate}
@@ -161,16 +135,16 @@ export function ProductCard({ product }: { product: Product }) {
           if (touchStart.current !== null && end !== undefined && Math.abs(end - touchStart.current) > 30) setAlternate((v) => !v);
           touchStart.current = null;
         }}
-        onClick={() => { if (window.matchMedia("(hover: none)").matches) setAlternate((v) => !v); }}
+        onClick={() => { if (window.matchMedia("(hover: none), (max-width: 767px)").matches) setAlternate((v) => !v); }}
       >
         <img src={product.image} alt={alt(product.image, product.name)} loading="lazy" draggable={false} className="card-primary absolute inset-0 h-full w-full object-cover" />
         <img src={product.hoverImage} alt={alt(product.hoverImage, `${product.name} lifestyle`)} loading="lazy" draggable={false} className="card-alternate absolute inset-0 h-full w-full object-cover" />
         {product.badge && <CardSticker text={product.badge} />}
         <div className="card-dots absolute inset-x-0 bottom-2 z-10 flex justify-center gap-1" aria-label="Product images">
           {[false, true].map((value, i) => (
-            <button key={i} type="button" aria-label={`Show ${product.name} image ${i + 1}`} aria-pressed={alternate === value} onClick={(e) => { e.stopPropagation(); setAlternate(value); }} className="grid h-7 w-7 place-items-center">
+            <Button variant="outline" key={i} type="button" aria-label={`Show ${product.name} image ${i + 1}`} aria-pressed={alternate === value} onClick={(e) => { e.stopPropagation(); setAlternate(value); }} className="grid h-7 w-7 place-items-center border-0 p-0">
               <span className={cn("h-2 w-2 rounded-full bg-background shadow", alternate !== value && "opacity-50")} />
-            </button>
+            </Button>
           ))}
         </div>
       </div>
@@ -179,12 +153,10 @@ export function ProductCard({ product }: { product: Product }) {
           <h3 className="text-2xl uppercase leading-[1.05] md:text-[1.75rem]">
             <Link to="/shop/$slug" params={{ slug: product.slug }} className="card-link after:absolute after:inset-0 after:z-[1] after:rounded-[22px] focus-visible:outline-none">{product.name}</Link>
           </h3>
-          <ul className="mt-2.5 space-y-0.5 text-sm font-light leading-[1.3]">
-            {product.taglines.map((line) => <li key={line}>{line}</li>)}
-          </ul>
+          <p className="card-description mt-3 font-light">{product.short}</p>
         </div>
         <div className="card-hover absolute inset-0 flex flex-col items-center justify-center gap-2.5 pt-4" aria-hidden>
-          <span className="inline-flex h-[54px] w-full items-center justify-center rounded-full bg-navy font-display text-sm uppercase tracking-[0.06em] text-cream">Shop now</span>
+          <span className="inline-flex h-[54px] w-full items-center justify-center card-action font-display text-sm uppercase tracking-normal">Shop now</span>
           <span className="card-sub text-xs font-semibold uppercase tracking-wide underline underline-offset-4">
             {product.category === "merch" ? "Choose your size" : "Choose 12 or 24 cans"}
           </span>
@@ -247,8 +219,8 @@ export const slideClass = "w-[85%] shrink-0 snap-start sm:w-[46%] lg:w-[31%]";
 /* ---------- FeatureCard ---------- */
 export function FeatureCard({ icon, title, text, className }: { icon?: ReactNode; title: string; text: string; className?: string }) {
   return (
-    <div className={cn("rounded-[var(--radius-card)] border-2 border-cream p-7 transition-transform duration-300 hover:-translate-y-1", className)}>
-      {icon && <div className="mb-5 grid h-14 w-14 place-items-center rounded-full bg-cream text-navy">{icon}</div>}
+    <div className={cn("rounded-lg bg-navy p-7 text-yellow transition-transform duration-300 hover:-translate-y-1", className)}>
+      {icon && <div className="mb-5 grid h-14 w-14 place-items-center rounded-full bg-yellow text-navy">{icon}</div>}
       <h3 className="text-2xl">{title}</h3>
       <p className="mt-3 leading-relaxed">{text}</p>
     </div>
@@ -326,7 +298,7 @@ export function FormField({ label, error, id, as, options, className, ...p }: In
 /* ---------- Split block ---------- */
 export function Split({ image, alt, children, imageSide = "right", className, tilt }: { image: string; alt: string; children: ReactNode; imageSide?: "left" | "right"; className?: string; tilt?: boolean }) {
   return (
-    <section className={cn("grid bg-forest text-cream md:grid-cols-2", className)}>
+    <section className={cn("grid bg-yellow text-cream md:grid-cols-2", className)}>
       <div className={cn("relative min-h-[380px] overflow-hidden md:min-h-[640px]", imageSide === "left" ? "md:order-1" : "md:order-2", tilt && "flex items-center justify-center p-8 md:p-16")}>
         {/* REPLACE WITH BRAND PHOTO if needed */}
         <img src={image} alt={alt} loading="lazy" className={cn(tilt ? "w-full max-w-md -rotate-3 rounded-[1.75rem] shadow-tilt" : "absolute inset-0 h-full w-full object-cover")} />
