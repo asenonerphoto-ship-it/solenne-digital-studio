@@ -23,7 +23,7 @@ function Home() {
  <Marquee />
  <section className="slant-bottom relative bg-yellow text-navy">
  <div className="mx-auto grid max-w-[1600px] items-center gap-10 px-5 py-16 md:grid-cols-2 md:px-10 md:py-24">
- <Reveal className="px-5 md:px-14"><TiltPhoto src={img["travel-can-tattoo"]} alt="A hand holding a Solenne can" /></Reveal>
+ <Reveal className="px-5 md:px-14"><TiltPhoto src={img["tray-sandwich"]} alt="Tattooed hand holding a Solenne can on a blue tray" /></Reveal>
  <Reveal className="flex flex-col items-end text-right" delay={150}>
  <Words className="display-xl text-white" text={retroCopy.homeHello} />
  <p className="mt-8 max-w-md text-lg uppercase">{retroCopy.hello}</p>
@@ -31,7 +31,7 @@ function Home() {
  <Link to="/our-story" className={btnClass("navy", "mt-8")}>Explore our story</Link>
  </Reveal></div><Doodles items={doodlePlacements.homeHello} />
  </section>
- <PhotoBand src={img["crew-flatlay-1"]} alt="Solenne cans and fruit on a tray" />
+ <PhotoBand src={img["crew-flatlay-1"]} alt="Solenne crew clothing, hats and accessories laid out together" />
  <section className="relative bg-cream"><SectionLabel>Our collection</SectionLabel><Doodles items={doodlePlacements.collection} />
  <div className="collection-band bg-yellow"><Slider>{products.filter(p => p.category === "cider").map(p => <div key={p.slug} className={slideClass}><ProductCard product={p} /></div>)}</Slider></div></section>
  <section className="slant-bottom grid bg-yellow text-navy md:grid-cols-2">
@@ -42,6 +42,6 @@ function Home() {
  </section>
  <section className="relative bg-cream"><SectionLabel>The merch</SectionLabel><Doodles items={doodlePlacements.merch} />
  <div className="collection-band bg-navy"><Slider>{products.filter(p => p.category === "merch").map(p => <div key={p.slug} className={slideClass}><ProductCard product={p} /></div>)}</Slider></div></section>
- <PhotoBand src={img["merch-stack"]} alt="Solenne fleece laid out on grass" />
+ <PhotoBand src={img["merch-stack"]} alt="Stacked Solenne clothing and hats" />
  </>;
 }

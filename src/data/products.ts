@@ -42,7 +42,7 @@ export const products: Product[] = [
     description:
       "Crisp, bright and made with apples from South Tyrol. Fruity and sparkly with a touch of style — the one you open first.",
     images: [
-      { src: img["apple-headphones"], alt: "Crispy Apple can next to a glass of cider over ice by the pool" },
+      { src: img["apple-teal-glass"], alt: "Crispy Apple can next to a glass of cider over ice on teal tiles" },
       { src: img["cheers-palms"], alt: "Friends toasting with Solenne cans under palm leaves" },
       { src: img["apple-green-fleece"], alt: "Hand in a green sweater holding a Crispy Apple can" },
       { src: img["apple-pour-garden"], alt: "Crispy Apple being poured into a glass with an apple slice" },
@@ -50,7 +50,7 @@ export const products: Product[] = [
     taste: { sweet: 45, refreshing: 90, sparkling: 75 },
     serve: [
       { title: "Over ice with lime", text: "Big glass, lots of ice, a wedge of lime. Done.", src: img["apple-pour-garden"] },
-      { title: "With salty snacks", text: "Chips, olives, taralli. Crisp meets salty.", src: img["apple-headphones"] },
+      { title: "With salty snacks", text: "Chips, olives, taralli. Crisp meets salty.", src: img["tray-sandwich"] },
       { title: "Après-ski", text: "Straight from the can, boots still on.", src: img["apple-green-fleece"] },
     ],
   },
@@ -59,7 +59,7 @@ export const products: Product[] = [
     badge: "FAN FAV",
     taglines: ["Juicy white peach twist", "Soft, fruity and fizzy", "Summer in a can"],
     image: img["peach-headphones"],
-    hoverImage: img.peachPeaches,
+    hoverImage: img["peach-umbrella"],
     name: "White Peach",
     category: "cider",
     pack: "single",
@@ -69,7 +69,7 @@ export const products: Product[] = [
     description:
       "South Tyrolean apples meet juicy white peach. Soft, sunny and sparkling — summer in a can, all year long.",
     images: [
-      { src: img["peach-umbrella"], alt: "White Peach can on a wooden board with lime and a peach garnish" },
+      { src: img["peach-umbrella"], alt: "White Peach can with a peach slice, straw and umbrella" },
       { src: img.peachPeaches, alt: "White Peach can surrounded by fresh peaches" },
       { src: img["table-peanuts"], alt: "White Peach cider being poured at a lunch table" },
       { src: img.pool, alt: "Solenne can on a striped towel by the pool" },
@@ -85,7 +85,7 @@ export const products: Product[] = [
     slug: "mixed-pack",
     badge: "NEW",
     taglines: ["Both flavors in one box", "Perfect for sharing", "12 cans of good vibes"],
-    image: img["cheers-palms"],
+    image: img["duo-radio"],
     hoverImage: img["peach-tray-cans"],
     name: "Mixed Pack",
     category: "cider",

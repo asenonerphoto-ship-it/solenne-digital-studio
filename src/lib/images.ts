@@ -24,9 +24,32 @@ import fleeceChest from "@/assets/fleece-chest.webp.asset.json";
 import toast from "@/assets/toast.webp.asset.json";
 import press from "@/assets/press.webp.asset.json";
 import towelCan from "@/assets/towel-can.webp.asset.json";
-import founders from "@/assets/founders.webp.asset.json";
 import pool from "@/assets/pool.webp.asset.json";
 import logo from "@/assets/logo-navy.png";
+
+import retroAppleGreenFleece from "@/assets/retro-apple-green-fleece.jpg.asset.json";
+import retroAppleHeadphones from "@/assets/retro-apple-headphones.jpg.asset.json";
+import retroApplePourGarden from "@/assets/retro-apple-pour-garden.jpg.asset.json";
+import retroAppleTealGlass from "@/assets/retro-apple-teal-glass.jpg.asset.json";
+import retroAppleTelephone from "@/assets/retro-apple-telephone.jpg.asset.json";
+import retroCheersPalms from "@/assets/retro-cheers-palms.jpg.asset.json";
+import retroContactSheet from "@/assets/retro-contact-sheet.jpg.asset.json";
+import retroCrewBarJacket from "@/assets/retro-crew-bar-jacket.jpg.asset.json";
+import retroCrewFlatlay1 from "@/assets/retro-crew-flatlay-1.jpg.asset.json";
+import retroCrewFlatlay2 from "@/assets/retro-crew-flatlay-2.jpg.asset.json";
+import retroDuoRadio from "@/assets/retro-duo-radio.jpg.asset.json";
+import retroFleeceSki from "@/assets/retro-fleece-ski.jpg.asset.json";
+import retroFounders from "@/assets/retro-founders.jpg.asset.json";
+import retroHeroHatCanSky from "@/assets/retro-hero-hat-can-sky.jpg.asset.json";
+import retroMerchStack from "@/assets/retro-merch-stack.jpg.asset.json";
+import retroPeachHeadphones from "@/assets/retro-peach-headphones.jpg.asset.json";
+import retroPeachTrayCans from "@/assets/retro-peach-tray-cans.jpg.asset.json";
+import retroPeachUmbrella from "@/assets/retro-peach-umbrella.jpg.asset.json";
+import retroPourCanTiles from "@/assets/retro-pour-can-tiles.jpg.asset.json";
+import retroShopFridgeJacket from "@/assets/retro-shop-fridge-jacket.jpg.asset.json";
+import retroTablePeanuts from "@/assets/retro-table-peanuts.jpg.asset.json";
+import retroTravelCanTattoo from "@/assets/retro-travel-can-tattoo.jpg.asset.json";
+import retroTraySandwich from "@/assets/retro-tray-sandwich.jpg.asset.json";
 
 export const img = {
   hero: hero.url,
@@ -54,28 +77,28 @@ export const img = {
   toast: toast.url,
   press: press.url,
   towelCan: towelCan.url,
-  founders: founders.url,
+  founders: retroFounders.url,
   pool: pool.url,
-  "hero-hat-can-sky": towelCan.url,
-  "crew-flatlay-1": tray.url,
-  "crew-flatlay-2": toast.url,
-  "merch-stack": fleeceFlat.url,
-  "pour-can-tiles": pour.url,
-  "apple-telephone": crispyAppleCard.url,
-  "apple-headphones": applePool.url,
-  "peach-headphones": whitePeachCard.url,
-  "duo-radio": toast.url,
-  "peach-umbrella": peachGarnish.url,
-  "tray-sandwich": peachTable.url,
-  "apple-teal-glass": appleGarden.url,
-  "cheers-palms": toast.url,
-  "apple-green-fleece": appleGreen.url,
-  "apple-pour-garden": appleGarden.url,
-  "shop-fridge-jacket": jacket.url,
-  "travel-can-tattoo": canHand.url,
-  "table-peanuts": peachTable.url,
-  "fleece-ski": homeSnowChair.url,
-  "peach-tray-cans": tray.url,
-  "crew-bar-jacket": fleeceCouple.url,
+  "hero-hat-can-sky": retroHeroHatCanSky.url,
+  "crew-flatlay-1": retroCrewFlatlay1.url,
+  "crew-flatlay-2": retroCrewFlatlay2.url,
+  "merch-stack": retroMerchStack.url,
+  "pour-can-tiles": retroPourCanTiles.url,
+  "apple-telephone": retroAppleTelephone.url,
+  "apple-headphones": retroAppleHeadphones.url,
+  "peach-headphones": retroPeachHeadphones.url,
+  "duo-radio": retroDuoRadio.url,
+  "peach-umbrella": retroPeachUmbrella.url,
+  "tray-sandwich": retroTraySandwich.url,
+  "apple-teal-glass": retroAppleTealGlass.url,
+  "cheers-palms": retroCheersPalms.url,
+  "apple-green-fleece": retroAppleGreenFleece.url,
+  "apple-pour-garden": retroApplePourGarden.url,
+  "shop-fridge-jacket": retroShopFridgeJacket.url,
+  "travel-can-tattoo": retroTravelCanTattoo.url,
+  "table-peanuts": retroTablePeanuts.url,
+  "fleece-ski": retroFleeceSki.url,
+  "peach-tray-cans": retroPeachTrayCans.url,
+  "crew-bar-jacket": retroCrewBarJacket.url,
   logo,
 };
