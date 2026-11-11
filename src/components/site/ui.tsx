@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useRef, useState, type ReactNode, type ButtonHTMLAttributes, type InputHTMLAttributes } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronDown } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/data/products";
 import { observeOnce, prefersReducedMotion, usePauseOffscreen } from "@/lib/motion";
