@@ -139,6 +139,7 @@ export function ProductCard({ product }: { product: Product }) {
       >
         <img src={product.image} alt={alt(product.image, product.name)} loading="lazy" draggable={false} className="card-primary absolute inset-0 h-full w-full object-cover" />
         <img src={product.hoverImage} alt={alt(product.hoverImage, `${product.name} lifestyle`)} loading="lazy" draggable={false} className="card-alternate absolute inset-0 h-full w-full object-cover" />
+        <Link to="/shop/$slug" params={{ slug: product.slug }} aria-label={`Shop ${product.name}`} className="card-photo-link absolute inset-0 z-[1]" />
         {product.badge && <CardSticker text={product.badge} />}
         <div className="card-dots absolute inset-x-0 bottom-2 z-10 flex justify-center gap-1" aria-label="Product images">
           {[false, true].map((value, i) => (

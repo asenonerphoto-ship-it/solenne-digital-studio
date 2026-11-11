@@ -99,7 +99,7 @@ function ProductDetails({ p }: { p: Product }) {
               <div className="mt-8">
                 <div className="flex items-center justify-between">
                   <p className="eyebrow">Size</p>
-                  <button onClick={() => setSizeGuide(true)} className="text-sm underline">Size guide</Button>
+                  <Button variant="outline" onClick={() => setSizeGuide(true)} className="border-0 p-0 text-sm underline">Size guide</Button>
                 </div>
                 <div className="mt-3 flex gap-2">
                   {p.sizes.map((s) => (
@@ -150,14 +150,14 @@ function ProductDetails({ p }: { p: Product }) {
 
       {lightbox !== null && (
         <div className="lightbox-in fixed inset-0 z-50 grid place-items-center bg-navy/95 p-4" role="dialog" aria-modal="true" onClick={() => setLightbox(null)}>
-          <button className="absolute right-6 top-6 text-cream" aria-label="Close"><X className="h-8 w-8" /></button>
+          <Button variant="outline" className="absolute right-6 top-6 border-0 p-0 text-white" aria-label="Close"><X className="h-8 w-8" /></Button>
           <img src={p.images[lightbox]?.src} alt={p.images[lightbox]?.alt ?? ""} className="max-h-[85vh] max-w-full rounded-[var(--radius-card)]" />
         </div>
       )}
       {sizeGuide && (
         <div className="fixed inset-0 z-50 grid place-items-center bg-navy/80 p-4" role="dialog" aria-modal="true" aria-label="Size guide">
           <div className="w-full max-w-md rounded-[var(--radius-card)] bg-background p-8 text-navy">
-            <div className="flex items-center justify-between"><h2 className="text-3xl">Size guide</h2><button onClick={() => setSizeGuide(false)} aria-label="Close"><X /></button></div>
+            <div className="flex items-center justify-between"><h2 className="text-3xl">Size guide</h2><Button variant="outline" className="border-0 p-0" onClick={() => setSizeGuide(false)} aria-label="Close"><X /></Button></div>
             <table className="mt-6 w-full text-left">
               <thead><tr className="border-b"><th className="py-2">Size</th><th>Chest (cm)</th><th>Length (cm)</th></tr></thead>
               <tbody>{[["S", "104", "68"], ["M", "110", "70"], ["L", "116", "72"], ["XL", "122", "74"]].map((r) => <tr key={r[0]} className="border-b"><td className="py-2 font-semibold">{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td></tr>)}</tbody>
