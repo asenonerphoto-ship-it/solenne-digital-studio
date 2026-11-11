@@ -6,6 +6,9 @@ import { getProduct } from "@/data/products";
 import { FeatureCard, Reveal, StepTimeline, Words, btnClass } from "@/components/site/ui";
 import { LeadForm } from "@/components/site/LeadForm";
 
+import { Doodles } from "@/components/site/doodles";
+import { doodlePlacements } from "@/data/doodles";
+
 export const Route = createFileRoute("/b2b")({
   head: () => ({
     meta: [
@@ -15,14 +18,14 @@ export const Route = createFileRoute("/b2b")({
       { property: "og:description", content: "Solenne for your bar, restaurant & shop." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      ...(img.tray.startsWith("https://") ? [{ property: "og:image", content: img.tray }, { name: "twitter:image", content: img.tray }] : []),
+      ...(img["peach-tray-cans"].startsWith("https://") ? [{ property: "og:image", content: img["peach-tray-cans"] }, { name: "twitter:image", content: img["peach-tray-cans"] }] : []),
     ],
   }),
   component: B2B,
 });
 
 const useCases = [
-  { title: "Bars & Clubs", src: img.tray },
+  { title: "Bars & Clubs", src: img["peach-tray-cans"] },
   { title: "Restaurants", src: img.peachTable },
   { title: "Hotels & Après-Ski", src: img.fleeceCouple },
   { title: "Retail", src: img.appleApples },
@@ -31,16 +34,17 @@ const useCases = [
 
 function B2B() {
   return (
-    <>
-      <section className="relative overflow-hidden bg-yellow text-cream">
-        <img src={img.tray} alt="Moody bar scene with Solenne cans on a tray" className="absolute inset-0 h-full w-full object-cover opacity-40" />
+    <div className="retro-page">
+      <section className="relative overflow-hidden slant-bottom bg-yellow text-navy">
+        <img src={img["peach-tray-cans"]} alt="Moody bar scene with Solenne cans on a tray" className="absolute inset-0 h-full w-full object-cover opacity-40" />
         <div className="relative mx-auto max-w-[1920px] px-5 py-28 md:px-10 md:py-40">
           <Words as="h1" className="display-xl max-w-5xl" text="Solenne for your bar, restaurant & shop" />
-          <a href="#inquiry" className={btnClass("cream", "mt-10")}>Request wholesale info</a>
+          <a href="#inquiry" className={btnClass("yellow", "mt-10")}>Request wholesale info</a>
         </div>
+        <Doodles items={doodlePlacements.b2b} />
       </section>
 
-      <section className="bg-yellow px-5 py-16 text-cream md:px-10 md:py-24">
+      <section className="slant-bottom bg-yellow px-5 py-16 text-navy md:px-10 md:py-24">
         <div className="mx-auto max-w-[1920px]">
           <h2 className="display-md mb-10">Why Solenne?</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -56,12 +60,13 @@ function B2B() {
         <h2 className="display-md mb-10">Assortment</h2>
         <div className="grid gap-8 md:grid-cols-2">
           {["crispy-apple", "white-peach"].map((s) => {
-            const p = getProduct(s)!;
+            const p = getProduct(s);
+            if (!p) return null;
             return (
-              <div key={s} className={`flex gap-6 rounded-[var(--radius-card)] border-[3px] p-5 ${s === "crispy-apple" ? "border-yellow" : "border-yellow"}`}>
+              <div key={s} className={`flex flex-col gap-6 rounded-lg bg-yellow p-5 text-navy sm:flex-row `}>
                 <img src={p.images[0].src} alt={p.images[0].alt} className="h-36 w-36 shrink-0 rounded-2xl object-cover md:h-44 md:w-44" />
                 <div>
-                  <h3 className={`text-3xl ${s === "crispy-apple" ? "text-navy" : "text-yellow"}`}>{p.name}</h3>
+                  <h3 className={`text-3xl text-navy`}>{p.name}</h3>
                   <p className="mt-3">Case: 24 × 330 ml cans</p>
                   <p>Minimum order: 5 cases</p>
                   <p className="mt-2 text-xs opacity-70">PLACEHOLDER — to be confirmed.</p>
@@ -76,7 +81,7 @@ function B2B() {
         {useCases.map((u, i) => (
           <Reveal key={u.title} delay={i * 60} className="relative overflow-hidden rounded-[var(--radius-card)]">
             <img src={u.src} alt={u.title} loading="lazy" className="aspect-[3/4] w-full object-cover" />
-            <p className="absolute inset-x-0 bottom-0 bg-yellow/80 p-4 font-display text-lg font-bold uppercase text-cream">{u.title}</p>
+            <p className="absolute inset-x-0 bottom-0 bg-navy p-4 font-display text-lg font-bold uppercase text-cream">{u.title}</p>
           </Reveal>
         ))}
       </section>
@@ -92,7 +97,7 @@ function B2B() {
         </div>
       </section>
 
-      <section id="inquiry" className="scroll-mt-28 bg-yellow px-5 py-16 text-cream md:py-24">
+      <section id="inquiry" className="scroll-mt-28 slant-bottom bg-yellow px-5 py-16 text-navy md:py-24">
         <div className="mx-auto max-w-3xl">
           <h2 className="display-md mb-10">Let's talk</h2>
           <LeadForm
@@ -114,6 +119,6 @@ function B2B() {
           />
         </div>
       </section>
-    </>
+    </div>
   );
 }

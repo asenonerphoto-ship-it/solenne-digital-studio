@@ -5,6 +5,10 @@ import { crewSteps } from "@/data/content";
 import { FeatureCard, Reveal, StepTimeline, Words, btnClass } from "@/components/site/ui";
 import { LeadForm } from "@/components/site/LeadForm";
 import { cn } from "@/lib/utils";
+import { PhotoHero, PhotoBand } from "@/components/site/Retro";
+import { Doodles } from "@/components/site/doodles";
+import { doodlePlacements } from "@/data/doodles";
+import { retroCopy } from "@/data/retro";
 
 export const Route = createFileRoute("/crew")({
   head: () => ({
@@ -15,7 +19,7 @@ export const Route = createFileRoute("/crew")({
       { property: "og:description", content: "Our community of friends who bring Solenne everywhere." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      ...(img.tray.startsWith("https://") ? [{ property: "og:image", content: img.tray }, { name: "twitter:image", content: img.tray }] : []),
+      ...(img["crew-bar-jacket"].startsWith("https://") ? [{ property: "og:image", content: img["crew-bar-jacket"] }, { name: "twitter:image", content: img["crew-bar-jacket"] }] : []),
     ],
   }),
   component: Crew,
@@ -23,30 +27,27 @@ export const Route = createFileRoute("/crew")({
 
 function Crew() {
   return (
-    <>
-      <section className="grid bg-yellow text-cream md:grid-cols-2">
-        <img src={img.tray} alt="Friends serving a tray of Solenne cans at a party" className="h-[420px] w-full object-cover md:h-full md:min-h-[700px]" />
-        <div className="flex flex-col items-end justify-center px-6 py-16 text-right md:px-16 lg:px-24">
-          <Words as="h1" className="display-xl" text="Join|the|crew!" />
-          <p className="mt-8 max-w-md text-lg">The Crew is our community of friends who bring Solenne to bars, parties, mountains and festivals.</p>
-          <a href="#apply" className={btnClass("cream", "mt-8")}>Apply now</a>
-        </div>
-      </section>
+    <div className="retro-page crew-page">
+      <PhotoHero src={img["crew-bar-jacket"]} alt="Friends wearing Solenne jackets" title="The crew">
+        <p className="mt-6 max-w-md bg-navy px-4 py-3 text-white">{retroCopy.crew}</p>
+        <a href="#apply" className={btnClass("yellow", "mt-6")}>Apply now</a>
+      </PhotoHero>
 
       <section className="mx-auto grid max-w-[1920px] gap-8 px-5 py-16 md:grid-cols-2 md:px-10 md:py-24">
-        <Reveal className="h-full rounded-[var(--radius-card)] bg-yellow p-10 text-cream md:p-14">
+        <Reveal className="h-full bg-yellow p-8 text-navy md:p-14">
           <p className="eyebrow">Track 01</p>
           <h2 className="display-lg mt-3">Sellers</h2>
           <p className="mt-6 text-lg">Sell Solenne to your friends, bars and shops — and earn 20% commission on every order.</p>
         </Reveal>
-        <Reveal delay={100} className="h-full rounded-[var(--radius-card)] bg-yellow p-10 text-navy md:p-14">
+        <Reveal delay={100} className="h-full bg-navy p-8 text-yellow md:p-14">
           <p className="eyebrow">Track 02</p>
           <h2 className="display-lg mt-3">Faces</h2>
           <p className="mt-6 text-lg">Be part of our look. No posting obligations, just good vibes.</p>
         </Reveal>
+        <Doodles items={doodlePlacements.crewTracks} />
       </section>
 
-      <section className="bg-yellow px-5 py-16 text-cream md:px-10 md:py-24">
+      <section className="bg-yellow px-5 py-16 text-navy md:px-10 md:py-24">
         <div className="mx-auto max-w-[1920px]">
           <h2 className="display-md mb-10">Crew benefits</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -66,7 +67,7 @@ function Crew() {
         ))}
       </section>
 
-      <section id="apply" className="scroll-mt-28 bg-yellow px-5 py-16 text-cream md:py-24">
+      <section id="apply" className="scroll-mt-28 bg-cream px-5 py-16 text-navy md:py-24">
         <div className="mx-auto max-w-3xl">
           <h2 className="display-md mb-10">Apply to the crew</h2>
           <LeadForm
@@ -85,6 +86,9 @@ function Crew() {
           />
         </div>
       </section>
-    </>
+      <PhotoBand src={img["crew-flatlay-2"]} alt="Friends toasting with Solenne" doodles={doodlePlacements.crewEnd} className="crew-final">
+        <div className="relative z-10 px-5 py-20 md:px-10"><Words className="display-xl text-white" text="The crew" /><span className="mt-8 inline-block -rotate-6 bg-yellow px-6 py-3 font-display text-4xl text-navy">Solenne</span></div>
+      </PhotoBand>
+    </div>
   );
 }
