@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useRef, useState, type ReactNode, type ButtonHTMLAttributes, type InputHTMLAttributes } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronDown } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/data/products";
 import { observeOnce, prefersReducedMotion, usePauseOffscreen } from "@/lib/motion";
@@ -157,9 +157,30 @@ export function ProductCard({ product }: { product: Product }) {
   );
 }
 
-/* ---------- Slider: native snap + mouse drag with momentum + fading edges ---------- */
+/* ---------- Slider: native snap + mouse drag with momentum + mobile arrows ---------- */
 export function Slider({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
+  const [canGoBack, setCanGoBack] = useState(false);
+  const [canGoForward, setCanGoForward] = useState(true);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const updateArrows = () => {
+      setCanGoBack(el.scrollLeft > 4);
+      setCanGoForward(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
+    };
+    updateArrows();
+    el.addEventListener("scroll", updateArrows, { passive: true });
+    window.addEventListener("resize", updateArrows);
+    return () => { el.removeEventListener("scroll", updateArrows); window.removeEventListener("resize", updateArrows); };
+  }, []);
+  const move = (direction: -1 | 1) => {
+    const el = ref.current;
+    const slide = el?.firstElementChild as HTMLElement | null;
+    if (!el || !slide) return;
+    const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
+    el.scrollBy({ left: direction * (slide.offsetWidth + gap), behavior: prefersReducedMotion() ? "auto" : "smooth" });
+  };
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -200,8 +221,18 @@ export function Slider({ children }: { children: ReactNode }) {
     return () => { cancelAnimationFrame(raf); el.removeEventListener("pointerdown", onDown); window.removeEventListener("pointermove", onMove); window.removeEventListener("pointerup", onUp); el.removeEventListener("click", blockClick, true); };
   }, []);
   return (
-    <div ref={ref} className="slider-fade no-scrollbar -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-6 md:-mx-10 md:gap-8 md:px-10">
-      {children}
+    <div>
+      <div ref={ref} className="slider-fade no-scrollbar -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-6 md:-mx-10 md:gap-8 md:px-10">
+        {children}
+      </div>
+      <div className="flex justify-center gap-3 pb-2 md:hidden" aria-label="Browse products">
+        <Button variant="outline" type="button" aria-label="Previous product" disabled={!canGoBack} onClick={() => move(-1)} className="h-12 w-12 border-2 p-0">
+          <ArrowLeft className="h-6 w-6" aria-hidden />
+        </Button>
+        <Button variant="outline" type="button" aria-label="Next product" disabled={!canGoForward} onClick={() => move(1)} className="h-12 w-12 border-2 p-0">
+          <ArrowRight className="h-6 w-6" aria-hidden />
+        </Button>
+      </div>
     </div>
   );
 }
