@@ -16,7 +16,7 @@ export const Route = createFileRoute("/shop/")({
 function Shop() {
  return <>
  <PhotoHero src={img["shop-fridge-jacket"]} alt="Solenne navy crewneck" title="Shop" label="Life is good!" />
- {(["cider", "merch"] as const).map(category => <section key={category} className="relative bg-cream">
+ {(["cider", "merch"] as const).map(category => <section key={category} className={category === "merch" ? "relative bg-cream pb-12 md:pb-20" : "relative bg-cream"}>
  <SectionLabel>{category === "cider" ? "Our drinks" : "The merch"}</SectionLabel>
  <Doodles items={category === "cider" ? doodlePlacements.collection : doodlePlacements.merch} />
  <div className={category === "cider" ? "collection-band bg-yellow" : "collection-band bg-navy"}>

@@ -32,7 +32,7 @@ function Home() {
  </Reveal></div><Doodles items={doodlePlacements.homeHello} />
  </section>
  <PhotoBand src={img["crew-flatlay-1"]} alt="Solenne crew clothing, hats and accessories laid out together" />
- <section className="relative bg-cream"><SectionLabel>Our collection</SectionLabel><Doodles items={doodlePlacements.collection} />
+ <section className="relative bg-cream pb-12 md:pb-20"><SectionLabel>Our collection</SectionLabel><Doodles items={doodlePlacements.collection} />
  <div className="collection-band bg-yellow"><Slider>{products.filter(p => p.category === "cider").map(p => <div key={p.slug} className={slideClass}><ProductCard product={p} /></div>)}</Slider></div></section>
  <section className="slant-bottom grid bg-yellow text-navy md:grid-cols-2">
  <div className="flex flex-col items-end justify-center px-6 py-16 text-right md:px-14 md:py-24"><Reveal className="flex flex-col items-end">
