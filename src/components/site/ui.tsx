@@ -221,8 +221,18 @@ export function Slider({ children }: { children: ReactNode }) {
     return () => { cancelAnimationFrame(raf); el.removeEventListener("pointerdown", onDown); window.removeEventListener("pointermove", onMove); window.removeEventListener("pointerup", onUp); el.removeEventListener("click", blockClick, true); };
   }, []);
   return (
-    <div ref={ref} className="slider-fade no-scrollbar -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-6 md:-mx-10 md:gap-8 md:px-10">
-      {children}
+    <div>
+      <div ref={ref} className="slider-fade no-scrollbar -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-6 md:-mx-10 md:gap-8 md:px-10">
+        {children}
+      </div>
+      <div className="flex justify-center gap-3 pb-2 md:hidden" aria-label="Browse products">
+        <Button variant="outline" type="button" aria-label="Previous product" disabled={!canGoBack} onClick={() => move(-1)} className="h-12 w-12 border-2 p-0">
+          <ArrowLeft className="h-6 w-6" aria-hidden />
+        </Button>
+        <Button variant="outline" type="button" aria-label="Next product" disabled={!canGoForward} onClick={() => move(1)} className="h-12 w-12 border-2 p-0">
+          <ArrowRight className="h-6 w-6" aria-hidden />
+        </Button>
+      </div>
     </div>
   );
 }
