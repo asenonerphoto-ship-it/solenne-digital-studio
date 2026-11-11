@@ -110,8 +110,9 @@
 }
 
 @layer base {
-  * {
+  *, *::before, *::after {
     border-color: var(--color-border);
+    border-radius: 0 !important;
   }
   html {
     scroll-behavior: smooth;
