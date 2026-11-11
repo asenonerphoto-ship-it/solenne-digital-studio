@@ -157,9 +157,30 @@ export function ProductCard({ product }: { product: Product }) {
   );
 }
 
-/* ---------- Slider: native snap + mouse drag with momentum + fading edges ---------- */
+/* ---------- Slider: native snap + mouse drag with momentum + mobile arrows ---------- */
 export function Slider({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
+  const [canGoBack, setCanGoBack] = useState(false);
+  const [canGoForward, setCanGoForward] = useState(true);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const updateArrows = () => {
+      setCanGoBack(el.scrollLeft > 4);
+      setCanGoForward(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
+    };
+    updateArrows();
+    el.addEventListener("scroll", updateArrows, { passive: true });
+    window.addEventListener("resize", updateArrows);
+    return () => { el.removeEventListener("scroll", updateArrows); window.removeEventListener("resize", updateArrows); };
+  }, []);
+  const move = (direction: -1 | 1) => {
+    const el = ref.current;
+    const slide = el?.firstElementChild as HTMLElement | null;
+    if (!el || !slide) return;
+    const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
+    el.scrollBy({ left: direction * (slide.offsetWidth + gap), behavior: prefersReducedMotion() ? "auto" : "smooth" });
+  };
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
