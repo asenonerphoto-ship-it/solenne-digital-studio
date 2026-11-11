@@ -1,4 +1,8 @@
-# Solenne update
+# Solenne retro restyle
+- [x] Replace global palette, navigation, footer and age-gate presentation.
+- [x] Create reusable doodles, photo treatments and centralized named photo slots.
+- [x] Restyle Home, Shop, products, Story, Crew, How It's Made, B2B and information pages.
+- [x] Verify all routes, cards, forms, selectors, placeholders and reduced motion at 375/768/1280px.
 - [x] Redesign global product cards and touch image controls.
 - [x] Apply Archivo Black to headings without changing body typography.
 - [x] Replace product purchase UI and local cart with placeholder-safe Shopify SDK integration.

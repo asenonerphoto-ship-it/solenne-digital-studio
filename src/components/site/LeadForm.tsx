@@ -1,5 +1,5 @@
 import { useState, type FormEvent, type ReactNode } from "react";
-import { FormField, btnClass } from "./ui";
+import { FormField, Button } from "./ui";
 import { isEmail, submitForm } from "@/lib/forms";
 import { Check } from "lucide-react";
 
@@ -35,7 +35,7 @@ export function LeadForm({ kind, fields, consent, submitLabel, success }: { kind
     await submitForm(kind, data);
     setState("done");
   };
-  if (state === "done") return <div className="rounded-[var(--radius-card)] bg-cream p-8 text-navy" role="status"><span className="check-burst mb-4 h-12 w-12 rounded-full bg-forest text-cream"><Check className="check-draw h-6 w-6" /></span>{success}</div>;
+  if (state === "done") return <div className="rounded-[var(--radius-card)] bg-cream p-8 text-navy" role="status"><span className="check-burst mb-4 h-12 w-12 rounded-full bg-yellow text-cream"><Check className="check-draw h-6 w-6" /></span>{success}</div>;
   return (
     <form onSubmit={onSubmit} noValidate className="grid gap-5 md:grid-cols-2">
       {fields.map((f) => (
@@ -43,12 +43,12 @@ export function LeadForm({ kind, fields, consent, submitLabel, success }: { kind
       ))}
       <div className="md:col-span-2">
         <label className="flex items-start gap-3 text-sm">
-          <input type="checkbox" name="consent" className="mt-1 h-5 w-5 accent-peach" />
+          <input type="checkbox" name="consent" className="mt-1 h-5 w-5 accent-yellow" />
           <span>{consent}</span>
         </label>
         {errors["consent"] && <p className="mt-1.5 text-sm font-semibold text-destructive" role="alert">{errors["consent"]}</p>}
       </div>
-      <button className={btnClass("cream", "md:col-span-2 md:justify-self-start")} disabled={state === "sending"}>{state === "sending" ? "Sending…" : submitLabel}</button>
+      <Button variant="navy" className="md:col-span-2 md:justify-self-start" disabled={state === "sending"}>{state === "sending" ? "Sending…" : submitLabel}</Button>
     </form>
   );
 }

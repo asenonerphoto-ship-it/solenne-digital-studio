@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Check, Gift, Leaf, MapPin, X } from "lucide-react";
-import { getProduct, products, themeClasses, type Product } from "@/data/products";
+import { getProduct, products, type Product } from "@/data/products";
 import { img } from "@/lib/images";
 import { ShopifyBuyButton } from "@/components/site/ShopifyBuyButton";
 import { DEFAULT_PACK_SIZE, PACK_SIZES, getShopifySelection, type PackSize } from "@/config/shopify";
-import { Accordion, Button, ProductCard, QuoteBlock, Reveal, WaveDivider, btnClass } from "@/components/site/ui";
+import { Accordion, Button, ProductCard, Reveal, btnClass } from "@/components/site/ui";
 import { cn } from "@/lib/utils";
+import { Doodles } from "@/components/site/doodles";
+import { doodlePlacements } from "@/data/doodles";
+import { SectionLabel } from "@/components/site/Retro";
 
 export const Route = createFileRoute("/shop/$slug")({
   loader: ({ params }) => {
@@ -40,7 +43,6 @@ function ProductPage() {
 }
 
 function ProductDetails({ p }: { p: Product }) {
-  const t = themeClasses[p.theme];
   const isCider = p.category === "cider";
   const [packSize, setPackSize] = useState<PackSize>(DEFAULT_PACK_SIZE);
   const [size, setSize] = useState(p.sizes?.[0] ?? "");
@@ -49,34 +51,33 @@ function ProductDetails({ p }: { p: Product }) {
   const selection = getShopifySelection(p.slug, isCider ? packSize : size);
 
   const related = products.filter((x) => x.slug !== p.slug && x.category === p.category).slice(0, 3);
-  const onLight = p.theme === "peach";
 
   return (
     <div key={p.slug}>
-      <section className={cn(t.page, "pb-16 md:pb-24")}>
+      <section className="bg-cream pb-16 text-navy md:pb-24">
         <div className="mx-auto grid max-w-[1920px] gap-10 px-5 pt-10 md:px-10 md:pt-16 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
           {/* Gallery */}
-          <div className="grid grid-cols-3 gap-3">
-            <button onClick={() => setLightbox(0)} className="col-span-3 overflow-hidden rounded-[var(--radius-card)]">
+          <div className="product-gallery grid gap-3">
+            <Button variant="outline" onClick={() => setLightbox(0)} aria-label={`Enlarge ${p.name} photo 1`} className="overflow-hidden rounded-xl border-0 p-0">
               <img key={p.slug} src={p.images[0].src} alt={p.images[0].alt} className="fade-swap aspect-square w-full object-cover transition-transform duration-700 hover:scale-105" />
-            </button>
+            </Button>
             {p.images.slice(1).map((im, i) => (
-              <button key={im.src + i} onClick={() => setLightbox(i + 1)} className="overflow-hidden rounded-2xl">
+              <Button variant="outline" key={im.src + i} onClick={() => setLightbox(i + 1)} aria-label={`Enlarge ${p.name} photo ${i + 2}`} className="overflow-hidden rounded-xl border-0 p-0">
                 <img src={im.src} alt={im.alt} loading="lazy" className="aspect-square w-full object-cover transition-transform duration-500 hover:scale-105" />
-              </button>
+              </Button>
             ))}
           </div>
 
           {/* Details */}
           <div className="lg:sticky lg:top-32 lg:self-start">
             <p className="eyebrow opacity-80">{isCider ? "Original Hard Cider · 330 ml · 5.1%" : "Solenne Merch"}</p>
-            <h1 className="display-lg mt-3">{p.name}</h1>
+            <h1 className="product-title display-lg mt-3">{p.name}</h1>
             <p className="mt-5 text-lg md:text-xl">{p.description}</p>
 
             {isCider && (
-              <div className="mt-8 grid grid-cols-2 gap-2 rounded-full bg-forest/30 p-1">
-                <Link to="/shop/$slug" params={{ slug: "crispy-apple" }} className={cn("rounded-full py-2.5 text-center text-sm font-semibold", p.pack === "single" ? "bg-cream text-navy" : "")}>Single Flavors</Link>
-                <Link to="/shop/$slug" params={{ slug: "mixed-pack" }} className={cn("rounded-full py-2.5 text-center text-sm font-semibold", p.pack === "variety" ? "bg-cream text-navy" : "")}>Variety Packs</Link>
+              <div className="mt-8 grid grid-cols-2 gap-3">
+                <Link to="/shop/$slug" params={{ slug: "crispy-apple" }} className={cn("rounded-lg border-2 border-navy py-2.5 text-center font-display text-xs uppercase", p.pack === "single" ? "bg-yellow text-navy" : "")}>Single Flavors</Link>
+                <Link to="/shop/$slug" params={{ slug: "mixed-pack" }} className={cn("rounded-lg border-2 border-navy py-2.5 text-center font-display text-xs uppercase", p.pack === "variety" ? "bg-yellow text-navy" : "")}>Variety Packs</Link>
               </div>
             )}
             {isCider && p.pack === "single" && (
@@ -85,7 +86,7 @@ function ProductDetails({ p }: { p: Product }) {
                   const x = getProduct(s);
                   if (!x) return null;
                   return (
-                    <Link key={s} to="/shop/$slug" params={{ slug: s }} className={cn("overflow-hidden rounded-xl border-2 text-center text-xs font-semibold", s === p.slug ? "border-cream" : "border-transparent opacity-70")}>
+                    <Link key={s} to="/shop/$slug" params={{ slug: s }} className={cn("overflow-hidden rounded-xl border-2 text-center text-xs font-semibold", s === p.slug ? "border-navy" : "border-transparent opacity-70")}>
                       <img src={x.images[0].src} alt="" className="h-16 w-20 object-cover" />
                       <span className="block bg-background py-1 text-navy">{x.name}</span>
                     </Link>
@@ -98,11 +99,11 @@ function ProductDetails({ p }: { p: Product }) {
               <div className="mt-8">
                 <div className="flex items-center justify-between">
                   <p className="eyebrow">Size</p>
-                  <button onClick={() => setSizeGuide(true)} className="text-sm underline">Size guide</button>
+                  <Button variant="outline" onClick={() => setSizeGuide(true)} className="border-0 p-0 text-sm underline">Size guide</Button>
                 </div>
                 <div className="mt-3 flex gap-2">
                   {p.sizes.map((s) => (
-                    <Button variant="outline" key={s} onClick={() => setSize(s)} aria-pressed={size === s} className={cn("select-pop h-12 w-14 p-0 border-current", size === s && "bg-cream text-navy border-cream")}>{s}</Button>
+                    <Button variant="outline" key={s} onClick={() => setSize(s)} aria-pressed={size === s} className={cn("select-pop h-12 w-14 p-0 border-current", size === s && "bg-yellow text-navy border-navy")}>{s}</Button>
                   ))}
                 </div>
               </div>
@@ -113,7 +114,7 @@ function ProductDetails({ p }: { p: Product }) {
                 <legend className="eyebrow">Pack size</legend>
                 <div className="mt-3 grid grid-cols-2 gap-3">
                   {PACK_SIZES.map((pack) => (
-                    <Button key={pack} variant="outline" aria-pressed={packSize === pack} onClick={() => setPackSize(pack)} className={cn("select-pop relative flex h-24 flex-col gap-1 rounded-2xl border-current/30 px-3 py-4 normal-case tracking-normal", packSize === pack && "border-cream bg-cream text-navy")}>
+                    <Button key={pack} variant="outline" aria-pressed={packSize === pack} onClick={() => setPackSize(pack)} className={cn("select-pop relative flex h-24 flex-col gap-1 rounded-2xl border-current/30 px-3 py-4 normal-case tracking-normal", packSize === pack && "border-navy bg-yellow text-navy")}>
                       <span className="text-lg font-semibold">{pack} cans</span>
                       {pack === 24 && <span className="text-xs font-light">Best value</span>}
                       {packSize === pack && <Check className="check-draw absolute right-3 top-3 h-4 w-4 opacity-60" aria-hidden />}
@@ -123,7 +124,7 @@ function ProductDetails({ p }: { p: Product }) {
               </fieldset>
             )}
             <div className="mt-5">
-              <ShopifyBuyButton productId={selection.productId} variantId={selection.variantId} tone={onLight ? "orange" : "cream"} />
+              <ShopifyBuyButton productId={selection.productId} variantId={selection.variantId} tone="yellow" />
             </div>
             <div className="mt-3 flex flex-wrap gap-3">
               <Link to="/contact" className={btnClass("white", "py-2.5 normal-case")}><MapPin className="h-4 w-4" /> Find me in store</Link>
@@ -135,26 +136,28 @@ function ProductDetails({ p }: { p: Product }) {
         </div>
       </section>
 
-      <WaveDivider top={p.theme === "apple" ? "fill-apple" : p.theme === "peach" ? "fill-peach" : p.theme === "navy" ? "fill-navy" : "fill-forest"} className="bg-forest" />
-      {isCider ? <CiderSections p={p} /> : <MerchSections p={p} />}
+      <div className="product-info-band relative overflow-hidden">
+        <Doodles items={doodlePlacements.product} />
+        {isCider ? <CiderSections p={p} /> : <MerchSections p={p} />}
+      </div>
 
-      <section className="mx-auto max-w-[1920px] px-5 py-16 md:px-10 md:py-24">
-        <h2 className="display-md mb-10">You might also like</h2>
+      <section className={cn("collection-band", isCider ? "bg-yellow text-navy" : "bg-navy text-white")}>
+        <SectionLabel>You might also like</SectionLabel>
         <div className="grid grid-cols-1 gap-5 min-[480px]:grid-cols-2 md:gap-6 lg:grid-cols-3">
           {related.map((r) => <ProductCard key={r.slug} product={r} />)}
         </div>
       </section>
 
       {lightbox !== null && (
-        <div className="lightbox-in fixed inset-0 z-50 grid place-items-center bg-forest/95 p-4" role="dialog" aria-modal="true" onClick={() => setLightbox(null)}>
-          <button className="absolute right-6 top-6 text-cream" aria-label="Close"><X className="h-8 w-8" /></button>
+        <div className="lightbox-in fixed inset-0 z-50 grid place-items-center bg-navy/95 p-4" role="dialog" aria-modal="true" onClick={() => setLightbox(null)}>
+          <Button variant="outline" className="absolute right-6 top-6 border-0 p-0 text-white" aria-label="Close"><X className="h-8 w-8" /></Button>
           <img src={p.images[lightbox]?.src} alt={p.images[lightbox]?.alt ?? ""} className="max-h-[85vh] max-w-full rounded-[var(--radius-card)]" />
         </div>
       )}
       {sizeGuide && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-forest/80 p-4" role="dialog" aria-modal="true" aria-label="Size guide">
+        <div className="fixed inset-0 z-50 grid place-items-center bg-navy/80 p-4" role="dialog" aria-modal="true" aria-label="Size guide">
           <div className="w-full max-w-md rounded-[var(--radius-card)] bg-background p-8 text-navy">
-            <div className="flex items-center justify-between"><h2 className="text-3xl">Size guide</h2><button onClick={() => setSizeGuide(false)} aria-label="Close"><X /></button></div>
+            <div className="flex items-center justify-between"><h2 className="text-3xl">Size guide</h2><Button variant="outline" className="border-0 p-0" onClick={() => setSizeGuide(false)} aria-label="Close"><X /></Button></div>
             <table className="mt-6 w-full text-left">
               <thead><tr className="border-b"><th className="py-2">Size</th><th>Chest (cm)</th><th>Length (cm)</th></tr></thead>
               <tbody>{[["S", "104", "68"], ["M", "110", "70"], ["L", "116", "72"], ["XL", "122", "74"]].map((r) => <tr key={r[0]} className="border-b"><td className="py-2 font-semibold">{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td></tr>)}</tbody>
@@ -171,7 +174,7 @@ function Bar({ label, value }: { label: string; value: number }) {
   return (
     <div>
       <div className="flex justify-between eyebrow"><span>{label}</span><span>{value}%</span></div>
-      <div className="mt-2 h-3 rounded-full bg-cream/20"><div className="h-3 rounded-full bg-cream" style={{ width: `${value}%` }} /></div>
+      <div className="mt-2 h-3 rounded-full bg-navy/20"><div className="h-3 rounded-full bg-navy" style={{ width: `${value}%` }} /></div>
     </div>
   );
 }
@@ -179,7 +182,7 @@ function Bar({ label, value }: { label: string; value: number }) {
 function CiderSections({ p }: { p: Product }) {
   return (
     <>
-      <section className="bg-forest text-cream">
+      <section className="bg-yellow text-navy">
         <div className="mx-auto grid max-w-[1920px] gap-12 px-5 py-16 md:grid-cols-2 md:px-10 md:py-24">
           <Reveal>
             <h2 className="display-md">About this cider</h2>
@@ -193,7 +196,7 @@ function CiderSections({ p }: { p: Product }) {
         </div>
         <div className="mx-auto grid max-w-[1920px] grid-cols-2 gap-4 px-5 pb-16 md:grid-cols-4 md:px-10">
           {["5.1% ABV", "330 ml", "Made in South Tyrol", "Gluten-free *"].map((f) => (
-            <div key={f} className="rounded-[var(--radius-card)] border-2 border-cream p-6 text-center font-display text-xl font-bold uppercase md:text-2xl">{f}</div>
+            <div key={f} className="rounded-[var(--radius-card)] border-2 border-navy p-6 text-center font-display text-xl font-bold uppercase md:text-2xl">{f}</div>
           ))}
         </div>
         <p className="px-5 pb-12 text-center text-xs opacity-70">* To be confirmed.</p>
@@ -235,18 +238,12 @@ function CiderSections({ p }: { p: Product }) {
       </section>
 
       <section className="no-scrollbar flex gap-4 overflow-x-auto px-5 pb-16 md:grid md:grid-cols-4 md:px-10">
-        {[img.toast, img.tray, img.pool, img.peachTable].map((s, i) => (
+        {[img["cheers-palms"], img["peach-tray-cans"], img.pool, img["table-peanuts"]].map((s, i) => (
           <img key={s} src={s} alt="Solenne lifestyle moment" loading="lazy" className={cn("aspect-square w-64 shrink-0 rounded-[var(--radius-card)] object-cover md:w-full", i % 2 ? "rotate-2" : "-rotate-2")} />
         ))}
       </section>
 
-      <section className="relative overflow-hidden text-cream">
-        <img src={img.press} alt="" className="absolute inset-0 h-full w-full object-cover" />
-        <div className="relative px-5 py-24 md:py-32">
-          <p className="eyebrow mb-6 text-center">Pop in the Press</p>
-          <QuoteBlock quote="Press quote placeholder — your first review goes here." source="Publication name (placeholder)" />
-        </div>
-      </section>
+
 
     </>
   );
@@ -254,7 +251,7 @@ function CiderSections({ p }: { p: Product }) {
 
 function MerchSections({ p }: { p: Product }) {
   return (
-    <section className="bg-forest text-cream">
+    <section className="bg-yellow text-navy">
       <div className="mx-auto grid max-w-[1920px] gap-12 px-5 py-16 md:grid-cols-2 md:px-10 md:py-24">
         <Accordion
           items={[
