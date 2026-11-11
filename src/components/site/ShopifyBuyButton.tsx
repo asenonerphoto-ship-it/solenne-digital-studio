@@ -32,7 +32,7 @@ export function ShopifyBuyButton({ productId, variantId, tone = "yellow" }: { pr
         options: {
           product: {
             iframe: false,
-            contents: { img: false, imgWithCarousel: false, title: false, variantTitle: false, price: false, description: false, options: false, quantity: false, button: true, buttonWithQuantity: false },
+            contents: { img: false, imgWithCarousel: false, title: false, variantTitle: false, price: false, description: false, options: false, quantity: true, button: false, buttonWithQuantity: true },
             text: { button: "ADD TO CART" },
             buttonDestination: "cart",
             styles: { product: { width: "100%", "max-width": "none", margin: "0" }, button: { "border-radius": "999px", "background-color": theme.yellow, color: theme.navy, "font-family": theme.displayFont } },
@@ -49,7 +49,7 @@ export function ShopifyBuyButton({ productId, variantId, tone = "yellow" }: { pr
   return (
     <div className={`shopify-buy-button shopify-buy-button-${tone}`}>
       <div ref={node} hidden={status !== "ready" || !configured} />
-      {(status !== "ready" || !configured) && <Button variant="yellow" className="w-full shadow-none" disabled>{configured && status === "loading" ? "Loading…" : "Coming soon"}</Button>}
+      {(status !== "ready" || !configured) && <div className="flex gap-3"><label className="sr-only" htmlFor="purchase-quantity">Quantity</label><input id="purchase-quantity" type="number" min="1" defaultValue="1" className="w-20 rounded-lg border-2 border-navy bg-cream px-3 text-navy" /><Button variant="yellow" className="w-full rounded-full shadow-none" disabled>{configured && status === "loading" ? "Loading…" : "Coming soon"}</Button></div>}
     </div>
   );
 }

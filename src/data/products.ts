@@ -33,8 +33,8 @@ export const products: Product[] = [
     slug: "crispy-apple",
     badge: "TOP SELLER",
     taglines: ["Fresh-pressed apple bite", "Sweet, sparkling, easy to love", "Made in South Tyrol"],
-    image: img.crispyAppleCard,
-    hoverImage: img.toast,
+    image: img["apple-telephone"],
+    hoverImage: img["cheers-palms"],
     name: "Crispy Apple",
     category: "cider",
     pack: "single",
@@ -45,23 +45,23 @@ export const products: Product[] = [
     description:
       "Crisp, bright and made with apples from South Tyrol. Fruity and sparkly with a touch of style — the one you open first.",
     images: [
-      { src: img.applePool, alt: "Crispy Apple can next to a glass of cider over ice by the pool" },
-      { src: img.toast, alt: "Friends toasting with Solenne cans under palm leaves" },
-      { src: img.appleGreen, alt: "Hand in a green sweater holding a Crispy Apple can" },
-      { src: img.appleGarden, alt: "Crispy Apple being poured into a glass with an apple slice" },
+      { src: img["apple-headphones"], alt: "Crispy Apple can next to a glass of cider over ice by the pool" },
+      { src: img["cheers-palms"], alt: "Friends toasting with Solenne cans under palm leaves" },
+      { src: img["apple-green-fleece"], alt: "Hand in a green sweater holding a Crispy Apple can" },
+      { src: img["apple-pour-garden"], alt: "Crispy Apple being poured into a glass with an apple slice" },
     ],
     taste: { sweet: 45, refreshing: 90, sparkling: 75 },
     serve: [
-      { title: "Over ice with lime", text: "Big glass, lots of ice, a wedge of lime. Done.", src: img.appleGarden },
-      { title: "With salty snacks", text: "Chips, olives, taralli. Crisp meets salty.", src: img.applePool },
-      { title: "Après-ski", text: "Straight from the can, boots still on.", src: img.appleGreen },
+      { title: "Over ice with lime", text: "Big glass, lots of ice, a wedge of lime. Done.", src: img["apple-pour-garden"] },
+      { title: "With salty snacks", text: "Chips, olives, taralli. Crisp meets salty.", src: img["apple-headphones"] },
+      { title: "Après-ski", text: "Straight from the can, boots still on.", src: img["apple-green-fleece"] },
     ],
   },
   {
     slug: "white-peach",
     badge: "FAN FAV",
     taglines: ["Juicy white peach twist", "Soft, fruity and fizzy", "Summer in a can"],
-    image: img.whitePeachCard,
+    image: img["peach-headphones"],
     hoverImage: img.peachPeaches,
     name: "White Peach",
     category: "cider",
@@ -73,15 +73,15 @@ export const products: Product[] = [
     description:
       "South Tyrolean apples meet juicy white peach. Soft, sunny and sparkling — summer in a can, all year long.",
     images: [
-      { src: img.peachLime, alt: "White Peach can on a wooden board with lime and a peach garnish" },
+      { src: img["peach-umbrella"], alt: "White Peach can on a wooden board with lime and a peach garnish" },
       { src: img.peachPeaches, alt: "White Peach can surrounded by fresh peaches" },
-      { src: img.peachTable, alt: "White Peach cider being poured at a lunch table" },
+      { src: img["table-peanuts"], alt: "White Peach cider being poured at a lunch table" },
       { src: img.pool, alt: "Solenne can on a striped towel by the pool" },
     ],
     taste: { sweet: 65, refreshing: 80, sparkling: 70 },
     serve: [
-      { title: "With a peach slice", text: "Ice, a fresh peach slice, sunshine optional.", src: img.peachGarnish },
-      { title: "With salty snacks", text: "Prosciutto, focaccia, friends.", src: img.peachTable },
+      { title: "With a peach slice", text: "Ice, a fresh peach slice, sunshine optional.", src: img["peach-umbrella"] },
+      { title: "With salty snacks", text: "Prosciutto, focaccia, friends.", src: img["table-peanuts"] },
       { title: "Poolside", text: "Cold can, warm towel, nowhere to be.", src: img.pool },
     ],
   },
@@ -89,8 +89,8 @@ export const products: Product[] = [
     slug: "mixed-pack",
     badge: "NEW",
     taglines: ["Both flavors in one box", "Perfect for sharing", "12 cans of good vibes"],
-    image: img.toast,
-    hoverImage: img.tray,
+    image: img["cheers-palms"],
+    hoverImage: img["peach-tray-cans"],
     name: "Mixed Pack",
     category: "cider",
     pack: "variety",
@@ -100,16 +100,16 @@ export const products: Product[] = [
     short: "Can't decide? Don't. Both flavors, one box.",
     description: "Six Crispy Apple, six White Peach. The perfect box for parties, road trips and people who like options.",
     images: [
-      { src: img.toast, alt: "Two hands toasting with Crispy Apple and White Peach cans" },
-      { src: img.tray, alt: "Tray of White Peach cans with straws and peach slices" },
-      { src: img.peachLime, alt: "White Peach can with lime on a board" },
-      { src: img.applePool, alt: "Crispy Apple can by the pool" },
+      { src: img["cheers-palms"], alt: "Two hands toasting with Crispy Apple and White Peach cans" },
+      { src: img["peach-tray-cans"], alt: "Tray of White Peach cans with straws and peach slices" },
+      { src: img["peach-umbrella"], alt: "White Peach can with lime on a board" },
+      { src: img["apple-headphones"], alt: "Crispy Apple can by the pool" },
     ],
     taste: { sweet: 55, refreshing: 85, sparkling: 72 },
     serve: [
-      { title: "Party bucket", text: "Fill a bucket with ice. Mix both flavors. Invite everyone.", src: img.tray },
-      { title: "With salty snacks", text: "Something crunchy, something salty.", src: img.peachTable },
-      { title: "Après-ski", text: "One for you, one for your friend.", src: img.appleGreen },
+      { title: "Party bucket", text: "Fill a bucket with ice. Mix both flavors. Invite everyone.", src: img["peach-tray-cans"] },
+      { title: "With salty snacks", text: "Something crunchy, something salty.", src: img["table-peanuts"] },
+      { title: "Après-ski", text: "One for you, one for your friend.", src: img["apple-green-fleece"] },
     ],
   },
   {
@@ -126,8 +126,8 @@ export const products: Product[] = [
     description: "Soft navy corduroy, embroidered Solenne logo, adjustable strap. Goes with sunglasses and bad hair days.",
     images: [
       { src: img.hat, alt: "Navy corduroy Solenne hat on a newspaper with sunglasses" },
-      { src: img.tray, alt: "Solenne crew serving cider" },
-      { src: img.toast, alt: "Friends toasting with cans" },
+      { src: img["peach-tray-cans"], alt: "Solenne crew serving cider" },
+      { src: img["cheers-palms"], alt: "Friends toasting with cans" },
       { src: img.canHand, alt: "Can held in a ringed hand" },
     ],
     sizes: ["One size"],
@@ -173,7 +173,7 @@ export const products: Product[] = [
       { src: img.jacket, alt: "Back of a navy Solenne crewneck with cream print" },
       { src: img.fleeceChest, alt: "Solenne embroidered logo detail" },
       { src: img.fleeceCouple, alt: "Friends wearing Solenne merch outdoors" },
-      { src: img.tray, alt: "Solenne crew at a party" },
+      { src: img["peach-tray-cans"], alt: "Solenne crew at a party" },
     ],
     sizes: ["S", "M", "L", "XL"],
     material: "80% organic cotton, 20% recycled polyester. 380 gsm.",
@@ -182,13 +182,6 @@ export const products: Product[] = [
 ];
 
 export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
-
-export const themeClasses: Record<Theme, { page: string; outline: string; accent: string; text: string }> = {
-  apple: { page: "bg-yellow text-cream", outline: "border-yellow", accent: "text-navy", text: "text-cream" },
-  peach: { page: "bg-yellow text-navy", outline: "border-yellow", accent: "text-yellow", text: "text-navy" },
-  navy: { page: "bg-navy text-cream", outline: "border-cream", accent: "text-navy", text: "text-cream" },
-  forest: { page: "bg-yellow text-cream", outline: "border-navy", accent: "text-navy", text: "text-cream" },
-};
 
 export const formatPrice = (n: number) =>
   new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR" }).format(n);
