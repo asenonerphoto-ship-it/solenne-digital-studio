@@ -205,7 +205,7 @@ export function Slider({ children }: { children: ReactNode }) {
     </div>
   );
 }
-export const slideClass = "w-[85%] shrink-0 snap-start sm:w-[46%] lg:w-[31%]";
+export const slideClass = "w-full shrink-0 snap-center sm:w-[46%] sm:snap-start lg:w-[31%]";
 
 /* ---------- FeatureCard ---------- */
 export function FeatureCard({ icon, title, text, className }: { icon?: ReactNode; title: string; text: string; className?: string }) {
