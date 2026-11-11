@@ -62,7 +62,7 @@ function Crew() {
       </section>
 
       <section className="mx-auto grid max-w-[1920px] grid-cols-2 gap-4 px-5 py-16 md:grid-cols-4 md:gap-8 md:px-10">
-        {[img.fleeceCouple, img.toast, img.fleeceWoman, img.hat].map((s, i) => (
+        {[img["fleece-ski"], img["cheers-palms"], img["crew-bar-jacket"], img["crew-flatlay-1"]].map((s, i) => (
           <img key={s} src={s} alt="Solenne crew at events and outdoors" loading="lazy" className={cn("aspect-square w-full rounded-[var(--radius-card)] object-cover shadow-tilt", i % 2 ? "rotate-2" : "-rotate-2")} />
         ))}
       </section>

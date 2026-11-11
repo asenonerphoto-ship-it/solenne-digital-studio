@@ -20,3 +20,4 @@
 - Retro lifestyle photo slots are centralized by their supplied hyphenated names in src/lib/images.ts so replacements require only one path change.
 - Doodles are independently replaceable SVG components, placed through per-section data in src/data/doodles.ts to keep art positioning editable.
 - Shared retro photo bands, tilted frames and section labels live in the site Retro module; product-card color comes from category, never flavor.
+- Our Story uses page-scoped split and mosaic classes in the global stylesheet so its photo grid can change without altering shared photo layouts.
