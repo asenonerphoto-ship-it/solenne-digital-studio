@@ -408,6 +408,7 @@ section { position: relative; overflow-x: clip; }
 }
 @media (min-width:768px) { .collection-band { padding: 52px 40px 32px; } }
 @media (max-width:767px) {
+ .slider-fade { mask-image: none; }
  .photo-hero { height: 560px; }
  .hero-title { font-size: 52px; }
  .photo-band { height: 380px; }
