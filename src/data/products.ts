@@ -1,6 +1,5 @@
 import { img } from "@/lib/images";
 
-export type Theme = "apple" | "peach" | "navy" | "forest";
 export type Category = "cider" | "merch";
 
 export interface Product {
@@ -8,7 +7,6 @@ export interface Product {
   name: string;
   category: Category;
   pack?: "single" | "variety";
-  theme: Theme;
   /** PLACEHOLDER prices — confirm before launch */
   price: number;
   unit: string;
@@ -38,7 +36,6 @@ export const products: Product[] = [
     name: "Crispy Apple",
     category: "cider",
     pack: "single",
-    theme: "apple",
     price: 29.9,
     unit: "12 cans",
     short: "Our refreshing classic apple cider with a twist.",
@@ -66,7 +63,6 @@ export const products: Product[] = [
     name: "White Peach",
     category: "cider",
     pack: "single",
-    theme: "peach",
     price: 29.9,
     unit: "12 cans",
     short: "Our refreshing classic apple cider with a peachy twist.",
@@ -94,7 +90,6 @@ export const products: Product[] = [
     name: "Mixed Pack",
     category: "cider",
     pack: "variety",
-    theme: "forest",
     price: 31.9,
     unit: "6 Crispy Apple + 6 White Peach",
     short: "Can't decide? Don't. Both flavors, one box.",
@@ -119,7 +114,6 @@ export const products: Product[] = [
     hoverImage: img.canHand,
     name: "Corduroy Hat",
     category: "merch",
-    theme: "navy",
     price: 34,
     unit: "One size",
     short: "Navy corduroy cap with the Solenne script.",
@@ -141,7 +135,6 @@ export const products: Product[] = [
     hoverImage: img.fleeceFlat,
     name: "Fleece Jacket",
     category: "merch",
-    theme: "navy",
     price: 89,
     unit: "Unisex",
     short: "Cream sherpa fleece with navy stripe. Made for the Dolomites.",
@@ -164,7 +157,6 @@ export const products: Product[] = [
     hoverImage: img.fleeceChest,
     name: "Crewneck",
     category: "merch",
-    theme: "navy",
     price: 69,
     unit: "Unisex",
     short: "Navy crewneck with back print. Hard cider, always good moments.",
