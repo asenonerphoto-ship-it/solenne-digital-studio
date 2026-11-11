@@ -87,20 +87,10 @@ export function Marquee({ text = "ORIGINAL HARD CIDER - MADE IN ITALY - ", class
   }, []);
   return (
     <div ref={wrap} data-m-skip className={cn("overflow-hidden bg-navy py-4 text-yellow", className)} aria-label="Original hard cider, made in Italy">
-      <div ref={track} className="flex w-max animate-marquee whitespace-nowrap font-display text-lg font-semibold tracking-[0.06em] md:text-2xl" aria-hidden>
+      <div ref={track} className="flex w-max animate-marquee whitespace-nowrap font-display text-lg font-semibold tracking-normal md:text-2xl" aria-hidden>
         <span className="pr-2">{row}</span>
         <span className="pr-2">{row}</span>
       </div>
-    </div>
-  );
-}
-
-/* ---------- SectionHeading ---------- */
-export function SectionHeading({ eyebrow, title, align = "left", className }: { eyebrow?: string; title: ReactNode; align?: "left" | "right" | "center"; className?: string }) {
-  return (
-    <div className={cn(align === "right" && "text-right", align === "center" && "text-center", className)}>
-      {eyebrow && <p className="eyebrow mb-3 opacity-80">{eyebrow}</p>}
-      <h2 className="display-md">{title}</h2>
     </div>
   );
 }
@@ -158,7 +148,7 @@ export function ProductCard({ product }: { product: Product }) {
         </div>
         <div className="card-hover absolute inset-0 flex flex-col items-center justify-center gap-2.5 pt-4" aria-hidden>
           <span className="inline-flex h-[54px] w-full items-center justify-center card-action font-display text-sm uppercase tracking-normal">Shop now</span>
-          <span className="card-sub text-xs font-semibold uppercase tracking-wide underline underline-offset-4">
+          <span className="card-sub text-xs font-semibold uppercase tracking-normal underline underline-offset-4">
             {product.category === "merch" ? "Choose your size" : "Choose 12 or 24 cans"}
           </span>
         </div>
@@ -296,17 +286,3 @@ export function FormField({ label, error, id, as, options, className, ...p }: In
   );
 }
 
-/* ---------- Split block ---------- */
-export function Split({ image, alt, children, imageSide = "right", className, tilt }: { image: string; alt: string; children: ReactNode; imageSide?: "left" | "right"; className?: string; tilt?: boolean }) {
-  return (
-    <section className={cn("grid bg-yellow text-cream md:grid-cols-2", className)}>
-      <div className={cn("relative min-h-[380px] overflow-hidden md:min-h-[640px]", imageSide === "left" ? "md:order-1" : "md:order-2", tilt && "flex items-center justify-center p-8 md:p-16")}>
-        {/* REPLACE WITH BRAND PHOTO if needed */}
-        <img src={image} alt={alt} loading="lazy" className={cn(tilt ? "w-full max-w-md -rotate-3 rounded-[1.75rem] shadow-tilt" : "absolute inset-0 h-full w-full object-cover")} />
-      </div>
-      <div className={cn("flex flex-col justify-center gap-6 px-6 py-16 md:px-16 lg:px-24", imageSide === "left" ? "md:order-2 md:items-end md:text-right" : "md:order-1 md:items-end md:text-right")}>
-        {children}
-      </div>
-    </section>
-  );
-}

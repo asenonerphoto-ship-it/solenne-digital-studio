@@ -73,7 +73,6 @@
   --cream: #FFFAEB;
   --white: #FFFFFF;
   --paper: var(--cream);
-  --shadow-card: 0 16px 32px -18px color-mix(in oklab, var(--navy) 25%, transparent);
 
   --background: var(--cream);
   --foreground: var(--navy);
@@ -108,8 +107,6 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: var(--yellow);
 
-  --shadow-tilt: -8px 16px 28px -6px oklch(0 0 0 / 0.35);
-  --shadow-lift: 0 18px 40px -18px color-mix(in oklab, var(--navy) 45%, transparent);
 }
 
 @layer base {
@@ -170,20 +167,12 @@
   outline: 3px solid var(--navy);
   outline-offset: 10px;
 }
-@utility shadow-lift {
-  box-shadow: var(--shadow-lift);
-}
 @utility no-scrollbar {
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
   }
 }
-@utility script-faded {
-  font-family: "Pacifico", cursive;
-  text-transform: none;
-}
-
 .card-primary, .card-alternate { transition: opacity 400ms ease, transform var(--dur-slow) var(--ease-out); }
 .card-alternate { opacity: 0; }
 [data-alternate="true"] .card-primary { opacity: 0; }
@@ -258,10 +247,10 @@
 .ken-burns { animation: ken-burns 12s var(--ease-in-out) infinite alternate; transform-origin: 50% 60%; }
 @keyframes ken-burns { from { transform: scale(1); } to { transform: scale(1.06); } }
 
-/* Floating cream accents */
+/* Floating doodles and accents */
 .float-y { animation: float-y 6s ease-in-out infinite; }
 @keyframes float-y { 0%, 100% { translate: 0 -10px; } 50% { translate: 0 10px; } }
-[data-paused="true"] .float-y, [data-paused="true"] .animate-marquee, [data-paused="true"] .wave-drift, [data-paused="true"] .ken-burns { animation-play-state: paused; }
+[data-paused="true"] .float-y, [data-paused="true"] .animate-marquee, [data-paused="true"] .ken-burns { animation-play-state: paused; }
 
 /* Timeline line draw */
 .line-draw path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s var(--ease-out); }
@@ -341,7 +330,7 @@ input:focus, textarea:focus, select:focus { box-shadow: 0 0 0 4px color-mix(in o
 @media (prefers-reduced-motion: reduce) {
   [data-m], .words .w > span { opacity: 1 !important; transform: none !important; clip-path: none !important; animation: none !important; transition: opacity 300ms ease !important; }
   .page-enter { animation: fade-swap 200ms ease both; }
-  .wave-wipe, .ken-burns, .float-y, .wave-drift, .wave-wobble, .menu-wave, .menu-item, .gate-in > *, .cart-bounce, .select-pop, .check-burst, .check-burst::after, .lightbox-in img { animation: none !important; }
+  .wave-wipe, .ken-burns, .float-y, .menu-wave, .menu-item, .gate-in > *, .cart-bounce, .select-pop, .check-burst, .check-burst::after, .lightbox-in img { animation: none !important; }
   .gate-out { animation: fade-out 200ms ease forwards; }
   .line-draw path { stroke-dashoffset: 0; transition: none; }
   .badge-pop { transform: none; opacity: 1; }
