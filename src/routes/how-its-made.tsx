@@ -65,7 +65,7 @@ function Made() {
             <Words as="h1" className="display-xl" text="What is|Solenne?" />
             <p className="mt-8 max-w-lg text-lg leading-relaxed">An original hard cider with Italian attitude. Crisp, fruity and lightly sparkling — made for sharing, not sipping alone. Our philosophy is simple: real fruit, honest process, great style.</p>
           </div>
-          <img src={img["apple-green-fleece"]} alt="Hand holding a Crispy Apple can against a green sweater" className="mx-auto w-[80%] max-w-md rotate-3 rounded-[var(--radius-card)] shadow-tilt" />
+          <img src={img["apple-green-fleece"]} alt="Hand holding a Crispy Apple can against a green sweater" className="mx-auto aspect-[4/5] w-[80%] max-w-md rotate-3 rounded-[var(--radius-card)] object-cover shadow-tilt" />
         </div>
         <Doodles items={doodlePlacements.made} />
       </section>
@@ -103,7 +103,7 @@ function Made() {
       </section>
 
       <section className="grid slant-bottom bg-yellow text-navy md:grid-cols-2">
-        <img src={img["apple-pour-garden"]} alt="Solenne cider poured into a glass in the garden" className="h-[360px] w-full object-cover md:h-full" />
+        <div className="split-photo relative min-h-[360px]"><img src={img["apple-pour-garden"]} alt="Solenne cider poured into a glass in the garden" className="h-full w-full object-cover" /></div>
         <div className="px-6 py-16 md:px-16 lg:px-24">
           <h2 className="display-md">Sustainability</h2>
           <p className="mt-6 text-lg leading-relaxed">Aluminium cans are infinitely recyclable and chill fast, so less energy goes into keeping them cold. Our apples are sourced regionally in South Tyrol to keep the journey from tree to can short.</p>

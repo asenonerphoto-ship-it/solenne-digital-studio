@@ -1,4 +1,5 @@
 # Solenne retro restyle
+- [ ] Apply consistent photo cropping across all pages and check mobile and desktop frames.
 - [x] Remove the yellow wash on the B2B main photo.
 - [x] Improve the Our Story photo grid while retaining its content and sections.
 - [x] Use more of the uploaded ZIP photos across the site and verify at 375, 768, 1280 and 1920px.

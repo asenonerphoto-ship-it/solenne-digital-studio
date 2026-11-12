@@ -21,3 +21,4 @@
 - Doodles are independently replaceable SVG components, placed through per-section data in src/data/doodles.ts to keep art positioning editable.
 - Shared retro photo bands, tilted frames and section labels live in the site Retro module; product-card color comes from category, never flavor.
 - Our Story uses page-scoped split and mosaic classes in the global stylesheet so its photo grid can change without altering shared photo layouts.
+- Repeated lifestyle photo grids use the shared photo-grid class for consistent square, center-cropped tiles; dedicated hero and product gallery frames retain their own proportions.

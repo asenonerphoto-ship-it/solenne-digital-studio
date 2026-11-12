@@ -204,10 +204,10 @@ function CiderSections({ p }: { p: Product }) {
 
       <section className="mx-auto max-w-[1920px] px-5 py-16 md:px-10 md:py-24">
         <h2 className="display-md">Serve it like this</h2>
-        <div className="mt-10 grid gap-8 md:grid-cols-3">
+        <div className="photo-grid mt-10 grid gap-8 md:grid-cols-3">
           {p.serve?.map((s, i) => (
             <Reveal key={s.title} delay={i * 100}>
-              <img src={s.src} alt={s.title} loading="lazy" className={cn("aspect-[4/5] w-full rounded-[var(--radius-card)] object-cover shadow-tilt", i === 1 ? "rotate-2" : "-rotate-2")} />
+              <img src={s.src} alt={s.title} loading="lazy" className={cn("aspect-square w-full rounded-[var(--radius-card)] object-cover shadow-tilt", i === 1 ? "rotate-2" : "-rotate-2")} />
               <h3 className="mt-6 text-2xl">{s.title}</h3>
               <p className="mt-2">{s.text}</p>
             </Reveal>
@@ -260,7 +260,7 @@ function MerchSections({ p }: { p: Product }) {
             { q: "Shipping & returns", a: "Free shipping in Italy over €60. Returns within 30 days, unworn and with tags. (PLACEHOLDER — to be confirmed)" },
           ]}
         />
-        <div className="grid grid-cols-2 gap-4">
+        <div className="photo-grid grid grid-cols-2 gap-4">
           {p.images.slice(0, 4).map((im, i) => (
             <img key={im.src + i} src={im.src} alt={im.alt} loading="lazy" className={cn("aspect-square w-full rounded-[var(--radius-card)] object-cover shadow-tilt", i % 2 ? "rotate-2" : "-rotate-2")} />
           ))}
