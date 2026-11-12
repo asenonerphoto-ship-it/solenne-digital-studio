@@ -77,10 +77,10 @@ function B2B() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-[1920px] grid-cols-2 gap-4 px-5 pb-16 md:grid-cols-5 md:px-10">
+      <section className="photo-grid mx-auto grid max-w-[1920px] grid-cols-2 gap-4 px-5 pb-16 md:grid-cols-5 md:px-10">
         {useCases.map((u, i) => (
           <Reveal key={u.title} delay={i * 60} className="relative overflow-hidden rounded-[var(--radius-card)]">
-            <img src={u.src} alt={u.title} loading="lazy" className="aspect-[3/4] w-full object-cover" />
+            <img src={u.src} alt={u.title} loading="lazy" className="aspect-square w-full object-cover" />
             <p className="absolute inset-x-0 bottom-0 bg-navy p-4 font-display text-lg font-bold uppercase text-cream">{u.title}</p>
           </Reveal>
         ))}
