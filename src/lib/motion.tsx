@@ -5,6 +5,8 @@ import { useEffect, useLayoutEffect, useRef, type RefObject } from "react";
 export const prefersReducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+const useIsoLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
+
 let sharedIO: IntersectionObserver | null = null;
 function getIO() {
   if (!sharedIO) {
@@ -36,39 +38,32 @@ const CANDIDATES = "h1,h2,h3,p,img,article,li,figure,form,blockquote,details,tab
  * Only marks elements without an already-marked ancestor; uses data attributes so React never fights it.
  */
 export function useAutoReveal(ref: RefObject<HTMLElement | null>, key: string) {
-  useEffect(() => {
+  useIsoLayoutEffect(() => {
+    const root = ref.current;
+    if (!root || prefersReducedMotion()) return;
     const marked: HTMLElement[] = [];
-    let frame = requestAnimationFrame(() => {
-      frame = requestAnimationFrame(() => {
-        const root = ref.current;
-        if (!root || prefersReducedMotion()) return;
-        const counts = new Map<Element, number>();
-        root.querySelectorAll<HTMLElement>(CANDIDATES).forEach((el) => {
-          const rotated = el.tagName === "IMG" && (parseFloat(getComputedStyle(el).rotate) || 0) !== 0;
-          if ((!rotated && el.closest("[data-m]")) || el.closest("[data-m-skip]") || el.classList.contains("sr-only")) return;
-          if (el.closest(".fixed")) return;
-          let kind = "up";
-          const tag = el.tagName;
-          if (tag === "IMG") {
-            const rot = parseFloat(getComputedStyle(el).rotate) || 0;
-            if (rot) { kind = "tilt"; el.style.setProperty("--rot", `${rot}deg`); }
-            else kind = el.parentElement && getComputedStyle(el.parentElement).overflow === "hidden" ? "zoom" : "up";
-          } else if (tag === "ARTICLE" || tag === "LI" || tag === "FIGURE") kind = "pop";
-          const parent = el.parentElement ?? root;
-          const i = counts.get(parent) ?? 0;
-          counts.set(parent, i + 1);
-          el.dataset["m"] = kind;
-          el.style.setProperty("--m-delay", `${Math.min(i, 6) * 80}ms`);
-          marked.push(el);
-        });
-        const io = getIO();
-        marked.forEach((el) => io.observe(el));
-      });
+    const counts = new Map<Element, number>();
+    root.querySelectorAll<HTMLElement>(CANDIDATES).forEach((el) => {
+      const rotated = el.tagName === "IMG" && (parseFloat(getComputedStyle(el).rotate) || 0) !== 0;
+      if ((!rotated && el.closest("[data-m]")) || el.closest("[data-m-skip]") || el.classList.contains("sr-only")) return;
+      if (el.closest(".fixed")) return;
+      let kind = "up";
+      const tag = el.tagName;
+      if (tag === "IMG") {
+        const rot = parseFloat(getComputedStyle(el).rotate) || 0;
+        if (rot) { kind = "tilt"; el.style.setProperty("--rot", `${rot}deg`); }
+        else kind = el.parentElement && getComputedStyle(el.parentElement).overflow === "hidden" ? "zoom" : "up";
+      } else if (tag === "ARTICLE" || tag === "LI" || tag === "FIGURE") kind = "pop";
+      const parent = el.parentElement ?? root;
+      const i = counts.get(parent) ?? 0;
+      counts.set(parent, i + 1);
+      el.dataset["m"] = kind;
+      el.style.setProperty("--m-delay", `${Math.min(i, 6) * 80}ms`);
+      marked.push(el);
     });
-    return () => {
-      cancelAnimationFrame(frame);
-      marked.forEach((el) => sharedIO?.unobserve(el));
-    };
+    const io = getIO();
+    marked.forEach((el) => io.observe(el));
+    return () => marked.forEach((el) => io.unobserve(el));
   }, [key]);
 }
 
