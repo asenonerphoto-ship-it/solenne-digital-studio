@@ -70,7 +70,7 @@ function Made() {
         <Doodles items={doodlePlacements.made} />
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-16 md:py-24">
+      <section className="relative mx-auto max-w-6xl px-5 py-16 md:py-24">
         <h2 className="display-md text-center">From orchard to can</h2>
         <div ref={track} className="relative mt-16">
           <svg className="absolute left-1/2 top-0 hidden h-full w-16 -translate-x-1/2 md:block" viewBox="0 0 40 1000" preserveAspectRatio="none" aria-hidden>
@@ -91,29 +91,33 @@ function Made() {
             ))}
           </ol>
         </div>
+        <Doodles items={doodlePlacements.madeSteps} />
       </section>
 
-      <section className="bg-yellow px-5 py-16 text-navy md:py-24">
+      <section className="relative bg-yellow px-5 py-16 text-navy md:py-24">
         <div className="mx-auto grid max-w-6xl gap-10 text-center md:grid-cols-3">
           <div><p className="display-lg"><Counter to={5.1} decimals={1} suffix="%" /></p><p className="eyebrow mt-2">ABV</p></div>
           <div><p className="display-lg"><Counter to={330} suffix=" ml" /></p><p className="eyebrow mt-2">Classic can</p></div>
           <div><p className="display-lg"><Counter to={100} suffix="%" /></p><p className="eyebrow mt-2">Natural ingredients *</p></div>
         </div>
         <p className="mt-8 text-center text-xs">* To be confirmed.</p>
+        <Doodles items={doodlePlacements.madeStats} />
       </section>
 
-      <section className="grid slant-bottom bg-yellow text-navy md:grid-cols-2">
+      <section className="relative grid slant-bottom bg-yellow text-navy md:grid-cols-2">
         <div className="split-photo relative min-h-[360px]"><img src={img["apple-garden-pour"]} alt="Solenne cider poured into a glass in the garden" className="h-full w-full object-cover" /></div>
         <div className="px-6 py-16 md:px-16 lg:px-24">
           <h2 className="display-md">Sustainability</h2>
           <p className="mt-6 text-lg leading-relaxed">Aluminium cans are infinitely recyclable and chill fast, so less energy goes into keeping them cold. Our apples are sourced regionally in South Tyrol to keep the journey from tree to can short.</p>
         </div>
+        <Doodles items={doodlePlacements.madeSustainability} />
       </section>
 
-      <section className="mx-auto max-w-4xl px-5 py-16 md:py-24">
+      <section className="relative mx-auto max-w-4xl px-5 py-16 md:py-24">
         <h2 className="display-md mb-10">FAQ</h2>
         <Accordion items={faqs} />
         <div className="mt-12 text-center"><Link to="/shop" className={btnClass("navy")}>Shop now</Link></div>
+        <Doodles items={doodlePlacements.madeFaq} />
       </section>
     </div>
   );
