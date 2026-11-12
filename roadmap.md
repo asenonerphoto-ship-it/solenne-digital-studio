@@ -1,5 +1,6 @@
 # Solenne retro restyle
 - [ ] Add suitable photos from Archiv_2.zip to centralized slots and relevant pages; verify responsive layouts.
+- [ ] Replace repeated lifestyle photos with distinct uploads where possible without changing layouts or cropping.
 - [x] Apply consistent photo cropping across all pages and check mobile and desktop frames.
 - [x] Remove the yellow wash on the B2B main photo.
 - [x] Improve the Our Story photo grid while retaining its content and sections.
