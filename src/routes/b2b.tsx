@@ -18,14 +18,14 @@ export const Route = createFileRoute("/b2b")({
       { property: "og:description", content: "Solenne for your bar, restaurant & shop." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      ...(img["peach-tray-cans"].startsWith("https://") ? [{ property: "og:image", content: img["peach-tray-cans"] }, { name: "twitter:image", content: img["peach-tray-cans"] }] : []),
+      ...(img["cans-ski-bucket"].startsWith("https://") ? [{ property: "og:image", content: img["cans-ski-bucket"] }, { name: "twitter:image", content: img["cans-ski-bucket"] }] : []),
     ],
   }),
   component: B2B,
 });
 
 const useCases = [
-  { title: "Bars & Clubs", src: img["peach-tray-cans"] },
+  { title: "Bars & Clubs", src: img["navy-jacket-night-bar"] },
   { title: "Restaurants", src: img["table-peanuts"] },
   { title: "Hotels & Après-Ski", src: img["fleece-ski"] },
   { title: "Retail", src: img["shop-fridge-jacket"] },
@@ -36,7 +36,7 @@ function B2B() {
   return (
     <div className="retro-page">
       <section className="relative overflow-hidden slant-bottom bg-yellow text-navy">
-        <img src={img["peach-tray-cans"]} alt="Solenne cans on a tray" className="b2b-main-photo absolute inset-0 h-full w-full object-cover" />
+        <img src={img["cans-ski-bucket"]} alt="Solenne cans chilling beside the ski slopes" className="b2b-main-photo absolute inset-0 h-full w-full object-cover" />
         <div className="relative mx-auto max-w-[1920px] px-5 py-28 md:px-10 md:py-40">
           <Words as="h1" className="display-xl max-w-5xl" text="Solenne for your bar, restaurant & shop" />
           <a href="#inquiry" className={btnClass("yellow", "mt-10")}>Request wholesale info</a>
@@ -44,7 +44,7 @@ function B2B() {
         <Doodles items={doodlePlacements.b2b} />
       </section>
 
-      <section className="slant-bottom bg-yellow px-5 py-16 text-navy md:px-10 md:py-24">
+      <section className="slant-bottom relative bg-yellow px-5 py-16 text-navy md:px-10 md:py-24">
         <div className="mx-auto max-w-[1920px]">
           <h2 className="display-md mb-10">Why Solenne?</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -54,9 +54,10 @@ function B2B() {
             <FeatureCard icon={<Megaphone />} title="Great branding" text="POS material and merch to make your fridge pop." />
           </div>
         </div>
+        <Doodles items={doodlePlacements.b2bWhy} />
       </section>
 
-      <section className="mx-auto max-w-[1920px] px-5 py-16 md:px-10 md:py-24">
+      <section className="relative mx-auto max-w-[1920px] px-5 py-16 md:px-10 md:py-24">
         <h2 className="display-md mb-10">Assortment</h2>
         <div className="grid gap-8 md:grid-cols-2">
           {["crispy-apple", "white-peach"].map((s) => {
@@ -75,18 +76,20 @@ function B2B() {
             );
           })}
         </div>
+        <Doodles items={doodlePlacements.b2bAssortment} />
       </section>
 
-      <section className="photo-grid mx-auto grid max-w-[1920px] grid-cols-2 gap-4 px-5 pb-16 md:grid-cols-5 md:px-10">
+      <section className="photo-grid relative mx-auto grid max-w-[1920px] grid-cols-2 gap-4 px-5 pb-16 md:grid-cols-5 md:px-10">
         {useCases.map((u, i) => (
           <Reveal key={u.title} delay={i * 60} className="relative overflow-hidden rounded-[var(--radius-card)]">
             <img src={u.src} alt={u.title} loading="lazy" className="aspect-square w-full object-cover" />
             <p className="absolute inset-x-0 bottom-0 bg-navy p-4 font-display text-lg font-bold uppercase text-cream">{u.title}</p>
           </Reveal>
-        ))}
+          ))}
+        <Doodles items={doodlePlacements.b2bUses} />
       </section>
 
-      <section className="bg-paper px-5 py-16 md:px-10 md:py-24">
+      <section className="relative bg-paper px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-[1920px]">
           <h2 className="display-md mb-14">The process</h2>
           <StepTimeline steps={b2bSteps} />
@@ -95,9 +98,10 @@ function B2B() {
             <a href="/downloads/solenne-press-kit-placeholder.pdf" download className={btnClass("outline")}><Download className="h-4 w-4" /> Press kit (PDF)</a>
           </div>
         </div>
+        <Doodles items={doodlePlacements.b2bProcess} />
       </section>
 
-      <section id="inquiry" className="scroll-mt-28 slant-bottom bg-yellow px-5 py-16 text-navy md:py-24">
+      <section id="inquiry" className="relative scroll-mt-28 slant-bottom bg-yellow px-5 py-16 text-navy md:py-24">
         <div className="mx-auto max-w-3xl">
           <h2 className="display-md mb-10">Let's talk</h2>
           <LeadForm
@@ -118,6 +122,7 @@ function B2B() {
             ]}
           />
         </div>
+        <Doodles items={doodlePlacements.b2bInquiry} />
       </section>
     </div>
   );

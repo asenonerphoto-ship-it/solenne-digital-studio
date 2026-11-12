@@ -54,7 +54,7 @@ function ProductDetails({ p }: { p: Product }) {
 
   return (
     <div key={p.slug}>
-      <section className="bg-cream pb-16 text-navy md:pb-24">
+      <section className="relative bg-cream pb-16 text-navy md:pb-24">
         <div className="mx-auto grid max-w-[1920px] gap-10 px-5 pt-10 md:px-10 md:pt-16 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
           {/* Gallery */}
           <div className="product-gallery grid gap-3">
@@ -134,6 +134,7 @@ function ProductDetails({ p }: { p: Product }) {
             <p className="mt-2 text-xs opacity-70">Prices are placeholders, to be confirmed.</p>
           </div>
         </div>
+        <Doodles items={doodlePlacements.productDetails} />
       </section>
 
       <div className="product-info-band relative overflow-hidden">
@@ -238,7 +239,7 @@ function CiderSections({ p }: { p: Product }) {
       </section>
 
       <section className="no-scrollbar flex gap-4 overflow-x-auto px-5 pb-16 md:grid md:grid-cols-4 md:px-10">
-        {[img["cheers-palms"], img["peach-tray-cans"], img.pool, img["table-peanuts"]].map((s, i) => (
+        {[img["apple-telephone-yellow"], img["apple-can-snow-splash"], img.pool, img["can-sky-toast"]].map((s, i) => (
           <img key={s} src={s} alt="Solenne lifestyle moment" loading="lazy" className={cn("aspect-square w-64 shrink-0 rounded-[var(--radius-card)] object-cover md:w-full", i % 2 ? "rotate-2" : "-rotate-2")} />
         ))}
       </section>

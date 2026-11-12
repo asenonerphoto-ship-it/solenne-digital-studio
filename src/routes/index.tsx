@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
 });
 function Home() {
  return <>
- <PhotoHero src={img["hero-hat-can-sky"]} alt="Solenne can on a striped towel" title={retroCopy.homeHero} className="home-hero" />
+ <PhotoHero src={img["hero-hat-can-sky"]} alt="Solenne can on a striped towel" title={retroCopy.homeHero} className="home-hero" doodles={doodlePlacements.homeHero} />
  <Marquee />
  <section className="slant-bottom relative bg-yellow text-navy">
  <div className="mx-auto grid max-w-[1600px] items-center gap-10 px-5 py-16 md:grid-cols-2 md:px-10 md:py-24">
@@ -31,17 +31,18 @@ function Home() {
  <Link to="/our-story" className={btnClass("navy", "mt-8")}>Explore our story</Link>
  </Reveal></div><Doodles items={doodlePlacements.homeHello} />
  </section>
- <PhotoBand src={img["crew-flatlay-1"]} alt="Solenne crew clothing, hats and accessories laid out together" />
+ <PhotoBand src={img["crew-gear-flatlay-yellow"]} alt="Solenne crew clothing, hats and accessories laid out together" />
  <section className="relative bg-cream pb-12 md:pb-20"><SectionLabel>Our collection</SectionLabel><Doodles items={doodlePlacements.collection} />
  <div className="collection-band bg-yellow"><Slider>{products.filter(p => p.category === "cider").map(p => <div key={p.slug} className={slideClass}><ProductCard product={p} /></div>)}</Slider></div></section>
- <section className="slant-bottom grid bg-yellow text-navy md:grid-cols-2">
+ <section className="slant-bottom relative grid bg-yellow text-navy md:grid-cols-2">
  <div className="flex flex-col items-end justify-center px-6 py-16 text-right md:px-14 md:py-24"><Reveal className="flex flex-col items-end">
  <Words className="display-xl text-white" text="What is|Solenne?" /><p className="mt-8 max-w-md text-lg uppercase">{retroCopy.what}</p>
  <Link to="/how-its-made" className={btnClass("navy", "mt-8")}>How it's made</Link></Reveal></div>
- <div className="split-photo film-photo relative min-h-[420px]"><img src={img["pour-can-tiles"]} alt="Solenne cider pouring into a green glass" className="h-full w-full object-cover" /></div>
+ <div className="split-photo film-photo relative min-h-[420px]"><img src={img["apple-pour-yellow-closeup"]} alt="Solenne cider pouring from a can against a yellow background" className="h-full w-full object-cover" /></div>
+ <Doodles items={doodlePlacements.homeWhat} />
  </section>
- <section className="relative bg-cream"><SectionLabel>The merch</SectionLabel><Doodles items={doodlePlacements.merch} />
+ <section className="relative bg-cream"><SectionLabel>The merch</SectionLabel><Doodles items={doodlePlacements.merch} /><Doodles items={doodlePlacements.homeMerch} />
  <div className="collection-band bg-navy"><Slider>{products.filter(p => p.category === "merch").map(p => <div key={p.slug} className={slideClass}><ProductCard product={p} /></div>)}</Slider></div></section>
- <PhotoBand src={img["merch-stack"]} alt="Stacked Solenne clothing and hats" />
+ <PhotoBand src={img["merch-folded-stack"]} alt="Stacked Solenne clothing and hats" />
  </>;
 }
