@@ -4,10 +4,10 @@ import type { DoodlePlacement } from "@/components/site/doodles";
 export const doodlePlacements = {
   homeHero: [{ shape: "SunWaves", className: "bottom-6 left-5 w-24 -rotate-6 text-yellow md:left-10 md:w-32", mobile: true }],
   homeHello: [{ shape: "FlowerEye", className: "bottom-10 left-3 w-28 -rotate-12 md:left-12 md:w-44", mobile: true }],
-  homeWhat: [{ shape: "CanSmile", className: "right-4 top-6 w-20 rotate-12 text-navy md:right-10 md:w-24", mobile: true }],
+  homeWhat: [{ shape: "CanSmile", className: "bottom-6 right-4 w-20 rotate-12 text-navy md:bottom-10 md:right-10 md:w-24", mobile: true }],
   collection: [{ shape: "CanEye", className: "right-5 top-2 w-20 rotate-12" }],
   merch: [{ shape: "CloudSmile", className: "right-10 top-0 w-36 -rotate-6", mobile: true }],
-  homeMerch: [{ shape: "Cassette", className: "bottom-6 left-4 w-32 -rotate-6 text-yellow md:left-12" }],
+  homeMerch: [{ shape: "Cassette", className: "left-1/2 top-1 w-24 -translate-x-1/2 -rotate-6 text-navy" }],
   shopHero: [{ shape: "Arrow", className: "left-5 top-8 w-24 -rotate-12 text-yellow md:left-10 md:w-32", mobile: true }],
   storyHero: [{ shape: "Sparkles", className: "left-6 top-8 w-24 text-yellow md:left-12 md:w-32", mobile: true }],
   storyFounders: [
@@ -17,10 +17,10 @@ export const doodlePlacements = {
   storyTravel: [{ shape: "Squiggles", className: "right-8 bottom-8 w-36 -rotate-12 text-yellow", mobile: true }],
   storyItalian: [{ shape: "CanEye", className: "bottom-6 left-4 w-24 rotate-12" }],
   storyTimeline: [{ shape: "Arrow", className: "right-6 top-8 w-24 -rotate-12" }],
-  storyValues: [{ shape: "SunWaves", className: "bottom-8 left-6 w-24 -rotate-6" }],
+  storyValues: [{ shape: "SunWaves", className: "right-2 top-2 w-16 -rotate-6" }],
   storyMoments: [{ shape: "Camera", className: "right-6 top-6 w-28 rotate-6" }],
   storyCollection: [{ shape: "CanWings", className: "right-4 top-4 w-20 rotate-12" }],
-  storyJoin: [{ shape: "Peace", className: "right-6 top-6 w-20 rotate-12 text-yellow", mobile: true }],
+  storyJoin: [{ shape: "Peace", className: "bottom-6 right-6 w-20 rotate-12 text-yellow", mobile: true }],
   crewHero: [{ shape: "Peace", className: "right-6 top-8 w-24 rotate-12 text-yellow md:right-12", mobile: true }],
   crewTracks: [
     { shape: "Smiley", className: "right-7 top-3 w-24 rotate-12", mobile: true },
@@ -45,7 +45,7 @@ export const doodlePlacements = {
   b2b: [{ shape: "Smiley", className: "bottom-4 right-3 w-28 -rotate-12", mobile: true }],
   b2bWhy: [{ shape: "Starburst", className: "right-6 top-6 w-20 rotate-12" }],
   b2bAssortment: [{ shape: "Apple", className: "right-6 top-6 w-20 rotate-12" }],
-  b2bUses: [{ shape: "Camera", className: "bottom-6 left-6 w-28 -rotate-6" }],
+  b2bUses: [{ shape: "Camera", className: "left-2 top-2 w-24 -rotate-6 text-yellow" }],
   b2bProcess: [{ shape: "Arrow", className: "right-6 top-6 w-24 -rotate-12" }],
   b2bInquiry: [{ shape: "Heart", className: "bottom-8 left-6 w-20 -rotate-12" }],
 } satisfies Record<string, DoodlePlacement[]>;
