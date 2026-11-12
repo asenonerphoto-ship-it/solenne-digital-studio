@@ -353,6 +353,8 @@ section { position: relative; overflow-x: clip; }
 .age-gate img { filter: brightness(0) invert(1); }
 .photo-hero { height: 660px; }
 .hero-title { font-size: 100px; line-height: 1; max-width: 100%; }
+.home-hero .hero-content { align-items: stretch; justify-content: flex-start; padding: clamp(24px, 4vw, 64px); text-align: left; }
+.home-hero .hero-title { width: 100%; font-size: clamp(3.5rem, 11vw, 12rem); line-height: 0.9; letter-spacing: -0.02em; }
 .photo-band { height: 540px; }
 .tilt-photo { margin: 22px; }
 .tilt-photo::before { content: ""; position: absolute; inset: 0; border: 3px solid var(--navy); transform: translate(14px, 14px); }
