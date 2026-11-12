@@ -38,7 +38,7 @@ export const doodlePlacements = {
     { shape: "FlowerEye", className: "bottom-0 right-0 w-28 rotate-12", mobile: true },
     { shape: "Starburst", className: "left-2 top-3 w-16 text-navy" },
   ],
-  madeSteps: [{ shape: "Apple", className: "left-2 top-2 w-20 rotate-12" }],
+  madeSteps: [{ shape: "Apple", className: "left-12 top-56 w-20 rotate-12 text-yellow" }],
   madeStats: [{ shape: "Rainbow", className: "bottom-6 left-6 w-24 -rotate-6" }],
   madeSustainability: [{ shape: "Mountain", className: "bottom-6 right-6 w-28" }],
   madeFaq: [{ shape: "CanFlower", className: "right-4 top-6 w-20 rotate-12" }],
