@@ -4,7 +4,6 @@ import { img } from "@/lib/images";
 import { products } from "@/data/products";
 import { storyTimeline } from "@/data/content";
 import { FeatureCard, ProductCard, QuoteBlock, Reveal, Slider, StepTimeline, Words, btnClass, slideClass } from "@/components/site/ui";
-import { cn } from "@/lib/utils";
 import { PhotoHero, PhotoBand, SectionLabel } from "@/components/site/Retro";
 import { Doodles } from "@/components/site/doodles";
 import { doodlePlacements } from "@/data/doodles";
@@ -76,8 +75,8 @@ function Story() {
       </section>
 
       <section className="story-moments mx-auto grid max-w-[1920px] grid-cols-2 gap-4 px-5 py-16 md:grid-cols-3 md:gap-6 md:px-10 md:py-24">
-        {[img["cheers-palms"], img["apple-headphones"], img["table-peanuts"], img["peach-headphones"], img["tray-sandwich"], img["apple-green-fleece"]].map((s, i) => (
-          <img key={s} src={s} alt="Solenne moments with friends" loading="lazy" className={cn("w-full object-cover", i === 0 && "story-moment-wide")} />
+        {[img["cheers-palms"], img["apple-headphones"], img["table-peanuts"], img["peach-headphones"], img["tray-sandwich"], img["apple-green-fleece"]].map((s) => (
+          <img key={s} src={s} alt="Solenne moments with friends" loading="lazy" />
         ))}
       </section>
 
