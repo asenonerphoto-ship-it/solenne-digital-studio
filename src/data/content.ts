@@ -17,7 +17,7 @@ export const storyTimeline = [
 ];
 
 export const madeSteps = [
-  { title: "Apples & fruit", text: "Hand-picked apples from South Tyrol's growing region, where alpine sun meets cool nights.", src: img.appleApples },
+  { title: "Apples & fruit", text: "Hand-picked apples from South Tyrol's growing region, where alpine sun meets cool nights.", src: img["apple-fruit-tray"] },
   { title: "Pressing", text: "The fruit is washed and gently pressed into fresh, cloudy juice within hours of picking.", src: img.peachPeaches },
   { title: "Fermentation", text: "Slow, cool fermentation keeps the fruit bright and the finish crisp.", src: img.appleGarden },
   { title: "Canning", text: "Lightly carbonated and sealed in 330 ml aluminium cans to lock in the sparkle.", src: img.toast },
