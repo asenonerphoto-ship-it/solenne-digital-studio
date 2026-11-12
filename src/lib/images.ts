@@ -50,8 +50,36 @@ import retroShopFridgeJacket from "@/assets/retro-shop-fridge-jacket.jpg.asset.j
 import retroTablePeanuts from "@/assets/retro-table-peanuts.jpg.asset.json";
 import retroTravelCanTattoo from "@/assets/retro-travel-can-tattoo.jpg.asset.json";
 import retroTraySandwich from "@/assets/retro-tray-sandwich.jpg.asset.json";
+import peachCocktailTable from "@/assets/additional-peach-cocktail-table.jpg.asset.json";
+import appleCarPicnic from "@/assets/additional-apple-car-picnic.jpg.asset.json";
+import sunnyRoadTrip from "@/assets/additional-sunny-road-trip.jpg.asset.json";
+import poolsideSnacks from "@/assets/additional-poolside-snacks.jpg.asset.json";
+import poolsideFriends from "@/assets/additional-poolside-friends.jpg.asset.json";
+import crewTennis from "@/assets/additional-crew-tennis.jpg.asset.json";
+import appleSnackTable from "@/assets/additional-apple-snack-table.jpg.asset.json";
+import canSkyToast from "@/assets/additional-can-sky-toast.jpg.asset.json";
+import ciderCooler from "@/assets/additional-cider-cooler.jpg.asset.json";
+import crewFestival from "@/assets/additional-crew-festival.jpg.asset.json";
+import mountainFriends from "@/assets/additional-mountain-friends.jpg.asset.json";
+import alpinePicnic from "@/assets/additional-alpine-picnic.jpg.asset.json";
+import appleFruitTray from "@/assets/additional-apple-fruit-tray.jpg.asset.json";
+import appleLimeStillLife from "@/assets/additional-apple-lime-still-life.jpg.asset.json";
 
 export const img = {
+  "peach-cocktail-table": peachCocktailTable.url,
+  "apple-car-picnic": appleCarPicnic.url,
+  "sunny-road-trip": sunnyRoadTrip.url,
+  "poolside-snacks": poolsideSnacks.url,
+  "poolside-friends": poolsideFriends.url,
+  "crew-tennis": crewTennis.url,
+  "apple-snack-table": appleSnackTable.url,
+  "can-sky-toast": canSkyToast.url,
+  "cider-cooler": ciderCooler.url,
+  "crew-festival": crewFestival.url,
+  "mountain-friends": mountainFriends.url,
+  "alpine-picnic": alpinePicnic.url,
+  "apple-fruit-tray": appleFruitTray.url,
+  "apple-lime-still-life": appleLimeStillLife.url,
   hero: hero.url,
   homeSnowChair: homeSnowChair.url,
   appleApples: appleApples.url,
