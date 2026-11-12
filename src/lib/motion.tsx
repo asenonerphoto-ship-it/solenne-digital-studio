@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, type RefObject } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 
 /** Motion layer helpers. Timing/easing tokens live in src/styles.css (--ease-*, --dur-*). */
 
