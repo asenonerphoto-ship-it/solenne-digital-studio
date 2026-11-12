@@ -400,7 +400,6 @@ section { position: relative; overflow-x: clip; }
  .story-split { grid-template-columns: minmax(0, 1fr); }
  .story-copy { padding: 24px; }
  .story-founders > .story-split { margin-top: 16px; }
- .story-moments img:last-child { aspect-ratio: 2 / 1; }
 }
 @media (hover:none) {
  .card-photo-link { display: none; }
