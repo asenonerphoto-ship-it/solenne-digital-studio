@@ -64,6 +64,43 @@ import mountainFriends from "@/assets/additional-mountain-friends.jpg.asset.json
 import alpinePicnic from "@/assets/additional-alpine-picnic.jpg.asset.json";
 import appleFruitTray from "@/assets/additional-apple-fruit-tray.jpg.asset.json";
 import appleLimeStillLife from "@/assets/additional-apple-lime-still-life.jpg.asset.json";
+import appleMirrorBlossoms from "@/assets/apple-mirror-blossoms.jpg.asset.json";
+import appleFruitCloseup from "@/assets/apple-fruit-closeup.jpg.asset.json";
+import appleThreeHands from "@/assets/apple-three-hands.jpg.asset.json";
+import appleCanBlueSky from "@/assets/apple-can-blue-sky.jpg.asset.json";
+import appleCanSunglasses from "@/assets/apple-can-sunglasses.jpg.asset.json";
+import appleHandCloseup from "@/assets/apple-hand-closeup.jpg.asset.json";
+import snowOrangeBeanieCan from "@/assets/snow-orange-beanie-can.jpg.asset.json";
+import snowOrangeGlassesCan from "@/assets/snow-orange-glasses-can.jpg.asset.json";
+import snowCanMountainToast from "@/assets/snow-can-mountain-toast.jpg.asset.json";
+import snowDeckchairToast from "@/assets/snow-deckchair-toast.jpg.asset.json";
+import appleCanYellowSleeve from "@/assets/apple-can-yellow-sleeve.jpg.asset.json";
+import crewGearFlatlayYellow from "@/assets/crew-gear-flatlay-yellow.jpg.asset.json";
+import snowMustardDeckchair from "@/assets/snow-mustard-deckchair.jpg.asset.json";
+import merchFoldedStack from "@/assets/merch-folded-stack.jpg.asset.json";
+import peachBeachCouple from "@/assets/peach-beach-couple.jpg.asset.json";
+import navyJacketNightBar from "@/assets/navy-jacket-night-bar.jpg.asset.json";
+import fleeceBarCheers from "@/assets/fleece-bar-cheers.jpg.asset.json";
+import yellowCapAppleLaugh from "@/assets/yellow-cap-apple-laugh.jpg.asset.json";
+import whiteTeeBarSnack from "@/assets/white-tee-bar-snack.jpg.asset.json";
+import appleSandwichTattoo from "@/assets/apple-sandwich-tattoo.jpg.asset.json";
+import shopFridgeNavyJacket from "@/assets/shop-fridge-navy-jacket.jpg.asset.json";
+import navyCrewneckSkiPortrait from "@/assets/navy-crewneck-ski-portrait.jpg.asset.json";
+import whiteTeeSkiGoggles from "@/assets/white-tee-ski-goggles.jpg.asset.json";
+import navyJacketSnowBalcony from "@/assets/navy-jacket-snow-balcony.jpg.asset.json";
+import navyCrewneckMountainCafe from "@/assets/navy-crewneck-mountain-cafe.jpg.asset.json";
+import fleeceSkisSnow from "@/assets/fleece-skis-snow.jpg.asset.json";
+import appleBarPourApron from "@/assets/apple-bar-pour-apron.jpg.asset.json";
+import cansSkiBucket from "@/assets/cans-ski-bucket.jpg.asset.json";
+import skiBarrelCans from "@/assets/ski-barrel-cans.jpg.asset.json";
+import capCanSunglassesCloseup from "@/assets/cap-can-sunglasses-closeup.jpg.asset.json";
+import applePourYellowCloseup from "@/assets/apple-pour-yellow-closeup.jpg.asset.json";
+import appleSixCanCaddy from "@/assets/apple-six-can-caddy.jpg.asset.json";
+import appleTelephoneYellow from "@/assets/apple-telephone-yellow.jpg.asset.json";
+import appleHeadphonesYellow from "@/assets/apple-headphones-yellow.jpg.asset.json";
+import duoRadioYellow from "@/assets/duo-radio-yellow.jpg.asset.json";
+import appleGardenPour from "@/assets/apple-garden-pour.jpg.asset.json";
+import appleCanSnowSplash from "@/assets/apple-can-snow-splash.jpg.asset.json";
 
 export const img = {
   "peach-cocktail-table": peachCocktailTable.url,
@@ -80,6 +117,43 @@ export const img = {
   "alpine-picnic": alpinePicnic.url,
   "apple-fruit-tray": appleFruitTray.url,
   "apple-lime-still-life": appleLimeStillLife.url,
+  "apple-mirror-blossoms": appleMirrorBlossoms.url,
+  "apple-fruit-closeup": appleFruitCloseup.url,
+  "apple-three-hands": appleThreeHands.url,
+  "apple-can-blue-sky": appleCanBlueSky.url,
+  "apple-can-sunglasses": appleCanSunglasses.url,
+  "apple-hand-closeup": appleHandCloseup.url,
+  "snow-orange-beanie-can": snowOrangeBeanieCan.url,
+  "snow-orange-glasses-can": snowOrangeGlassesCan.url,
+  "snow-can-mountain-toast": snowCanMountainToast.url,
+  "snow-deckchair-toast": snowDeckchairToast.url,
+  "apple-can-yellow-sleeve": appleCanYellowSleeve.url,
+  "crew-gear-flatlay-yellow": crewGearFlatlayYellow.url,
+  "snow-mustard-deckchair": snowMustardDeckchair.url,
+  "merch-folded-stack": merchFoldedStack.url,
+  "peach-beach-couple": peachBeachCouple.url,
+  "navy-jacket-night-bar": navyJacketNightBar.url,
+  "fleece-bar-cheers": fleeceBarCheers.url,
+  "yellow-cap-apple-laugh": yellowCapAppleLaugh.url,
+  "white-tee-bar-snack": whiteTeeBarSnack.url,
+  "apple-sandwich-tattoo": appleSandwichTattoo.url,
+  "shop-fridge-navy-jacket": shopFridgeNavyJacket.url,
+  "navy-crewneck-ski-portrait": navyCrewneckSkiPortrait.url,
+  "white-tee-ski-goggles": whiteTeeSkiGoggles.url,
+  "navy-jacket-snow-balcony": navyJacketSnowBalcony.url,
+  "navy-crewneck-mountain-cafe": navyCrewneckMountainCafe.url,
+  "fleece-skis-snow": fleeceSkisSnow.url,
+  "apple-bar-pour-apron": appleBarPourApron.url,
+  "cans-ski-bucket": cansSkiBucket.url,
+  "ski-barrel-cans": skiBarrelCans.url,
+  "cap-can-sunglasses-closeup": capCanSunglassesCloseup.url,
+  "apple-pour-yellow-closeup": applePourYellowCloseup.url,
+  "apple-six-can-caddy": appleSixCanCaddy.url,
+  "apple-telephone-yellow": appleTelephoneYellow.url,
+  "apple-headphones-yellow": appleHeadphonesYellow.url,
+  "duo-radio-yellow": duoRadioYellow.url,
+  "apple-garden-pour": appleGardenPour.url,
+  "apple-can-snow-splash": appleCanSnowSplash.url,
   hero: hero.url,
   homeSnowChair: homeSnowChair.url,
   appleApples: appleApples.url,
