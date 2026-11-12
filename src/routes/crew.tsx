@@ -28,7 +28,7 @@ export const Route = createFileRoute("/crew")({
 function Crew() {
   return (
     <div className="retro-page crew-page">
-      <PhotoHero src={img["fleece-bar-cheers"]} alt="Solenne crew member in a fleece at a bar" title="The crew">
+      <PhotoHero src={img["fleece-bar-cheers"]} alt="Solenne crew member in a fleece at a bar" title="The crew" doodles={doodlePlacements.crewHero}>
         <p className="mt-6 max-w-md bg-navy px-4 py-3 text-white">{retroCopy.crew}</p>
         <a href="#apply" className={btnClass("yellow", "mt-6")}>Apply now</a>
       </PhotoHero>
@@ -47,7 +47,7 @@ function Crew() {
         <Doodles items={doodlePlacements.crewTracks} />
       </section>
 
-      <section className="bg-yellow px-5 py-16 text-navy md:px-10 md:py-24">
+      <section className="relative bg-yellow px-5 py-16 text-navy md:px-10 md:py-24">
         <div className="mx-auto max-w-[1920px]">
           <h2 className="display-md mb-10">Crew benefits</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -59,6 +59,7 @@ function Crew() {
           <h2 className="display-md mb-14 mt-20">How it works</h2>
           <StepTimeline steps={crewSteps} />
         </div>
+        <Doodles items={doodlePlacements.crewBenefits} />
       </section>
 
       <section className="photo-grid mx-auto grid max-w-[1920px] grid-cols-2 gap-4 px-5 py-16 md:grid-cols-4 md:gap-8 md:px-10">
@@ -67,7 +68,7 @@ function Crew() {
         ))}
       </section>
 
-      <section id="apply" className="scroll-mt-28 bg-cream px-5 py-16 text-navy md:py-24">
+      <section id="apply" className="relative scroll-mt-28 bg-cream px-5 py-16 text-navy md:py-24">
         <div className="mx-auto max-w-3xl">
           <h2 className="display-md mb-10">Apply to the crew</h2>
           <LeadForm
@@ -85,6 +86,7 @@ function Crew() {
             ]}
           />
         </div>
+        <Doodles items={doodlePlacements.crewApply} />
       </section>
       <PhotoBand src={img["snow-mustard-deckchair"]} alt="Solenne crew relaxing in the snow" doodles={doodlePlacements.crewEnd} className="crew-final">
         <div className="relative z-10 px-5 py-20 md:px-10"><Words className="display-xl text-white" text="The crew" /><span className="mt-8 inline-block -rotate-6 bg-yellow px-6 py-3 font-display text-4xl text-navy">Solenne</span></div>

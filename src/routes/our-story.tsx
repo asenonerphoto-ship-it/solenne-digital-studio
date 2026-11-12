@@ -26,7 +26,7 @@ export const Route = createFileRoute("/our-story")({
 function Story() {
   return (
     <div className="retro-page story-page">
-      <PhotoHero src={img["peach-tray-cans"]} alt="Peach cans with fruit and straws" label="Our Story" />
+      <PhotoHero src={img["peach-tray-cans"]} alt="Peach cans with fruit and straws" label="Our Story" doodles={doodlePlacements.storyHero} />
       <h1 className="sr-only">Our Story</h1>
 
       <section className="story-block story-founders">
@@ -59,38 +59,43 @@ function Story() {
         <div className="story-copy"><SectionLabel tilted>Italian cider</SectionLabel><p className="mt-8 text-lg leading-relaxed">So we made one. With apples from home, a can we're proud to hold, and a name that sounds like the sun.</p></div>
         <div className="story-photo"><img src={img["snow-deckchair-toast"]} alt="A Solenne toast in a deckchair in the snow" className="w-full object-cover" /></div><Doodles items={doodlePlacements.storyItalian} />
       </section>
-      <section className="bg-paper px-5 py-16 md:px-10 md:py-24">
+      <section className="relative bg-paper px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-[1920px]">
           <h2 className="display-md mb-14">How we got here</h2>
           <StepTimeline steps={storyTimeline} className="text-navy" />
         </div>
+        <Doodles items={doodlePlacements.storyTimeline} />
       </section>
 
-      <section className="slant-bottom bg-yellow px-5 py-16 text-navy md:px-10 md:py-24">
+      <section className="slant-bottom relative bg-yellow px-5 py-16 text-navy md:px-10 md:py-24">
         <div className="mx-auto grid max-w-[1920px] gap-6 md:grid-cols-3">
           <FeatureCard icon={<Mountain />} title="Made in Italy" text="Apples from South Tyrol, made close to home." />
           <FeatureCard icon={<Sparkles />} title="Quality you can taste" text="Real fruit, slow fermentation, no shortcuts." />
           <FeatureCard icon={<Sun />} title="Life is good!" text="Made for friends, mountains and long evenings." />
         </div>
+        <Doodles items={doodlePlacements.storyValues} />
       </section>
 
-      <section className="story-moments photo-grid mx-auto grid max-w-[1920px] grid-cols-2 gap-4 px-5 py-16 md:grid-cols-3 md:gap-6 md:px-10 md:py-24">
+      <section className="story-moments photo-grid relative mx-auto grid max-w-[1920px] grid-cols-2 gap-4 px-5 py-16 md:grid-cols-3 md:gap-6 md:px-10 md:py-24">
         {[img["apple-mirror-blossoms"], img["yellow-cap-apple-laugh"], img["white-tee-bar-snack"], img["sunny-road-trip"], img["alpine-picnic"], img["mountain-friends"]].map((s) => (
           <img key={s} src={s} alt="Solenne moments with friends" loading="lazy" />
         ))}
+        <Doodles items={doodlePlacements.storyMoments} />
       </section>
 
-      <section className="collection-band bg-yellow">
+      <section className="collection-band relative bg-yellow">
         <h2 className="display-md mb-10">Our collection</h2>
         <Slider>
           {products.filter((p) => p.category === "cider").map((p) => <div key={p.slug} className={slideClass}><ProductCard product={p} /></div>)}
         </Slider>
+        <Doodles items={doodlePlacements.storyCollection} />
       </section>
 
       <PhotoBand src={img["ski-barrel-cans"]} alt="Solenne cans at an alpine ski bar" />
-      <section className="slant-top bg-navy px-5 py-20 text-center text-yellow">
+      <section className="slant-top relative bg-navy px-5 py-20 text-center text-yellow">
         <h2 className="display-lg">Join the crew</h2>
         <Link to="/crew" className={btnClass("yellow", "mt-8")}>Become part of it</Link>
+        <Doodles items={doodlePlacements.storyJoin} />
       </section>
     </div>
   );
