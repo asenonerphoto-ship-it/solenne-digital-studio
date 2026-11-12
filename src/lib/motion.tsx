@@ -5,8 +5,6 @@ import { useEffect, useRef, type RefObject } from "react";
 export const prefersReducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const useIsoLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
-
 let sharedIO: IntersectionObserver | null = null;
 function getIO() {
   if (!sharedIO) {
@@ -38,7 +36,7 @@ const CANDIDATES = "h1,h2,h3,p,img,article,li,figure,form,blockquote,details,tab
  * Only marks elements without an already-marked ancestor; uses data attributes so React never fights it.
  */
 export function useAutoReveal(ref: RefObject<HTMLElement | null>, key: string) {
-  useIsoLayoutEffect(() => {
+  useEffect(() => {
     const root = ref.current;
     if (!root || prefersReducedMotion()) return;
     const marked: HTMLElement[] = [];
