@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
 });
 function Home() {
  return <>
- <PhotoHero src={img["hero-hat-can-sky"]} alt="Solenne can on a striped towel" title={retroCopy.homeHero} />
+ <PhotoHero src={img["hero-hat-can-sky"]} alt="Solenne can on a striped towel" title={retroCopy.homeHero} className="home-hero" />
  <Marquee />
  <section className="slant-bottom relative bg-yellow text-navy">
  <div className="mx-auto grid max-w-[1600px] items-center gap-10 px-5 py-16 md:grid-cols-2 md:px-10 md:py-24">
