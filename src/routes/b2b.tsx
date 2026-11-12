@@ -18,14 +18,14 @@ export const Route = createFileRoute("/b2b")({
       { property: "og:description", content: "Solenne for your bar, restaurant & shop." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      ...(img["peach-tray-cans"].startsWith("https://") ? [{ property: "og:image", content: img["peach-tray-cans"] }, { name: "twitter:image", content: img["peach-tray-cans"] }] : []),
+      ...(img["cans-ski-bucket"].startsWith("https://") ? [{ property: "og:image", content: img["cans-ski-bucket"] }, { name: "twitter:image", content: img["cans-ski-bucket"] }] : []),
     ],
   }),
   component: B2B,
 });
 
 const useCases = [
-  { title: "Bars & Clubs", src: img["peach-tray-cans"] },
+  { title: "Bars & Clubs", src: img["navy-jacket-night-bar"] },
   { title: "Restaurants", src: img["table-peanuts"] },
   { title: "Hotels & Après-Ski", src: img["fleece-ski"] },
   { title: "Retail", src: img["shop-fridge-jacket"] },
@@ -36,7 +36,7 @@ function B2B() {
   return (
     <div className="retro-page">
       <section className="relative overflow-hidden slant-bottom bg-yellow text-navy">
-        <img src={img["peach-tray-cans"]} alt="Solenne cans on a tray" className="b2b-main-photo absolute inset-0 h-full w-full object-cover" />
+        <img src={img["cans-ski-bucket"]} alt="Solenne cans chilling beside the ski slopes" className="b2b-main-photo absolute inset-0 h-full w-full object-cover" />
         <div className="relative mx-auto max-w-[1920px] px-5 py-28 md:px-10 md:py-40">
           <Words as="h1" className="display-xl max-w-5xl" text="Solenne for your bar, restaurant & shop" />
           <a href="#inquiry" className={btnClass("yellow", "mt-10")}>Request wholesale info</a>

@@ -238,7 +238,7 @@ function CiderSections({ p }: { p: Product }) {
       </section>
 
       <section className="no-scrollbar flex gap-4 overflow-x-auto px-5 pb-16 md:grid md:grid-cols-4 md:px-10">
-        {[img["cheers-palms"], img["peach-tray-cans"], img.pool, img["table-peanuts"]].map((s, i) => (
+        {[img["apple-telephone-yellow"], img["apple-can-snow-splash"], img.pool, img["can-sky-toast"]].map((s, i) => (
           <img key={s} src={s} alt="Solenne lifestyle moment" loading="lazy" className={cn("aspect-square w-64 shrink-0 rounded-[var(--radius-card)] object-cover md:w-full", i % 2 ? "rotate-2" : "-rotate-2")} />
         ))}
       </section>
