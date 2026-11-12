@@ -1,6 +1,6 @@
 # Solenne retro restyle
 - [x] Keep decorative drawings off all text; place them over photos or clear colored areas and verify mobile/desktop.
-- [ ] Center and enlarge GOOD VIBES ONLY in the mobile homepage hero.
+- [x] Center and enlarge GOOD VIBES ONLY in the mobile homepage hero.
 - [x] Add suitable photos from Archiv_2.zip to centralized slots and relevant pages; verify responsive layouts.
 - [x] Replace repeated lifestyle photos with distinct uploads where possible without changing layouts or cropping.
 - [x] Replace placeholder doodles with the uploaded SVG artwork and add drawings to sections currently missing them.
