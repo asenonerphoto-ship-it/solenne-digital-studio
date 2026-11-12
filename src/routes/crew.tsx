@@ -19,7 +19,7 @@ export const Route = createFileRoute("/crew")({
       { property: "og:description", content: "Our community of friends who bring Solenne everywhere." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      ...(img["crew-bar-jacket"].startsWith("https://") ? [{ property: "og:image", content: img["crew-bar-jacket"] }, { name: "twitter:image", content: img["crew-bar-jacket"] }] : []),
+      ...(img["fleece-bar-cheers"].startsWith("https://") ? [{ property: "og:image", content: img["fleece-bar-cheers"] }, { name: "twitter:image", content: img["fleece-bar-cheers"] }] : []),
     ],
   }),
   component: Crew,
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/crew")({
 function Crew() {
   return (
     <div className="retro-page crew-page">
-      <PhotoHero src={img["crew-bar-jacket"]} alt="Friends wearing Solenne jackets" title="The crew">
+      <PhotoHero src={img["fleece-bar-cheers"]} alt="Solenne crew member in a fleece at a bar" title="The crew">
         <p className="mt-6 max-w-md bg-navy px-4 py-3 text-white">{retroCopy.crew}</p>
         <a href="#apply" className={btnClass("yellow", "mt-6")}>Apply now</a>
       </PhotoHero>
@@ -62,7 +62,7 @@ function Crew() {
       </section>
 
       <section className="photo-grid mx-auto grid max-w-[1920px] grid-cols-2 gap-4 px-5 py-16 md:grid-cols-4 md:gap-8 md:px-10">
-        {[img["crew-tennis"], img["crew-festival"], img["mountain-friends"], img["alpine-picnic"]].map((s, i) => (
+        {[img["snow-orange-beanie-can"], img["snow-orange-glasses-can"], img["white-tee-ski-goggles"], img["navy-jacket-snow-balcony"]].map((s, i) => (
           <img key={s} src={s} alt="Solenne crew at events and outdoors" loading="lazy" className={cn("aspect-square w-full rounded-[var(--radius-card)] object-cover shadow-tilt", i % 2 ? "rotate-2" : "-rotate-2")} />
         ))}
       </section>
@@ -86,7 +86,7 @@ function Crew() {
           />
         </div>
       </section>
-      <PhotoBand src={img["crew-flatlay-2"]} alt="Friends toasting with Solenne" doodles={doodlePlacements.crewEnd} className="crew-final">
+      <PhotoBand src={img["snow-mustard-deckchair"]} alt="Solenne crew relaxing in the snow" doodles={doodlePlacements.crewEnd} className="crew-final">
         <div className="relative z-10 px-5 py-20 md:px-10"><Words className="display-xl text-white" text="The crew" /><span className="mt-8 inline-block -rotate-6 bg-yellow px-6 py-3 font-display text-4xl text-navy">Solenne</span></div>
       </PhotoBand>
     </div>

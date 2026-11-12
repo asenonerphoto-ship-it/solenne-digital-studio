@@ -57,7 +57,7 @@ function Story() {
 
       <section className="story-block story-split bg-cream text-navy">
         <div className="story-copy"><SectionLabel tilted>Italian cider</SectionLabel><p className="mt-8 text-lg leading-relaxed">So we made one. With apples from home, a can we're proud to hold, and a name that sounds like the sun.</p></div>
-        <div className="story-photo"><img src={img["fleece-ski"]} alt="A Solenne moment in the snow" className="w-full object-cover" /></div><Doodles items={doodlePlacements.storyItalian} />
+        <div className="story-photo"><img src={img["snow-deckchair-toast"]} alt="A Solenne toast in a deckchair in the snow" className="w-full object-cover" /></div><Doodles items={doodlePlacements.storyItalian} />
       </section>
       <section className="bg-paper px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-[1920px]">
@@ -75,7 +75,7 @@ function Story() {
       </section>
 
       <section className="story-moments photo-grid mx-auto grid max-w-[1920px] grid-cols-2 gap-4 px-5 py-16 md:grid-cols-3 md:gap-6 md:px-10 md:py-24">
-        {[img["sunny-road-trip"], img["apple-car-picnic"], img["poolside-friends"], img["can-sky-toast"], img["poolside-snacks"], img["alpine-picnic"]].map((s) => (
+        {[img["apple-mirror-blossoms"], img["yellow-cap-apple-laugh"], img["white-tee-bar-snack"], img["sunny-road-trip"], img["alpine-picnic"], img["mountain-friends"]].map((s) => (
           <img key={s} src={s} alt="Solenne moments with friends" loading="lazy" />
         ))}
       </section>
@@ -87,7 +87,7 @@ function Story() {
         </Slider>
       </section>
 
-      <PhotoBand src={img["table-peanuts"]} alt="Cider at a lunch table" />
+      <PhotoBand src={img["ski-barrel-cans"]} alt="Solenne cans at an alpine ski bar" />
       <section className="slant-top bg-navy px-5 py-20 text-center text-yellow">
         <h2 className="display-lg">Join the crew</h2>
         <Link to="/crew" className={btnClass("yellow", "mt-8")}>Become part of it</Link>

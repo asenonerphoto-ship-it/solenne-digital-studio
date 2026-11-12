@@ -18,7 +18,7 @@ export const Route = createFileRoute("/how-its-made")({
       { property: "og:description", content: "From orchard to can, step by step." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      ...(img["apple-green-fleece"].startsWith("https://") ? [{ property: "og:image", content: img["apple-green-fleece"] }, { name: "twitter:image", content: img["apple-green-fleece"] }] : []),
+      ...(img["apple-can-sunglasses"].startsWith("https://") ? [{ property: "og:image", content: img["apple-can-sunglasses"] }, { name: "twitter:image", content: img["apple-can-sunglasses"] }] : []),
     ],
   }),
   component: Made,
@@ -65,7 +65,7 @@ function Made() {
             <Words as="h1" className="display-xl" text="What is|Solenne?" />
             <p className="mt-8 max-w-lg text-lg leading-relaxed">An original hard cider with Italian attitude. Crisp, fruity and lightly sparkling — made for sharing, not sipping alone. Our philosophy is simple: real fruit, honest process, great style.</p>
           </div>
-          <img src={img["apple-green-fleece"]} alt="Hand holding a Crispy Apple can against a green sweater" className="mx-auto aspect-[4/5] w-[80%] max-w-md rotate-3 rounded-[var(--radius-card)] object-cover shadow-tilt" />
+          <img src={img["apple-can-sunglasses"]} alt="Woman in sunglasses holding a Crispy Apple can against a blue sky" className="mx-auto aspect-[4/5] w-[80%] max-w-md rotate-3 rounded-[var(--radius-card)] object-cover shadow-tilt" />
         </div>
         <Doodles items={doodlePlacements.made} />
       </section>
@@ -103,7 +103,7 @@ function Made() {
       </section>
 
       <section className="grid slant-bottom bg-yellow text-navy md:grid-cols-2">
-        <div className="split-photo relative min-h-[360px]"><img src={img["apple-pour-garden"]} alt="Solenne cider poured into a glass in the garden" className="h-full w-full object-cover" /></div>
+        <div className="split-photo relative min-h-[360px]"><img src={img["apple-garden-pour"]} alt="Solenne cider poured into a glass in the garden" className="h-full w-full object-cover" /></div>
         <div className="px-6 py-16 md:px-16 lg:px-24">
           <h2 className="display-md">Sustainability</h2>
           <p className="mt-6 text-lg leading-relaxed">Aluminium cans are infinitely recyclable and chill fast, so less energy goes into keeping them cold. Our apples are sourced regionally in South Tyrol to keep the journey from tree to can short.</p>
