@@ -4,7 +4,6 @@ import { img } from "@/lib/images";
 import { products } from "@/data/products";
 import { storyTimeline } from "@/data/content";
 import { FeatureCard, ProductCard, QuoteBlock, Reveal, Slider, StepTimeline, Words, btnClass, slideClass } from "@/components/site/ui";
-import { cn } from "@/lib/utils";
 import { PhotoHero, PhotoBand, SectionLabel } from "@/components/site/Retro";
 import { Doodles } from "@/components/site/doodles";
 import { doodlePlacements } from "@/data/doodles";
